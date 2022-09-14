@@ -1,0 +1,52 @@
+﻿@model _4_BusinessObjectModel.Models.CollegeStudent
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+
+<h4>CollegeStudent</h4>
+@using (Html.BeginForm("Edit", "CollegeStudent"))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+            @Html.Partial("_EditStudent")
+            @Html.Partial("_EditCollegeStudent")
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal" @ViewBag.disabled>
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+ 
+        @Html.Partial("_ConfirmPopup")
+    </div>
+}
+<p>
+
+    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "CollegeStudent",new { id = Model.ID })'">Export</button>
+
+    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "CollegeStudent", new { id = Model.ID })'">Edit</button>
+
+    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "CollegeStudent")'">Back to list</button>
+
+    <div>
+        <b>
+            @TempData["ExportMessage"]
+        </b>
+    </div>
+</p>
+
+<script src="~/Scripts/scripts.js">
+
+    </script>
