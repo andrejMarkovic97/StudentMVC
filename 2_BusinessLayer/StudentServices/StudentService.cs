@@ -10,9 +10,9 @@ namespace _2_BusinessLayer.StudentServices
 {
     public class StudentService<T> : IStudentService<T> where T : Student
     {
-        private readonly IStudentRepository<T> studentRepository;
+        private readonly IGenericRepository<T>studentRepository;
 
-        public StudentService(IStudentRepository<T> studentRepository)
+        public StudentService(IGenericRepository<T> studentRepository)
         {
             this.studentRepository = studentRepository;
         }

@@ -1,4 +1,6 @@
-﻿using _2_BusinessLayer.StudentServices;
+﻿using _2_BusinessLayer.GenericServices;
+using _2_BusinessLayer.RoleServices;
+using _2_BusinessLayer.StudentServices;
 using _2_BusinessLayer.UserServices;
 using _3_DataAccess.Repository;
 using _3_DataAccess.RoleRepository;
@@ -30,14 +32,14 @@ namespace _1_PresentationLayer.App_Start
 
 			container.RegisterType<IGenericRepository<User>, UserRepository>();
 			container.RegisterType<IGenericRepository<Role>, RoleRepository>();
-
+			
 			//SERVICE REGISTRATION
-
 			container.RegisterType<IStudentService<HighSchoolStudent>, HighSchoolStudentService>();
 			container.RegisterType<IStudentService<CollegeStudent>, CollegeStudentService>();
+			container.RegisterType<IGenericService<User>, UserService>();
+			container.RegisterType<IGenericService<Role>, RoleService>();
 
-			//container.RegisterType<IUserService, UserService>();
-			//container.RegisterType<IUserRepository, UserRepository>();
+
 
 			// e.g. container.RegisterType<ITestService, TestService>();
 

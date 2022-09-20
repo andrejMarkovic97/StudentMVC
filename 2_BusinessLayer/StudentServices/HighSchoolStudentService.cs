@@ -9,15 +9,14 @@ using System.Web;
 
 namespace _2_BusinessLayer.StudentServices
 {
-    public class HighSchoolStudentService : StudentService<HighSchoolStudent>,IStudentService<HighSchoolStudent>
+    public class HighSchoolStudentService : StudentService<HighSchoolStudent>
     {
-        private readonly IStudentRepository<HighSchoolStudent> studentRepository;
+        private readonly IGenericRepository<HighSchoolStudent> studentRepository;
 
-        public HighSchoolStudentService(IStudentRepository<HighSchoolStudent> studentRepository) : base(studentRepository)
+        public HighSchoolStudentService(IGenericRepository<HighSchoolStudent> studentRepository) : base(studentRepository)
         {
             this.studentRepository = studentRepository;
         }
-
 
         public override List<HighSchoolStudent> GetAll()
         {

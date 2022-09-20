@@ -1,4 +1,5 @@
-﻿using _2_BusinessLayer.StudentServices;
+﻿using _2_BusinessLayer.GenericServices;
+using _2_BusinessLayer.StudentServices;
 using _2_BusinessLayer.UserServices;
 using _4_BusinessObjectModel.Models;
 using System;
@@ -12,9 +13,9 @@ namespace _1_PresentationLayer.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUserService centralQuestionService;
+        private readonly IGenericService<User> centralQuestionService;
 
-        public LoginController(IUserService centralQuestionService) 
+        public LoginController(IGenericService<User> centralQuestionService) 
         {
             this.centralQuestionService = centralQuestionService;
         }

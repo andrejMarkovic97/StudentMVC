@@ -104,12 +104,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericServices\GenericService.cs" />
+    <Compile Include="GenericServices\IGenericService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleServices\RoleService.cs" />
     <Compile Include="StudentServices\CollegeStudentService.cs" />
     <Compile Include="StudentServices\HighSchoolStudentService.cs" />
     <Compile Include="StudentServices\IStudentService.cs" />
     <Compile Include="StudentServices\StudentService.cs" />
-    <Compile Include="UserServices\IUserService.cs" />
     <Compile Include="UserServices\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ namespace _2_BusinessLayer.GenericServices
         {
             this.genericRepository = genericRepository;
         }
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             if (entity != null)
             {
@@ -22,12 +22,12 @@ namespace _2_BusinessLayer.GenericServices
             }
         }
 
-        public void Delete(Guid id)
+        public virtual void Delete(Guid id)
         {
             genericRepository.Delete(id);
         }
 
-        public void Edit(T entity)
+        public virtual void Edit(T entity)
         {
             if (entity != null)
             {
@@ -35,12 +35,12 @@ namespace _2_BusinessLayer.GenericServices
             }
         }
 
-        public T Get(Guid id)
+        public virtual T Get(Guid id)
         {
             return genericRepository.Get(id);
         }
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
             return genericRepository.GetAll();
         }
