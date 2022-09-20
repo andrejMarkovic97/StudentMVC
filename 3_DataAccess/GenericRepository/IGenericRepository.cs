@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace _3_DataAccess.Repository
 {
-   public interface IStudentRepository<T> where T:Student
+   public interface IGenericRepository<T> where T:class
     {
 
-        void Add(T student);
+        void Add(T entity);
         List<T> GetAll();
         T Get(Guid id);
-        void Edit(T student);
+        void Edit(T entity);
         void Delete(Guid id);
     }
 }

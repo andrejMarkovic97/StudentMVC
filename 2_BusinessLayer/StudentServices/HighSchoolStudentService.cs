@@ -21,7 +21,23 @@ namespace _2_BusinessLayer.StudentServices
 
         public override List<HighSchoolStudent> GetAll()
         {
-            return studentRepository.GetAll().FindAll(x => x.Discriminator == Discriminator.HighSchoolStudent);
+            return studentRepository.GetAll();
+            //List<HighSchoolStudent> highschoolers = new List<HighSchoolStudent>();
+            //foreach (var student in students)
+            //{
+            //    if (student.User != null && student.User.UserRoles != null)
+            //    {
+            //        List<UserRole> userRoles = student.User.UserRoles;
+            //        foreach (UserRole ur in userRoles)
+            //        {
+            //            if (ur.Role.RoleName == "HighSchoolStudent")
+            //            {
+            //                highschoolers.Add(student);
+            //            }
+            //        }
+            //    }
+            //}
+            //return highschoolers;
         }
 
         public override List<HighSchoolStudent> Search(string filter)

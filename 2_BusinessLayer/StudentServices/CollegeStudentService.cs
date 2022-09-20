@@ -23,7 +23,20 @@ namespace _2_BusinessLayer.StudentServices
 
         public override List<CollegeStudent> GetAll()
         {
-            return studentRepository.GetAll().FindAll(x => x.Discriminator == Discriminator.CollegeStudent);
+            var students = studentRepository.GetAll();
+            List<CollegeStudent> collegeStudents = new List<CollegeStudent>();
+            foreach (var student in students)
+            {
+                var userRoles = student.User.UserRoles;
+                foreach (UserRole ur in userRoles)
+                {
+                    if (ur.Role.RoleName == "CollegeStudent")
+                    {
+                        collegeStudents.Add(student);
+                    }
+                }
+            }
+            return collegeStudents;
         }
 
         public override List<CollegeStudent> Search(string filter)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,8 @@ using System.Web;
 
 namespace _4_BusinessObjectModel.Models
 {
-    [Table("student")]
+    [Table("t_student")]
+    
     public class Student
     {
         public Student()
@@ -17,17 +19,21 @@ namespace _4_BusinessObjectModel.Models
         [Key]
         [Column("id")]
         public Guid ID { get; set; }
+
         [Required]
         [Column("first_name")]
         public string FirstName { get; set; }
+
         [Required]
         [Column("last_name")]
         public string LastName { get; set; }
+
         [Required]
         [Column("birth_date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+
         [Required]
         [EmailAddress]
         [Column("email")]
@@ -38,11 +44,11 @@ namespace _4_BusinessObjectModel.Models
 
         [Column("adress")]
         public string Adress { get; set; }
-        
-        [Required]
-        [Column("discriminator")]
-        [EnumDataType(typeof(Discriminator))]
-        public Discriminator Discriminator { get; set; }
+
+        [Column("user_id")]
+        public Guid UserID { get; set; }
+        [ForeignKey("UserID")]
+        public User User { get; set; }
 
         public override string ToString()
         {

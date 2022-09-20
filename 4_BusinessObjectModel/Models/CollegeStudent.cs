@@ -6,7 +6,7 @@ using System.Web;
 
 namespace _4_BusinessObjectModel.Models
 {
-    [Table("student")]
+    [Table("t_student")]
     public class CollegeStudent : Student
     {
         public CollegeStudent()

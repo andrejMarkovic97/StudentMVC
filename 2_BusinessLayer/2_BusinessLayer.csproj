@@ -109,6 +109,8 @@
     <Compile Include="StudentServices\HighSchoolStudentService.cs" />
     <Compile Include="StudentServices\IStudentService.cs" />
     <Compile Include="StudentServices\StudentService.cs" />
+    <Compile Include="UserServices\IUserService.cs" />
+    <Compile Include="UserServices\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -129,6 +131,7 @@
       <Name>4_BusinessObjectModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

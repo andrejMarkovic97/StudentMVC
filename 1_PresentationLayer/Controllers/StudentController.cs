@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace _1_PresentationLayer.Controllers
 {
+    [Authorize]
     public class StudentController<T> : Controller where T:Student
     {
         private readonly IStudentService<T> centralQuestionService;

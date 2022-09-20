@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace _1_PresentationLayer.Controllers
 {
+    [Authorize]
     public class HighSchoolStudentController : StudentController<HighSchoolStudent>
     {
         private readonly IStudentService<HighSchoolStudent> centralQuestionService;
@@ -23,7 +24,7 @@ namespace _1_PresentationLayer.Controllers
             try
             {
                 hs.ID = Guid.NewGuid();
-                hs.Discriminator = Discriminator.HighSchoolStudent;
+                //hs.Discriminator = Discriminator.HighSchoolStudent;
                 centralQuestionService.Add(hs);
 
                 return RedirectToAction("Index");
@@ -38,7 +39,7 @@ namespace _1_PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                hs.Discriminator = Discriminator.HighSchoolStudent;
+                //hs.Discriminator = Discriminator.HighSchoolStudent;
                 centralQuestionService.Edit(hs);
                 return RedirectToAction("Index");
             }
