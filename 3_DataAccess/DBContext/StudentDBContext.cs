@@ -13,14 +13,33 @@ namespace _3_DataAccess
         {
 
         }
-        public DbSet<Student> Students {get; set;}
+        public DbSet<User> Users {get; set;}
         public DbSet<HighSchoolStudent> HighschoolStudents { get; set; }
         public DbSet<CollegeStudent> CollegeStudents { get; set; }
 
-        public DbSet<User> Users { get; set; }
+      
         public DbSet<Role> Roles{ get; set; }
         public DbSet<UserRole> UserRoles{ get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<UserRole>()
+                .HasKey(c => new { c.UserID, c.RoleID });
+
+            modelBuilder.Entity<User>()
+                .HasMany(c => c.UserRoles)
+                .WithRequired()
+                .HasForeignKey(c => c.UserID);
+
+            modelBuilder.Entity<Role>()
+                .HasMany(c => c.UserRoles)
+                .WithRequired()
+                .HasForeignKey(c => c.RoleID);
+
+
+
+        }
 
     }
 }

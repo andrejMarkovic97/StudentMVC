@@ -9,7 +9,7 @@ namespace _3_DataAccess.GenericRepository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly StudentDBContext db;
+        protected readonly StudentDBContext db;
         private readonly DbSet<T> dbSet;
 
         public GenericRepository(StudentDBContext db)

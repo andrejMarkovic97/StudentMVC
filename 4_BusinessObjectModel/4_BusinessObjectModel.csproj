@@ -106,7 +106,6 @@
   <ItemGroup>
     <Compile Include="Models\CollegeStudent.cs" />
     <Compile Include="Models\HighSchoolStudent.cs" />
-    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\UserRole.cs" />

@@ -1,4 +1,5 @@
-﻿using _3_DataAccess.Repository;
+﻿using _2_BusinessLayer.GenericServices;
+using _3_DataAccess.Repository;
 using _4_BusinessObjectModel;
 using _4_BusinessObjectModel.Models;
 using System;
@@ -9,34 +10,22 @@ using System.Web;
 
 namespace _2_BusinessLayer.StudentServices
 {
-    public class CollegeStudentService : StudentService<CollegeStudent>
+    public class CollegeStudentService : GenericService<CollegeStudent>,IStudentService<CollegeStudent>
     {
-        private readonly IGenericRepository<CollegeStudent> studentRepository;
-
-        public CollegeStudentService(IGenericRepository<CollegeStudent> studentRepository) : base(studentRepository)
+        public CollegeStudentService(IGenericRepository<CollegeStudent> genericRepository) : base(genericRepository)
         {
-            this.studentRepository = studentRepository;
         }
 
-        public override List<CollegeStudent> GetAll()
+        public void ExportData(CollegeStudent student)
         {
-            var students = studentRepository.GetAll();
-            List<CollegeStudent> collegeStudents = new List<CollegeStudent>();
-            foreach (var student in students)
-            {
-                var userRoles = student.User.UserRoles;
-                foreach (UserRole ur in userRoles)
-                {
-                    if (ur.Role.RoleName == "CollegeStudent")
-                    {
-                        collegeStudents.Add(student);
-                    }
-                }
-            }
-            return collegeStudents;
+            var name = $"{student.FirstName}_{student.LastName}.txt";
+            var path = @"C:\Users\amar\Desktop\ExportedData\" + name;
+            string text = student.ToString();
+
+            File.WriteAllText(path, text);
         }
 
-        public override List<CollegeStudent> Search(string filter)
+        public  List<CollegeStudent> Search(string filter)
         {
             filter = filter.ToLower();
             var list = GetAll();

@@ -111,7 +111,8 @@
     <Compile Include="StudentServices\CollegeStudentService.cs" />
     <Compile Include="StudentServices\HighSchoolStudentService.cs" />
     <Compile Include="StudentServices\IStudentService.cs" />
-    <Compile Include="StudentServices\StudentService.cs" />
+    <Compile Include="StudentServices\UserService.cs" />
+    <Compile Include="UserRoleServices\UserRoleService.cs" />
     <Compile Include="UserServices\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

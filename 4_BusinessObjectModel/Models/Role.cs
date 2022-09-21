@@ -18,10 +18,10 @@ namespace _4_BusinessObjectModel.Models
         }
         [Key]
         [Column("role_id")]
-        public Guid RoleId{ get; set; }
+        public Guid RoleID{ get; set; }
         [Column("role_name")]
         public string RoleName { get; set; }
-        public List<UserRole> UserRoles { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
 
     }
 }

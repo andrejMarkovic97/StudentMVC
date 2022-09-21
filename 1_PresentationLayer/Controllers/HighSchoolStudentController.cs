@@ -23,7 +23,7 @@ namespace _1_PresentationLayer.Controllers
         {
             try
             {
-                hs.ID = Guid.NewGuid();
+                hs.UserID = Guid.NewGuid();
                 //hs.Discriminator = Discriminator.HighSchoolStudent;
                 centralQuestionService.Add(hs);
 

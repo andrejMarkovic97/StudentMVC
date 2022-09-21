@@ -232,16 +232,15 @@
     <Content Include="Views\Shared\_ConfirmPopup.cshtml" />
     <Content Include="Views\Home\AdminArea.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\CollegeStudent\View.cshtml" />
-    <Content Include="Views\Home\UserArea.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Details.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Register\Register.cshtml" />
+    <Content Include="Views\Home\UserArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

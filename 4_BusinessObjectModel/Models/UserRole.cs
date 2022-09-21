@@ -21,14 +21,11 @@ namespace _4_BusinessObjectModel.Models
         public User User { get; set; }
 
         [Column("role_id")]
-        public Guid RoleId { get; set; }
+        public Guid RoleID { get; set; }
 
-        [ForeignKey("RoleId")]
+        [ForeignKey("RoleID")]
         public Role Role { get; set; }
 
-        public override string ToString()
-        {
-            return $"{User.UserID},{Role.RoleName}";
-        }
+
     }
 }

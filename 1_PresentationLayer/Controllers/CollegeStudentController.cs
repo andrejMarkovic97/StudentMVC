@@ -24,7 +24,7 @@ namespace _1_PresentationLayer.Controllers
         {
             try
             {
-                cs.ID = Guid.NewGuid();
+                cs.UserID = Guid.NewGuid();
                 //cs.Discriminator = Discriminator.CollegeStudent;
                 centralQuestionService.Add(cs);
 

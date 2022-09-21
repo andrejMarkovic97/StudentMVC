@@ -7,10 +7,10 @@ using System.Web;
 
 namespace _4_BusinessObjectModel.Models
 {
-    [Table("t_student")]
+    [Table("t_user")]
 
 
-    public class HighSchoolStudent : Student
+    public class HighSchoolStudent : User
     {
         public HighSchoolStudent()
         {

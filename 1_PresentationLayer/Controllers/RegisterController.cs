@@ -12,15 +12,21 @@ namespace _1_PresentationLayer.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly IGenericService<User> centralQuestionService;
+        private readonly IGenericService<User> userCentralQuestionService;
+        private readonly IGenericService<Role> roleCentralQuestionService;
+        
 
-        public RegisterController(IGenericService<User> centralQuestionService)
+        public RegisterController(IGenericService<User> userCentralQuestionService, IGenericService<Role> roleCentralQuestionService)
         {
-            this.centralQuestionService = centralQuestionService;
+            this.userCentralQuestionService = userCentralQuestionService;
+            this.roleCentralQuestionService = roleCentralQuestionService;
+            
         }
+
         // GET: Register
         public ActionResult Register()
         {
+            ViewBag.RoleList = roleCentralQuestionService.GetAll();
 
             return View();
         }
@@ -28,9 +34,15 @@ namespace _1_PresentationLayer.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-
-            centralQuestionService.Add(user);
-            return RedirectToAction("Index", "Home");
+            user.UserID = Guid.NewGuid();
+            Role role = roleCentralQuestionService.GetAll().First();
+            UserRole ur = new UserRole();
+            ur.User = user;
+            ur.UserID = user.UserID;
+            ur.Role = role;
+            ur.RoleID = role.RoleID;
+            userCentralQuestionService.Add(user);
+            return RedirectToAction("Index","Home");
         }
     }
 }

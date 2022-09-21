@@ -110,9 +110,9 @@
     <Compile Include="StudentRepository\CollegeStudentRepository.cs" />
     <Compile Include="StudentRepository\HighSchoolStudentRepository.cs" />
     <Compile Include="GenericRepository\IGenericRepository.cs" />
-    <Compile Include="StudentRepository\StudentRepository.cs" />
     <Compile Include="DBContext\StudentDBContext.cs" />
     <Compile Include="UserRepository\UserRepository.cs" />
+    <Compile Include="UserRoleRepository\UserRoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

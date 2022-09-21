@@ -15,6 +15,9 @@ namespace _3_DataAccess.Repository
            
         }
 
-        
+        //public override List<CollegeStudent> GetAll()
+        //{
+        //    return db.Users.Include("User").Include("Role");
+        //}
     }
 }

@@ -6,8 +6,8 @@ using System.Web;
 
 namespace _4_BusinessObjectModel.Models
 {
-    [Table("t_student")]
-    public class CollegeStudent : Student
+    [Table("t_user")]
+    public class CollegeStudent : User
     {
         public CollegeStudent()
         {
@@ -17,7 +17,7 @@ namespace _4_BusinessObjectModel.Models
         public string InstitutionName { get; set; }
 
         [Column("generation")]
-        public int? Generation { get; set; }
+        public int Generation { get; set; }
 
         public override string ToString()
         {

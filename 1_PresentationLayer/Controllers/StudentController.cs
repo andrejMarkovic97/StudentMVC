@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace _1_PresentationLayer.Controllers
 {
     [Authorize]
-    public class StudentController<T> : GenericController<T> where T:Student
+    public class StudentController<T> : GenericController<T> where T:User
     {
         private readonly IStudentService<T> centralQuestionService;
 
@@ -20,7 +20,8 @@ namespace _1_PresentationLayer.Controllers
         }
 
 
-        // GET: Student
+        // GET: User
+        [HttpPost]
         public virtual ActionResult Index(string filter)
         {
             if (filter == null || filter == "")
@@ -44,7 +45,7 @@ namespace _1_PresentationLayer.Controllers
             }
         }
 
-        //// GET: Student/Details/5
+        //// GET: User/Details/5
         //public virtual ActionResult Details(Guid id)
         //{
         //    T student = centralQuestionService.Get(id);
@@ -53,20 +54,20 @@ namespace _1_PresentationLayer.Controllers
         //    return View(student);
         //}
 
-        //// GET: Student/Create
+        //// GET: User/Create
         //public virtual ActionResult Create()
         //{
         //    return View("Create");
         //}
 
-        //// POST: Student/Create
+        //// POST: User/Create
         //[HttpPost]
         //public virtual ActionResult Create(T student)
         //{
         //    return View();
         //}
 
-        //// GET: Student/Edit/5
+        //// GET: User/Edit/5
         //public virtual ActionResult Edit(Guid id)
         //{
         //    T student = centralQuestionService.Get(id);
@@ -79,14 +80,14 @@ namespace _1_PresentationLayer.Controllers
         //    return new HttpNotFoundResult();
         //}
 
-        //// POST: Student/Edit/5
+        //// POST: User/Edit/5
         //[HttpPost]
         //public virtual ActionResult Edit(T student)
         //{
         //    return View("Index");
         //}
 
-        //// GET: Student/Delete/5
+        //// GET: User/Delete/5
         //public virtual ActionResult Delete(Guid id)
         //{
         //    T student = centralQuestionService.Get(id);
@@ -97,14 +98,14 @@ namespace _1_PresentationLayer.Controllers
         //    }
         //    return new HttpNotFoundResult();
         //}
-        //// POST: Student/Delete/5
+        //// POST: User/Delete/5
         //[HttpPost]
         //public virtual ActionResult Delete(T student)
         //{
         //    if (student != null)
         //    {
                 
-        //        centralQuestionService.Delete(student.ID);
+        //        centralQuestionService.Delete(student.UserID);
         //    }
         //    return RedirectToAction("Index");
         //}
@@ -117,7 +118,7 @@ namespace _1_PresentationLayer.Controllers
                 centralQuestionService.ExportData(student);
                 TempData["ExportMessage"] = $"Data successfully exported to {student.FirstName}_{student.LastName}.txt";
             }
-            return RedirectToAction("Details", new { id = student.ID });
+            return RedirectToAction("Details", new { id = student.UserID });
         }
 
         public virtual ActionResult ConfirmPopup(Guid id)
