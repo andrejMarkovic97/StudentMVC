@@ -113,7 +113,6 @@
     <Compile Include="StudentServices\IStudentService.cs" />
     <Compile Include="StudentServices\UserService.cs" />
     <Compile Include="UserRoleServices\UserRoleService.cs" />
-    <Compile Include="UserServices\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
