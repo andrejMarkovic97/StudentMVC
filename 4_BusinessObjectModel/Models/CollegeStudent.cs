@@ -7,6 +7,7 @@ using System.Web;
 namespace _4_BusinessObjectModel.Models
 {
     [Table("t_user")]
+
     public class CollegeStudent : User
     {
         public CollegeStudent()

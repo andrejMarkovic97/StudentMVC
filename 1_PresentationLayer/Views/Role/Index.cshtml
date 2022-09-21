@@ -26,7 +26,7 @@
     <td>
         <div class="outer">
             <div class="inner">
-                <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "Role", new { id = item.RoleId })'">Details</button>
+                <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "Role", new { id = item.RoleID })'">Details</button>
             </div>
             <div class="inner">
                 <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        @using (Html.BeginForm("Delete", "Role", new { id = item.RoleId }))
+        @using (Html.BeginForm("Delete", "Role", new { id = item.RoleID }))
         {
             @Html.AntiForgeryToken()
             @Html.Partial("_ConfirmPopup")

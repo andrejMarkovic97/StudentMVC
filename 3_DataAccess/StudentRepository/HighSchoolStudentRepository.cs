@@ -18,7 +18,7 @@ namespace _3_DataAccess.Repository
 
         public override List<HighSchoolStudent> GetAll()
         {
-           return db.HighschoolStudents.ToList();
+            return db.HighschoolStudents.ToList();
 
             //var userRoleList = db.UserRoles.Include("User").Include("Role").ToList();
             //List<HighSchoolStudent> highSchoolers = new List<HighSchoolStudent>();

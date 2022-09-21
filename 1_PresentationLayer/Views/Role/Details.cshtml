@@ -13,7 +13,7 @@
         <h4>Role</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.RoleId)
+        @Html.HiddenFor(model => model.RoleID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -35,7 +35,7 @@
 }
 
 <p>
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "Role", new { id = Model.RoleId})'">Edit</button>
+    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "Role", new { id = Model.RoleID})'">Edit</button>
 
     <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "Role")'">Back to list</button>
 </p>

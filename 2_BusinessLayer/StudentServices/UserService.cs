@@ -24,7 +24,7 @@ namespace _2_BusinessLayer.StudentServices
             File.WriteAllText(path, text);
         }
 
-        public List<User> Search(string filter)
+        public virtual List<User> Search(string filter)
         {
             return null;
         }
