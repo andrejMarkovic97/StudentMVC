@@ -39,7 +39,10 @@ namespace _1_PresentationLayer.App_Start
 
 			container.RegisterType<IStudentService<HighSchoolStudent>, HighSchoolStudentService>();
 			container.RegisterType<IStudentService<CollegeStudent>, CollegeStudentService>();
-			container.RegisterType<IStudentService<User>, UserService>();
+
+			container.RegisterType<IStudentService<User>, UserService<User>>();
+			container.RegisterType<IGenericService<User>, UserService<User>>();
+
 			container.RegisterType<IGenericService<Role>, RoleService>();
 			container.RegisterType<IGenericService<UserRole>, UserRoleService>();
 

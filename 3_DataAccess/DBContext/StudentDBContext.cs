@@ -23,7 +23,6 @@ namespace _3_DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           
 
             modelBuilder.Entity<UserRole>()
                 .HasKey(c => new { c.UserID, c.RoleID });
@@ -37,8 +36,6 @@ namespace _3_DataAccess
                 .HasMany(c => c.UserRoles)
                 .WithRequired()
                 .HasForeignKey(c => c.RoleID);
-
-
 
         }
 

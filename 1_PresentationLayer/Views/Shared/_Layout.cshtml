@@ -8,31 +8,49 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top ">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Students", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+    @if (ViewBag.Title != "Login" && ViewBag.Title != "Register")
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top ">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Students", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
 
-                    <li>@Html.ActionLink("Login", "Login", "Login")</li>
-                    <li>@Html.ActionLink("Register", "Register", "Register")</li>
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("High School Students", "Index", "HighSchoolStudent")</li>
-                    <li>@Html.ActionLink("College Students", "Index", "CollegeStudent")</li>
-                    <li>@Html.ActionLink("Roles", "Index", "Role")</li>
-                </ul>
+                        @*<li>@Html.ActionLink("Login", "Login", "Login")</li>*@
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("High School Students", "Index", "HighSchoolStudent")</li>
+                        <li>@Html.ActionLink("College Students", "Index", "CollegeStudent")</li>
+                        <li>@Html.ActionLink("Roles", "Index", "Role")</li>
+                    </ul>
+                </div>
             </div>
+
         </div>
-        
+    }
+    else if (ViewBag.Title == "Login")
+    {
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <h2 class="navbar-brand"><b>Login</b></h2>
     </div>
-    </div>
+</nav>
+    }
+    else
+    {
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <h2 class="navbar-brand"><b>Register</b></h2>
+            </div>
+        </nav>
+    }
     <div class="container body-content">
         @RenderBody()
         <hr />
