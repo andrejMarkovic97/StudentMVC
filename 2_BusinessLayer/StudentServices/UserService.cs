@@ -9,13 +9,13 @@ using System.Web;
 
 namespace _2_BusinessLayer.StudentServices
 {
-    public class UserService : GenericService<User>, IStudentService<User> 
+    public class UserService<T> : GenericService<T>, IStudentService<T> where T:User 
     {
-        public UserService(IGenericRepository<User> genericRepository) : base(genericRepository)
+        public UserService(IGenericRepository<T> genericRepository) : base(genericRepository)
         {
         }
 
-        public virtual void ExportData(User student)
+        public virtual void ExportData(T student)
         {
             var name = $"{student.FirstName}_{student.LastName}.txt";
             var path = @"C:\Users\amar\Desktop\ExportedData\" + name;
@@ -24,7 +24,7 @@ namespace _2_BusinessLayer.StudentServices
             File.WriteAllText(path, text);
         }
 
-        public List<User> Search(string filter)
+        public virtual List<T> Search(string filter)
         {
             return null;
         }

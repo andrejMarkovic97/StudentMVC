@@ -30,8 +30,28 @@ namespace _3_DataAccess.UserRepository
             //    }
             //}
             //return users;
-           return db.Users.Include("UserRoles").ToList();
+            //return db.Users.Include("UserRoles").ToList();
+            return db.Users.Include("UserRoles").ToList();
+            //foreach (var user in users)
+            //{
+            //    List<UserRole> UserRoles = (from UserRole ur in db.UserRoles
+            //                                join User u in db.Users on ur.UserID equals u.UserID
+            //                                join Role r in db.Roles on ur.RoleID equals r.RoleID
+            //                                where ur.UserID == user.UserID
+            //                                select new UserRole()
+            //                                {
+            //                                    UserID = ur.UserID,
+            //                                    RoleID = ur.RoleID
+
+
+            //                                }).ToList();
+
+            //    user.UserRoles = UserRoles;
+
+            //}
+
         }
-        
+
     }
+        
 }

@@ -10,7 +10,7 @@ using System.Web;
 
 namespace _2_BusinessLayer.StudentServices
 {
-    public class HighSchoolStudentService : GenericService<HighSchoolStudent>, IStudentService<HighSchoolStudent>
+    public class HighSchoolStudentService : UserService<HighSchoolStudent>, IStudentService<HighSchoolStudent>
     {
 
         public HighSchoolStudentService(IGenericRepository<HighSchoolStudent> genericRepository) : base(genericRepository)
@@ -18,7 +18,7 @@ namespace _2_BusinessLayer.StudentServices
         }
 
 
-        public List<HighSchoolStudent> Search(string filter)
+        public override List<HighSchoolStudent> Search(string filter)
         {
             filter = filter.ToLower();
             var list = GetAll();
@@ -29,14 +29,7 @@ namespace _2_BusinessLayer.StudentServices
 
         }
      
-        public void ExportData(HighSchoolStudent student)
-        {
-            var name = $"{student.FirstName}_{student.LastName}.txt";
-            var path = @"C:\Users\amar\Desktop\ExportedData\" + name;
-            string text = student.ToString();
-
-            File.WriteAllText(path, text);
-        }
+       
 
       
     }
