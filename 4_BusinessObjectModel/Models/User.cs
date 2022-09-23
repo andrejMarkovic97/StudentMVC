@@ -50,7 +50,7 @@ namespace _4_BusinessObjectModel.Models
         [Column("adress")]
         public string Adress { get; set; }
 
-       [Not]
+       [NotMapped]
         public Discriminator Discriminator { get; set; }
         public List<UserRole> UserRoles { get; set; }
         public override string ToString()
