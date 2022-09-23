@@ -11,26 +11,16 @@ namespace _3_DataAccess.Repository
     {
   
 
-        public HighSchoolStudentRepository(StudentDBContext db) :base(db)
+        public HighSchoolStudentRepository(UserDBContext db) :base(db)
         {
             
         }
 
         public override List<HighSchoolStudent> GetAll()
         {
-            return db.HighschoolStudents.ToList();
+            return db.HighschoolStudents.Include("UserRoles").ToList();
 
-            //var userRoleList = db.UserRoles.Include("User").Include("Role").ToList();
-            //List<HighSchoolStudent> highSchoolers = new List<HighSchoolStudent>();
-            //foreach (var userRole in userRoleList)
-            //{
-            //    if (userRole.Role.RoleName == "HighSchoolStudent")
-            //    {
-            //        highSchoolers.Add((HighSchoolStudent)userRole.User);
-            //    }
-            //}
-            //return highSchoolers;
-
+            
            
            
         }

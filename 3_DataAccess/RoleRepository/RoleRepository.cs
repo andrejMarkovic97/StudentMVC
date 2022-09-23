@@ -9,7 +9,7 @@ namespace _3_DataAccess.RoleRepository
 {
     public class RoleRepository : GenericRepository<Role>
     {
-        public RoleRepository(StudentDBContext db) : base(db)
+        public RoleRepository(UserDBContext db) : base(db)
         {
         }
     }

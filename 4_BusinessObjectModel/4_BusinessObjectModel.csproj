@@ -104,8 +104,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Discriminator.cs" />
     <Compile Include="Models\CollegeStudent.cs" />
     <Compile Include="Models\HighSchoolStudent.cs" />
+    <Compile Include="Models\Professor.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\UserRole.cs" />

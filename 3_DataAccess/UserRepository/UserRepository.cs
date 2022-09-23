@@ -10,45 +10,31 @@ namespace _3_DataAccess.UserRepository
 {
     public class UserRepository : GenericRepository<User>
     {
-        public UserRepository(StudentDBContext db) : base(db)
+        public UserRepository(UserDBContext db) : base(db)
         {
 
         }
 
         public override List<User> GetAll()
         {
-            //var userRoles = db.UserRoles.Include("Role").Include("User").ToList();
-            //List<User> users = db.Users.ToList();
+
+            List<User> users = db.Users.Include("UserRoles").ToList();
+            foreach (var user in users)
+            {
+                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == user.UserID).ToList();
+            }
+            return users;
             //foreach (var user in users)
             //{
-            //    foreach (var ur in userRoles)
-            //    {
-            //        if (ur.UserID == user.UserID)
-            //        {
-            //            user.UserRoles.Add(ur);
-            //        }
-            //    }
-            //}
-            //return users;
-            //return db.Users.Include("UserRoles").ToList();
-            return db.Users.Include("UserRoles").ToList();
-            //foreach (var user in users)
-            //{
-            //    List<UserRole> UserRoles = (from UserRole ur in db.UserRoles
-            //                                join User u in db.Users on ur.UserID equals u.UserID
-            //                                join Role r in db.Roles on ur.RoleID equals r.RoleID
+            //    List<UserRole> userRoles = (from ur in db.UserRoles
+            //                                join r in db.Roles
+            //                                on ur.RoleID equals r.RoleID
             //                                where ur.UserID == user.UserID
-            //                                select new UserRole()
+            //                                select new
             //                                {
-            //                                    UserID = ur.UserID,
-            //                                    RoleID = ur.RoleID
-
-
             //                                }).ToList();
-
-            //    user.UserRoles = UserRoles;
-
             //}
+            
 
         }
 

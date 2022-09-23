@@ -9,10 +9,10 @@ namespace _3_DataAccess.GenericRepository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly StudentDBContext db;
+        protected readonly UserDBContext db;
         private readonly DbSet<T> dbSet;
 
-        public GenericRepository(StudentDBContext db)
+        public GenericRepository(UserDBContext db)
         {
             this.db = db;
             this.dbSet = db.Set<T>();

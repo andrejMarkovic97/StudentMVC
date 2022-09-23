@@ -80,7 +80,7 @@
             <td>
                 <div class="outer">
                     <div class="inner">
-                    <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "CollegeStudent", new { id = item.ID })'">Details</button>
+                    <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "CollegeStudent", new { id = item.UserID })'">Details</button>
                     </div>
                     <div class="inner">
                         <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                
-                @using (Html.BeginForm("Delete", "CollegeStudent", new { id = item.ID }))
+                @using (Html.BeginForm("Delete", "CollegeStudent", new { id = item.UserID }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.Partial("_ConfirmPopup")

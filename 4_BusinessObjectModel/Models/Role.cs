@@ -10,7 +10,7 @@ using System.Web.Security;
 namespace _4_BusinessObjectModel.Models
 {
     [Table("t_roles")]
-    public class Role  
+    public class Role : IdentityRole
     {
         public Role()
         {

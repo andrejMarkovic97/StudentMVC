@@ -32,9 +32,9 @@
 
 }
 <p>
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "HighSchoolStudent",new { id = Model.ID })'">Export</button>
+    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "HighSchoolStudent",new { id = Model.UserID })'">Export</button>
 
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "HighSchoolStudent", new { id = Model.ID })'">Edit</button>
+    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "HighSchoolStudent", new { id = Model.UserID })'">Edit</button>
 
     <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "HighSchoolStudent")'">Back to list</button>
 

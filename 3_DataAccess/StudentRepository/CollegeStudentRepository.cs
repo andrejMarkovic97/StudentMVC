@@ -10,14 +10,14 @@ namespace _3_DataAccess.Repository
     public class CollegeStudentRepository : GenericRepository<CollegeStudent>
     {
 
-        public CollegeStudentRepository(StudentDBContext db):base(db)
+        public CollegeStudentRepository(UserDBContext db):base(db)
         {
            
         }
 
-        //public override List<CollegeStudent> GetAll()
-        //{
-        //    return db.Users.Include("User").Include("Role");
-        //}
+        public override List<CollegeStudent> GetAll()
+        {
+            return db.CollegeStudents.Include("UserRoles").ToList();
+        }
     }
 }

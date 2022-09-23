@@ -1,10 +1,10 @@
-﻿@model IEnumerable<_4_BusinessObjectModel.Models.User>
+﻿@model IEnumerable<_4_BusinessObjectModel.Models.Professor>
 
 @{
-    ViewBag.Title = "UserArea";
+    ViewBag.Title = "Index";
 }
 
-<h2>UserArea</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,9 +13,6 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -33,7 +30,10 @@
             @Html.DisplayNameFor(model => model.Adress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Roles)
+            @Html.DisplayNameFor(model => model.Cabinet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
         </th>
         <th></th>
     </tr>
@@ -42,9 +42,6 @@
 <tr>
     <td>
         @Html.DisplayFor(modelItem => item.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Password)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.FirstName)
@@ -62,15 +59,32 @@
         @Html.DisplayFor(modelItem => item.Adress)
     </td>
     <td>
-        @Html.DropDownListFor(modelItem=>item.Roles,new SelectList(item.Roles))
+        @Html.DisplayFor(modelItem => item.Cabinet)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+        @Html.DisplayFor(modelItem => item.Subject)
     </td>
+    
+    <td>
+        <div class="outer">
+            <div class="inner">
+                <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "Professor", new { id = item.UserID })'">Details</button>
+            </div>
+            <div class="inner">
+                <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
+                    Delete
+                </button>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("Delete", "Professor", new { id = item.UserID }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_ConfirmPopup")
+        }
+    </td>
+    
 </tr>
 }
-
 
 </table>

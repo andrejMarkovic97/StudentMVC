@@ -50,7 +50,9 @@ namespace _4_BusinessObjectModel.Models
         [Column("adress")]
         public string Adress { get; set; }
 
-       public List<UserRole> UserRoles { get; set; }
+       [Not]
+        public Discriminator Discriminator { get; set; }
+        public List<UserRole> UserRoles { get; set; }
         public override string ToString()
         {
             return $"First Name : {FirstName},\nLast name : {LastName},\nBirth date: {BirthDate.ToShortDateString()},\n" +

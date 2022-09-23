@@ -175,9 +175,11 @@
     <Compile Include="Controllers\HighSchoolStudentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfessorController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -230,14 +232,17 @@
     <Content Include="Views\CollegeStudent\_EditCollegeStudent.cshtml" />
     <Content Include="Views\HighSchoolStudent\_EditHighSchoolStudent.cshtml" />
     <Content Include="Views\Shared\_ConfirmPopup.cshtml" />
-    <Content Include="Views\Home\AdminArea.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\CollegeStudent\View.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Details.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
-    <Content Include="Views\Home\UserArea.cshtml" />
+    <Content Include="Views\Professor\Index.cshtml" />
+    <Content Include="Views\Professor\_EditProfessor.cshtml" />
+    <Content Include="Views\Professor\Details.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\AdminArea.cshtml" />
+    <Content Include="Views\User\UserArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

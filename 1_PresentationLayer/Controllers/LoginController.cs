@@ -36,16 +36,11 @@ namespace _1_PresentationLayer.Controllers
                 cookie.Expires = DateTime.Now.AddHours(3000);
                 cookie.HttpOnly = true;
                 Response.Cookies.Add(cookie);
-                //if (existingUser.Roles != null && existingUser.Roles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
-                //{
-                //    return RedirectToAction("AdminArea", "Home", existingUser);
-
-                //}
-                //else
-                //{
-                //    return RedirectToAction("UserArea", "Home", existingUser);
-                //}
-                return RedirectToAction("UserArea", "Home", existingUser);
+                if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
+                {
+                    return RedirectToAction("AdminArea", "User");
+                }
+                return RedirectToAction("UserArea", "User",existingUser);
             }
             TempData["LoginMessage"] = $"Invalid credentials";
             return View("Login");

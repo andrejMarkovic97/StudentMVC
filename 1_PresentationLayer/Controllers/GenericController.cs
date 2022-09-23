@@ -71,7 +71,7 @@ namespace _1_PresentationLayer.Controllers
         {
             if(ModelState.IsValid)
             {
-                //hs.Discriminator = Discriminator.HighSchoolStudent;
+                
                 centralQuestionService.Edit(entity);
                 return RedirectToAction("Index");
             }
