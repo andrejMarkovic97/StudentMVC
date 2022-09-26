@@ -10,12 +10,12 @@ namespace _1_PresentationLayer.Controllers
 {
     public class UserController : GenericController<User>
     {
-        private readonly IGenericService<User> centralQuestionService;
+        private readonly IGenericService<User> userService;
         private readonly IGenericService<Role> roleCentralQuestionService;
 
-        public UserController(IGenericService<User> centralQuestionService, IGenericService<Role> roleCentralQuestionService) : base(centralQuestionService)
+        public UserController(IGenericService<User> userService, IGenericService<Role> roleCentralQuestionService) : base(userService)
         {
-            this.centralQuestionService = centralQuestionService;
+            this.userService = userService;
             this.roleCentralQuestionService = roleCentralQuestionService;
         }
 
@@ -29,13 +29,13 @@ namespace _1_PresentationLayer.Controllers
                 RoleID = role.RoleID
             };
             user.UserRoles.Add(ur);
-            centralQuestionService.Add(user);
+            userService.Add(user);
             return View("AdminArea");
         }
 
         public ActionResult AdminArea()
         {
-            var list = centralQuestionService.GetAll();
+            var list = userService.GetAll();
             return View(list);
         }
 

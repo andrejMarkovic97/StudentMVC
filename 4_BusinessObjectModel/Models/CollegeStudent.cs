@@ -6,19 +6,19 @@ using System.Web;
 
 namespace _4_BusinessObjectModel.Models
 {
-    [Table("t_user")]
-
+   
     public class CollegeStudent : User
     {
         public CollegeStudent()
         {
 
         }
-        [Column("institution_name")]
+        
         public string InstitutionName { get; set; }
 
-        [Column("generation")]
+        
         public int Generation { get; set; }
+
 
         public override string ToString()
         {

@@ -10,7 +10,7 @@ using System.Web;
 
 namespace _2_BusinessLayer.StudentServices
 {
-    public class HighSchoolStudentService : UserService<HighSchoolStudent>, IStudentService<HighSchoolStudent>
+    public class HighSchoolStudentService : UserService<HighSchoolStudent>, IUserService<HighSchoolStudent>
     {
 
         public HighSchoolStudentService(IGenericRepository<HighSchoolStudent> genericRepository) : base(genericRepository)

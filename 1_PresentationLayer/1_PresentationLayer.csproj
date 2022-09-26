@@ -246,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -272,6 +273,10 @@
     <ProjectReference Include="..\4_BusinessObjectModel\4_BusinessObjectModel.csproj">
       <Project>{A192482F-D208-4012-9442-5FE10F7A2529}</Project>
       <Name>4_BusinessObjectModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\5_InfrastructureLayer\5_InfrastructureLayer.csproj">
+      <Project>{d926e374-4d73-4f2e-8b46-deef8888af4c}</Project>
+      <Name>5_InfrastructureLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

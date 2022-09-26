@@ -7,7 +7,7 @@ using System.Web;
 
 namespace _2_BusinessLayer.StudentServices
 {
-    public interface IStudentService<T> : IGenericService<T> where T:User
+    public interface IUserService<T> : IGenericService<T> where T:User
     {
         //void Add(T student);
         //List<T> GetAll();

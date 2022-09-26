@@ -10,7 +10,7 @@ namespace _1_PresentationLayer.Controllers
 {
     public class ProfessorController : GenericController<Professor>
     {
-        public ProfessorController(IGenericService<Professor> centralQuestionService) : base(centralQuestionService)
+        public ProfessorController(IGenericService<Professor> professorService) : base(professorService)
         {
         }
     }

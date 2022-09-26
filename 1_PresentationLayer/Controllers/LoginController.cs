@@ -12,11 +12,11 @@ namespace _1_PresentationLayer.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IStudentService<User> centralQuestionService;
+        private readonly IUserService<User> userService;
 
-        public LoginController(IStudentService<User> centralQuestionService) 
+        public LoginController(IUserService<User> userService) 
         {
-            this.centralQuestionService = centralQuestionService;
+            this.userService = userService;
         }
         public ActionResult Login()
         {
@@ -27,14 +27,16 @@ namespace _1_PresentationLayer.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var existingUser = centralQuestionService.GetAll().FirstOrDefault(s=>s.Email==user.Email && s.Password==user.Password);
+            var existingUser = userService.GetAll().FirstOrDefault(s=>s.Email==user.Email && s.Password==user.Password);
             if (existingUser != null)
             {
                 var Ticket = new FormsAuthenticationTicket(user.Email, true, 3000);
                 string Encrypt = FormsAuthentication.Encrypt(Ticket);
-                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt);
-                cookie.Expires = DateTime.Now.AddHours(3000);
-                cookie.HttpOnly = true;
+                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt)
+                {
+                    Expires = DateTime.Now.AddHours(3000),
+                    HttpOnly = true
+                };
                 Response.Cookies.Add(cookie);
                 if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
                 {
@@ -45,7 +47,7 @@ namespace _1_PresentationLayer.Controllers
             TempData["LoginMessage"] = $"Invalid credentials";
             return View("Login");
 
-
+            
         }
 
 

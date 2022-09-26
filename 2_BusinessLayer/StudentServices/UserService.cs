@@ -9,7 +9,7 @@ using System.Web;
 
 namespace _2_BusinessLayer.StudentServices
 {
-    public class UserService<T> : GenericService<T>, IStudentService<T> where T:User 
+    public class UserService<T> : GenericService<T>, IUserService<T> where T:User 
     {
         public UserService(IGenericRepository<T> genericRepository) : base(genericRepository)
         {

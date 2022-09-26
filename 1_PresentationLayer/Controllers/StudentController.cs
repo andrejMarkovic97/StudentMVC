@@ -12,11 +12,11 @@ namespace _1_PresentationLayer.Controllers
     [Authorize]
     public class StudentController<T> : GenericController<T> where T:User
     {
-        private readonly IStudentService<T> centralQuestionService;
+        private readonly IUserService<T> userService;
 
-        public StudentController(IStudentService<T> centralQuestionService) : base(centralQuestionService)
+        public StudentController(IUserService<T> userService) : base(userService)
         {
-            this.centralQuestionService = centralQuestionService;
+            this.userService = userService;
         }
 
 
@@ -26,13 +26,13 @@ namespace _1_PresentationLayer.Controllers
         {
             if (filter == null || filter == "")
             {
-                var list = centralQuestionService.GetAll();
+                var list = userService.GetAll();
 
                 return View(list);
             }
             else
             {
-                List<T> list = centralQuestionService.Search(filter);
+                List<T> list = userService.Search(filter);
                 if (list == null || list.Count == 0)
                 {
                     TempData["ErrorSearch"] = " No results found";
@@ -48,7 +48,7 @@ namespace _1_PresentationLayer.Controllers
         //// GET: User/Details/5
         //public virtual ActionResult Details(Guid id)
         //{
-        //    T student = centralQuestionService.Get(id);
+        //    T student = collegeStudentService.Get(id);
         //    ViewBag.readOnly = true;
         //    ViewBag.disabled = "disabled";
         //    return View(student);
@@ -70,7 +70,7 @@ namespace _1_PresentationLayer.Controllers
         //// GET: User/Edit/5
         //public virtual ActionResult Edit(Guid id)
         //{
-        //    T student = centralQuestionService.Get(id);
+        //    T student = collegeStudentService.Get(id);
         //    if (student != null)
         //    {
         //        ViewBag.readOnly = false;
@@ -90,7 +90,7 @@ namespace _1_PresentationLayer.Controllers
         //// GET: User/Delete/5
         //public virtual ActionResult Delete(Guid id)
         //{
-        //    T student = centralQuestionService.Get(id);
+        //    T student = collegeStudentService.Get(id);
         //    if (student != null)
         //    {
         //        ViewBag.readOnly = true;
@@ -105,17 +105,17 @@ namespace _1_PresentationLayer.Controllers
         //    if (student != null)
         //    {
                 
-        //        centralQuestionService.Delete(student.UserID);
+        //        collegeStudentService.Delete(student.UserID);
         //    }
         //    return RedirectToAction("Index");
         //}
 
         public virtual ActionResult Export(Guid id)
         {
-            T  student = centralQuestionService.Get(id);
+            T  student = userService.Get(id);
             if (student != null)
             {
-                centralQuestionService.ExportData(student);
+                userService.ExportData(student);
                 TempData["ExportMessage"] = $"Data successfully exported to {student.FirstName}_{student.LastName}.txt";
             }
             return RedirectToAction("Details", new { id = student.UserID });
@@ -123,7 +123,7 @@ namespace _1_PresentationLayer.Controllers
 
         public virtual ActionResult ConfirmPopup(Guid id)
         {
-            T student = centralQuestionService.Get(id);
+            T student = userService.Get(id);
             return PartialView("_ModalPopUp", student);
         }
     }

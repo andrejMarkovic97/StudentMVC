@@ -7,8 +7,7 @@ using System.Web;
 
 namespace _4_BusinessObjectModel.Models
 {
-    [Table("t_user")]
-
+    
 
     public class HighSchoolStudent : User
     {
@@ -16,15 +15,14 @@ namespace _4_BusinessObjectModel.Models
         {
                 
         }
-        [Column("school_name")]
         public string SchoolName { get; set; }
 
-        [Required]
-        [Column("enrollment_date")]
+       
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? EnrollmentDate { get; set; }
 
+        
         public override string ToString()
         {
             return base.ToString() + 

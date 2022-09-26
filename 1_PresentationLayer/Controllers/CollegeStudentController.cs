@@ -9,15 +9,15 @@ using System.Web.Mvc;
 
 namespace _1_PresentationLayer.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="User")]
     public class CollegeStudentController : StudentController<CollegeStudent>
     {
-        private readonly IStudentService<CollegeStudent> centralQuestionService;
+        private readonly IUserService<CollegeStudent> collegeStudentService;
 
       
-        public CollegeStudentController(IStudentService<CollegeStudent> centralQuestionService) : base(centralQuestionService)
+        public CollegeStudentController(IUserService<CollegeStudent> collegeStudentService) : base(collegeStudentService)
         {
-            this.centralQuestionService = centralQuestionService;
+            this.collegeStudentService = collegeStudentService;
         }
 
         public override ActionResult Create(CollegeStudent cs)
@@ -26,7 +26,7 @@ namespace _1_PresentationLayer.Controllers
             {
                 cs.UserID = Guid.NewGuid();
                 //cs.Discriminator = Discriminator.CollegeStudent;
-                centralQuestionService.Add(cs);
+                collegeStudentService.Add(cs);
 
                 return RedirectToAction("Index");
             }
@@ -41,7 +41,7 @@ namespace _1_PresentationLayer.Controllers
             if (ModelState.IsValid)
             {
                 //cs.Discriminator = Discriminator.CollegeStudent;
-                centralQuestionService.Edit(cs);
+                collegeStudentService.Edit(cs);
                 return RedirectToAction("Index");
             }
             return View("Details", cs);

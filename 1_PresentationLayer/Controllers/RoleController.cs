@@ -10,7 +10,7 @@ namespace _1_PresentationLayer.Controllers
 {
     public class RoleController : GenericController<Role>
     {
-        public RoleController(IGenericService<Role> centralQuestionService) : base(centralQuestionService)
+        public RoleController(IGenericService<Role> roleService) : base(roleService)
         {
         }
     }
