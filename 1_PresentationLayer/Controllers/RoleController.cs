@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace _1_PresentationLayer.Controllers
 {
+    [Authorize]
     public class RoleController : GenericController<Role>
     {
         public RoleController(IGenericService<Role> roleService) : base(roleService)

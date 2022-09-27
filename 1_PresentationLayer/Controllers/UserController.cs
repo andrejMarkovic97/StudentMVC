@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace _1_PresentationLayer.Controllers
 {
+    [Authorize]
     public class UserController : GenericController<User>
     {
         private readonly IGenericService<User> userService;
@@ -19,6 +20,7 @@ namespace _1_PresentationLayer.Controllers
             this.roleCentralQuestionService = roleCentralQuestionService;
         }
 
+        [Authorize(Roles = "Admin")]
         public override ActionResult Create(User user)
         {
             user.UserID = Guid.NewGuid();

@@ -243,6 +243,7 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\AdminArea.cshtml" />
     <Content Include="Views\User\UserArea.cshtml" />
+    <Content Include="Views\Professor\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -49,6 +49,7 @@ namespace _5_InfrastructureLayer.Security
         {
 
             List<string> roleNames = new List<string>();
+
             using (var db = new UserDBContext())
             {
                 var user = db.Users.FirstOrDefault(u => u.Email == email);
@@ -74,9 +75,21 @@ namespace _5_InfrastructureLayer.Security
             throw new NotImplementedException();
         }
 
-        public override bool IsUserInRole(string username, string roleName)
+        public override bool IsUserInRole(string email, string roleName)
         {
-            throw new NotImplementedException();
+            using (var db = new UserDBContext())
+            {
+                var user = db.Users.FirstOrDefault(u => u.Email == email);
+                if (user != null)
+                {
+                    user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == user.UserID).ToList();
+                    if (user.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == roleName) == null)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)

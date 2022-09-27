@@ -47,10 +47,12 @@ namespace _1_PresentationLayer.Controllers
             TempData["LoginMessage"] = $"Invalid credentials";
             return View("Login");
 
-            
         }
 
-
-
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
     }
 }

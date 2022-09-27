@@ -1,4 +1,5 @@
-﻿using _2_BusinessLayer.StudentServices;
+﻿using _2_BusinessLayer.GenericServices;
+using _2_BusinessLayer.StudentServices;
 using _4_BusinessObjectModel;
 using _4_BusinessObjectModel.Models;
 using System;
@@ -9,24 +10,43 @@ using System.Web.Mvc;
 
 namespace _1_PresentationLayer.Controllers
 {
-    [Authorize(Roles="Admin","User")]
+    [Authorize]
     public class HighSchoolStudentController : StudentController<HighSchoolStudent>
     {
         private readonly IUserService<HighSchoolStudent> highSchoolStudentService;
+        private readonly IGenericService<Role> roleService;
 
-        public HighSchoolStudentController(IUserService<HighSchoolStudent> highSchoolStudentService) : base(highSchoolStudentService)
+        public HighSchoolStudentController(IUserService<HighSchoolStudent> highSchoolStudentService, IGenericService<Role> roleService) : base(highSchoolStudentService)
         {
             this.highSchoolStudentService = highSchoolStudentService;
+            this.roleService = roleService;
         }
-
+        [Authorize(Roles = "Professor")]
         public override ActionResult Create(HighSchoolStudent hs)
         {
             try
             {
                 hs.UserID = Guid.NewGuid();
-                //hs.Discriminator = Discriminator.HighSchoolStudent;
-                highSchoolStudentService.Add(hs);
+                hs.UserRoles = new List<UserRole>();
+                UserRole roleUser = new UserRole
+                
+                {
+                    UserID = hs.UserID,
+                    RoleID = roleService.GetAll().FirstOrDefault(r => r.RoleName == "User").RoleID
 
+                };
+                UserRole roleHS = new UserRole
+                {
+                    UserID = hs.UserID,
+                    RoleID = roleService.GetAll().FirstOrDefault(r => r.RoleName == "HighSchoolStudent").RoleID
+
+                };
+                hs.UserRoles.Add(roleUser);
+                hs.UserRoles.Add(roleHS);
+               
+                hs.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
+                highSchoolStudentService.Add(hs);
+               
                 return RedirectToAction("Index");
             }
             catch
@@ -39,7 +59,7 @@ namespace _1_PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                //hs.Discriminator = Discriminator.HighSchoolStudent;
+                
                 highSchoolStudentService.Edit(hs);
                 return RedirectToAction("Index");
             }

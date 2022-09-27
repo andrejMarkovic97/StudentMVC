@@ -1,4 +1,5 @@
-﻿using _2_BusinessLayer.StudentServices;
+﻿using _2_BusinessLayer.GenericServices;
+using _2_BusinessLayer.StudentServices;
 using _4_BusinessObjectModel;
 using _4_BusinessObjectModel.Models;
 using System;
@@ -9,31 +10,45 @@ using System.Web.Mvc;
 
 namespace _1_PresentationLayer.Controllers
 {
-    [Authorize(Roles="User")]
+    [Authorize]
     public class CollegeStudentController : StudentController<CollegeStudent>
     {
         private readonly IUserService<CollegeStudent> collegeStudentService;
+        private readonly IGenericService<Role> roleService;
 
-      
-        public CollegeStudentController(IUserService<CollegeStudent> collegeStudentService) : base(collegeStudentService)
+        public CollegeStudentController(IUserService<CollegeStudent> collegeStudentService, IGenericService<Role> roleService) : base(collegeStudentService)
         {
             this.collegeStudentService = collegeStudentService;
+            this.roleService = roleService;
         }
 
+        [Authorize(Roles = "Professor")]
         public override ActionResult Create(CollegeStudent cs)
         {
-            try
+           
+            cs.UserID = Guid.NewGuid();
+            cs.UserRoles = new List<UserRole>();
+            UserRole roleUser = new UserRole
             {
-                cs.UserID = Guid.NewGuid();
-                //cs.Discriminator = Discriminator.CollegeStudent;
-                collegeStudentService.Add(cs);
+                UserID = cs.UserID,
+                RoleID = roleService.GetAll().FirstOrDefault(r => r.RoleName == "User").RoleID
+            };
 
+            UserRole roleCS = new UserRole
+                {
+                    UserID = cs.UserID,
+                    RoleID = roleService.GetAll().FirstOrDefault(r => r.RoleName == "CollegeStudent").RoleID
+
+                };
+                cs.UserRoles.Add(roleUser);
+                cs.UserRoles.Add(roleCS);
+               
+                cs.Password= System.Web.Security.Membership.GeneratePassword(8, 1);
+                collegeStudentService.Add(cs);
+                
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View("Create");
-            }
+            
+          
         }
 
         public override ActionResult Edit(CollegeStudent cs)

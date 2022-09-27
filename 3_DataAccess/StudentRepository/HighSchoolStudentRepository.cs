@@ -16,6 +16,21 @@ namespace _3_DataAccess.Repository
             
         }
 
+        public override void Add(HighSchoolStudent hs)
+        {
+            db.Users.Add(hs);
+            db.UserRoles.AddRange(hs.UserRoles);
+            db.SaveChanges();
+        }
+
+        public override void Delete(Guid id)
+        {
+            var userRoles = db.UserRoles.ToList().Where(ur => ur.UserID == id);
+            db.UserRoles.RemoveRange(userRoles);
+            db.Users.Remove(Get(id));
+            db.SaveChanges();
+        }
+
         public override List<HighSchoolStudent> GetAll()
         {
             return db.HighschoolStudents.Include("UserRoles").ToList();

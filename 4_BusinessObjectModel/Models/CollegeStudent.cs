@@ -11,7 +11,7 @@ namespace _4_BusinessObjectModel.Models
     {
         public CollegeStudent()
         {
-
+            
         }
         
         public string InstitutionName { get; set; }

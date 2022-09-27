@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -20,8 +21,10 @@ namespace _3_DataAccess.GenericRepository
         }
         public virtual void Add(T entity)
         {
-            dbSet.Add(entity);
-            db.SaveChanges();
+          
+                dbSet.Add(entity);
+                db.SaveChanges();
+           
         }
 
         public virtual void Delete(Guid id)

@@ -9,14 +9,17 @@
 <link href="..\Content\Styles.css" rel="stylesheet">
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Professor"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 
 @using (Html.BeginForm("Index", "HighSchoolStudent", FormMethod.Get))
 {
     @Html.TextBox("filter")
-    <input type="submit" value="Search" placeholder="Search"/>
+    <input type="submit" value="Search" placeholder="Search" />
 }
 
 
@@ -89,14 +92,14 @@
                             Delete
                         </button>
                     </div>
-                    </div>
-                    @using (Html.BeginForm("Delete", "HighSchoolStudent", new { id = item.UserID }))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.Partial("_ConfirmPopup")
-                    }
+                </div>
+                @using (Html.BeginForm("Delete", "HighSchoolStudent", new { id = item.UserID }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Partial("_ConfirmPopup")
+                }
 
-</td>
+            </td>
         </tr>
     }
 

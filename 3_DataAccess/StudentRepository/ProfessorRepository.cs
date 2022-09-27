@@ -2,6 +2,8 @@
 using _4_BusinessObjectModel.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +14,21 @@ namespace _3_DataAccess.StudentRepository
         public ProfessorRepository(UserDBContext db) :base(db)
         {
 
+        }
+
+        public override void Add(Professor professor)
+        {
+            db.Users.Add(professor);
+            db.UserRoles.AddRange(professor.UserRoles);
+            db.SaveChanges();
+        }
+
+        public override void Delete(Guid id)
+        {
+            var userRoles = db.UserRoles.ToList().Where(ur => ur.UserID == id);
+            db.UserRoles.RemoveRange(userRoles);
+            db.Users.Remove(Get(id));
+            db.SaveChanges();
         }
 
         public override List<Professor> GetAll()

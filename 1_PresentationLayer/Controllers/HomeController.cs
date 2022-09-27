@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace _1_PresentationLayer.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -26,13 +27,13 @@ namespace _1_PresentationLayer.Controllers
 
             return View();
         }
-        
+        [Authorize(Roles = "Admin")]
         public ActionResult AdminArea()
         {
 
             return View();
         }
-
+        [Authorize(Roles = "User")]
         public ActionResult UserArea()
         {
             return View();
