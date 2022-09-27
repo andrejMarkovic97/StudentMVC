@@ -20,7 +20,7 @@ namespace _1_PresentationLayer.Controllers
         }
 
 
-        // GET: User
+       
         [HttpPost]
         public virtual ActionResult Index(string filter)
         {

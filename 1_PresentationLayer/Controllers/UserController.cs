@@ -40,10 +40,11 @@ namespace _1_PresentationLayer.Controllers
             var list = userService.GetAll();
             return View(list);
         }
-
+        [Authorize(Roles = "User")]
         public ActionResult UserArea(User user)
         {
             return View(user);
+
         }
     }
 }

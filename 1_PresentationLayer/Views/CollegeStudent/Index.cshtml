@@ -11,7 +11,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 }
-@using (Html.BeginForm("Index", "CollegeStudent", FormMethod.Get))
+@using (Html.BeginForm("Index", "CollegeStudent", FormMethod.Post))
 {
 
     @Html.TextBox("filter")

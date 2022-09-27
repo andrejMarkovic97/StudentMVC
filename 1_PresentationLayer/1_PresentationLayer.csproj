@@ -241,9 +241,9 @@
     <Content Include="Views\Professor\_EditProfessor.cshtml" />
     <Content Include="Views\Professor\Details.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\AdminArea.cshtml" />
     <Content Include="Views\User\UserArea.cshtml" />
     <Content Include="Views\Professor\Create.cshtml" />
+    <Content Include="Views\User\AdminArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

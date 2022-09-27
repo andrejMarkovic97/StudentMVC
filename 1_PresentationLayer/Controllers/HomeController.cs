@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _4_BusinessObjectModel.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,17 +28,7 @@ namespace _1_PresentationLayer.Controllers
 
             return View();
         }
-        [Authorize(Roles = "Admin")]
-        public ActionResult AdminArea()
-        {
-
-            return View();
-        }
-        [Authorize(Roles = "User")]
-        public ActionResult UserArea()
-        {
-            return View();
-
-        }
     }
+       
+    
 }

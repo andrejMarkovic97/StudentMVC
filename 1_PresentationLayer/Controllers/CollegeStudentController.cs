@@ -55,7 +55,7 @@ namespace _1_PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                //cs.Discriminator = Discriminator.CollegeStudent;
+                
                 collegeStudentService.Edit(cs);
                 return RedirectToAction("Index");
             }

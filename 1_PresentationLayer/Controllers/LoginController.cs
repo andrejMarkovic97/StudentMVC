@@ -40,6 +40,7 @@ namespace _1_PresentationLayer.Controllers
                 Response.Cookies.Add(cookie);
                 if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
                 {
+                    
                     return RedirectToAction("AdminArea", "User");
                 }
                 return RedirectToAction("UserArea", "User",existingUser);

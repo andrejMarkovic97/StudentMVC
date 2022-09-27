@@ -16,7 +16,7 @@
     </p>
 }
 
-@using (Html.BeginForm("Index", "HighSchoolStudent", FormMethod.Get))
+@using (Html.BeginForm("Index", "HighSchoolStudent", FormMethod.Post))
 {
     @Html.TextBox("filter")
     <input type="submit" value="Search" placeholder="Search" />

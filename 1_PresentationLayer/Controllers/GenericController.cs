@@ -9,16 +9,16 @@ namespace _1_PresentationLayer.Controllers
 {
     public class GenericController<T> : Controller where T:class
     {
-        private readonly IGenericService<T> centralQuestionService;
+        private readonly IGenericService<T> genericService;
 
-        public GenericController(IGenericService<T> centralQuestionService)
+        public GenericController(IGenericService<T> genericService)
         {
-            this.centralQuestionService = centralQuestionService;
+            this.genericService = genericService;
         }
         // GET: Generic
         public virtual ActionResult Index()
         {
-            var list = centralQuestionService.GetAll();
+            var list = genericService.GetAll();
             return View(list);
         }
 
@@ -27,7 +27,7 @@ namespace _1_PresentationLayer.Controllers
         {
             ViewBag.readOnly = true;
             ViewBag.disabled = "disabled";
-            T entity = centralQuestionService.Get(id);
+            T entity = genericService.Get(id);
             return View(entity);
         }
 
@@ -42,8 +42,9 @@ namespace _1_PresentationLayer.Controllers
         public virtual ActionResult Create(T entity)
         {
             try
-            { 
-
+            {
+                
+                genericService.Add(entity); 
                 return RedirectToAction("Index");
             }
             catch
@@ -55,7 +56,7 @@ namespace _1_PresentationLayer.Controllers
         // GET: Generic/Edit/5
         public virtual ActionResult Edit(Guid id)
         {
-            T entity = centralQuestionService.Get(id);
+            T entity = genericService.Get(id);
             if (entity != null)
             {
                 ViewBag.readOnly = false;
@@ -72,7 +73,7 @@ namespace _1_PresentationLayer.Controllers
             if(ModelState.IsValid)
             {
                 
-                centralQuestionService.Edit(entity);
+                genericService.Edit(entity);
                 return RedirectToAction("Index");
             }
             return View("Details", entity);
@@ -81,7 +82,7 @@ namespace _1_PresentationLayer.Controllers
         // GET: Generic/Delete/5
         public virtual ActionResult Delete(Guid id)
         {
-            T entity = centralQuestionService.Get(id);
+            T entity = genericService.Get(id);
             ViewBag.readOnly = true;
             if (entity != null)
             {
@@ -97,7 +98,7 @@ namespace _1_PresentationLayer.Controllers
         {
             
 
-            centralQuestionService.Delete(id);
+            genericService.Delete(id);
             
             return RedirectToAction("Index");
         }
