@@ -1,9 +1,19 @@
-﻿@model _4_BusinessObjectModel.Models.CollegeStudent
-
+﻿@model _1_PresentationLayer.ViewModels.CollegeStudentViewModel
+@{
+    bool readOnly;
+    if (Model == null)
+    {
+        readOnly = false;
+    }
+    else
+    {
+        readOnly = Model.IsReadOnly;
+    }
+}
 <div class="form-group">
     @Html.LabelFor(model => model.InstitutionName, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.InstitutionName, ViewBag.readOnly==true ? (object)new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } } : (object)new { htmlAttributes = new { @class = "form-control" }} )
+        @Html.EditorFor(model => model.InstitutionName, readOnly == true ? (object)new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } } : (object)new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.InstitutionName, "", new { @class = "text-danger" })
     </div>
 </div>
@@ -11,7 +21,7 @@
 <div class="form-group">
     @Html.LabelFor(model => model.Generation, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.Generation, ViewBag.readOnly == true ? (object)new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } } : (object)new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.Generation, readOnly == true ? (object)new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } } : (object)new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Generation, "", new { @class = "text-danger" })
     </div>
 </div>

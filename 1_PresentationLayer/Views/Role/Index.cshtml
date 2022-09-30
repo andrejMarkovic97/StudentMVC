@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_4_BusinessObjectModel.Models.Role>
+﻿@model IEnumerable<_1_PresentationLayer.ViewModels.RoleViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -17,31 +17,32 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.RoleName)
-    </td>
-    <td>
-    <td>
-        <div class="outer">
-            <div class="inner">
-                <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "Role", new { id = item.RoleID })'">Details</button>
-            </div>
-            <div class="inner">
-                <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
-                    Delete
-                </button>
-            </div>
-        </div>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+            <td>
+                <div class="outer">
+                    <div class="inner">
+                        <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "Role", new { id = item.RoleID })'">Details</button>
+                    </div>
+                    <div class="inner">
+                        <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
+                            Delete
+                        </button>
+                    </div>
+                </div>
 
-        @using (Html.BeginForm("Delete", "Role", new { id = item.RoleID }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.Partial("_ConfirmPopup")
-        }
-    </td>
-</tr>
-}
+                @using (Html.BeginForm("Delete", "Role", new { id = item.RoleID }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Partial("_ConfirmPopup")
+                }
+            </td>
+        </tr>
+    }
 
 </table>

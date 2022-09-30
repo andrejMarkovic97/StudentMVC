@@ -80,21 +80,21 @@ namespace _1_PresentationLayer.Controllers
         }
 
         // GET: Generic/Delete/5
-        public virtual ActionResult Delete(Guid id)
-        {
-            T entity = genericService.Get(id);
-            ViewBag.readOnly = true;
-            if (entity != null)
-            {
-                ViewBag.readOnly = true;
-                return View(entity);
-            }
-            return new HttpNotFoundResult();
-        }
+        //public virtual ActionResult Delete(Guid id)
+        //{
+        //    T entity = genericService.Get(id);
+        //    ViewBag.readOnly = true;
+        //    if (entity != null)
+        //    {
+        //        ViewBag.readOnly = true;
+        //        return View(entity);
+        //    }
+        //    return new HttpNotFoundResult();
+        //}
 
-        // POST: Generic/Delete/5
+        //POST: Generic/Delete/5
         [HttpPost]
-        public virtual ActionResult Delete(Guid id, FormCollection collection)
+        public virtual ActionResult Delete(Guid id)
         {
             
 

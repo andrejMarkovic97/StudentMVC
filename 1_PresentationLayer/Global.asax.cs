@@ -1,4 +1,5 @@
 ﻿using _1_PresentationLayer.App_Start;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,10 @@ namespace _1_PresentationLayer
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
+
+            
+            
+            
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model _4_BusinessObjectModel.Models.CollegeStudent
+﻿@model _1_PresentationLayer.ViewModels.CollegeStudentViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -18,17 +18,23 @@
             @Html.HiddenFor(model => model.UserID)
             @Html.Partial("_EditStudent")
             @Html.Partial("_EditCollegeStudent")
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal" @ViewBag.disabled>
-                        Submit
-                    </button>
+            @{
+                if (!Model.IsDisabled)
+                {
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal" @ViewBag.disabled>
+                            Submit
+                        </button>
+                    </div>
                 </div>
-            </div>
+                    }
+                }
         </div>
-    
- 
+
+
         @Html.Partial("_ConfirmPopup")
     </div>
 }
@@ -49,4 +55,4 @@
 
 <script src="~/Scripts/scripts.js">
 
-    </script>
+</script>

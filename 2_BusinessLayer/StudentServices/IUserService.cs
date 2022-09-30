@@ -19,5 +19,7 @@ namespace _2_BusinessLayer.StudentServices
 
         void ExportData(T student);
 
+        User GetUserByCredentials(string email, string password);
+
     }
 }

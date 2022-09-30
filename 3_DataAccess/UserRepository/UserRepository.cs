@@ -30,6 +30,15 @@ namespace _3_DataAccess.UserRepository
 
         }
 
+        public override User GetUserByCredentials(string email, string password)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            if (user != null)
+            {
+                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == user.UserID).ToList();
+            }
+            return user;
+        }
     }
         
 }

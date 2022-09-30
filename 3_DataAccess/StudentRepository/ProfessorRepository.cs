@@ -22,7 +22,7 @@ namespace _3_DataAccess.StudentRepository
             db.UserRoles.AddRange(professor.UserRoles);
             db.SaveChanges();
         }
-
+        
         public override void Delete(Guid id)
         {
             var userRoles = db.UserRoles.ToList().Where(ur => ur.UserID == id);

@@ -1,4 +1,5 @@
 ﻿using _3_DataAccess.Repository;
+using _4_BusinessObjectModel.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -52,6 +53,11 @@ namespace _3_DataAccess.GenericRepository
         public virtual List<T> GetAll()
         {
             return dbSet.ToList();
+        }
+
+        public virtual T GetUserByCredentials(string email, string password)
+        {
+            return null;
         }
     }
 }

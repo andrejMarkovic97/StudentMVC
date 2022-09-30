@@ -15,5 +15,7 @@ namespace _3_DataAccess.Repository
         T Get(Guid id);
         void Edit(T entity);
         void Delete(Guid id);
+
+        T GetUserByCredentials(string email, string password);
     }
 }

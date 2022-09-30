@@ -27,7 +27,7 @@ namespace _1_PresentationLayer.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var existingUser = userService.GetAll().FirstOrDefault(s=>s.Email==user.Email && s.Password==user.Password);
+            var existingUser = userService.GetUserByCredentials(user.Email, user.Password);
             if (existingUser != null)
             {
                 var Ticket = new FormsAuthenticationTicket(user.Email, true, 3000);

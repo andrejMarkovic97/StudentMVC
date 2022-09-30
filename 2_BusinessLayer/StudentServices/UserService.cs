@@ -11,8 +11,11 @@ namespace _2_BusinessLayer.StudentServices
 {
     public class UserService<T> : GenericService<T>, IUserService<T> where T:User 
     {
+        private readonly IGenericRepository<T> genericRepository;
+
         public UserService(IGenericRepository<T> genericRepository) : base(genericRepository)
         {
+            this.genericRepository = genericRepository;
         }
 
         public virtual void ExportData(T student)
@@ -24,11 +27,19 @@ namespace _2_BusinessLayer.StudentServices
             File.WriteAllText(path, text);
         }
 
+        public User GetUserByCredentials(string email, string password)
+        {
+            return genericRepository.GetUserByCredentials(email, password);
+        }
+
         public virtual List<T> Search(string filter)
         {
             return null;
         }
-       
+
+        
+
+
 
     }
 }

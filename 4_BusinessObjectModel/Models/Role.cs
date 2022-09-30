@@ -14,13 +14,13 @@ namespace _4_BusinessObjectModel.Models
     {
         public Role()
         {
-
+                
         }
-        
-        public Guid RoleID{ get; set; }
+
+        public Guid RoleID { get ; set; }
        
         public string RoleName { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
+        public List<UserRole> UserRoles { get; set; }
 
     }
 }

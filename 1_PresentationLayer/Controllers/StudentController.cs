@@ -121,11 +121,7 @@ namespace _1_PresentationLayer.Controllers
             return RedirectToAction("Details", new { id = student.UserID });
         }
 
-        public virtual ActionResult ConfirmPopup(Guid id)
-        {
-            T student = userService.Get(id);
-            return PartialView("_ModalPopUp", student);
-        }
+       
     }
 }
 

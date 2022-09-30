@@ -1,4 +1,7 @@
-﻿using _2_BusinessLayer.GenericServices;
+﻿using _1_PresentationLayer.ApplicationService.UserAppService;
+using _1_PresentationLayer.ViewModels;
+using _2_BusinessLayer.GenericServices;
+using _2_BusinessLayer.RoleServices;
 using _4_BusinessObjectModel.Models;
 using System;
 using System.Collections.Generic;
@@ -9,43 +12,45 @@ using System.Web.Mvc;
 namespace _1_PresentationLayer.Controllers
 {
     [Authorize]
-    public class ProfessorController : GenericController<Professor>
+    public class ProfessorController : UserAppController<ProfessorViewModel, Professor>
     {
-        private readonly IGenericService<Professor> professorService;
-        private readonly IGenericService<Role> roleService;
+        private readonly IUserAppService<ProfessorViewModel, Professor> professorAppService;
+        private readonly RoleService roleService;
 
-        public ProfessorController(IGenericService<Professor> professorService,IGenericService<Role> roleService) : base(professorService)
+        public ProfessorController(IUserAppService<ProfessorViewModel, Professor> professorAppService,RoleService roleService) : base(professorAppService)
         {
-            this.professorService = professorService;
+            this.professorAppService = professorAppService;
             this.roleService = roleService;
         }
 
-        [Authorize(Roles="Admin")]
-        public override ActionResult Create(Professor p)
+
+        [Authorize(Roles = "Admin")]
+        public override ActionResult Create(ProfessorViewModel professor)
         {
-           
-                p.UserID = Guid.NewGuid();
-                p.UserRoles = new List<UserRole>();
-                UserRole roleUser = new UserRole
-                {
-                    UserID = p.UserID,
-                    RoleID = roleService.GetAll().FirstOrDefault(r => r.RoleName == "User").RoleID
 
-                };
-                UserRole roleProfessor = new UserRole
-                {
-                    UserID = p.UserID,
-                    RoleID = roleService.GetAll().FirstOrDefault(r => r.RoleName == "Professor").RoleID
+            professor.UserID = Guid.NewGuid();
+            professor.UserRoles = new List<UserRole>();
+            UserRole roleUser = new UserRole
+            {
+                UserID = professor.UserID,
+                RoleID = roleService.GetAll().FirstOrDefault(r => r.RoleName == "User").RoleID
 
-                };
-                p.UserRoles.Add(roleUser);
-                p.UserRoles.Add(roleProfessor);
-              
-                p.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
-                professorService.Add(p);
+            };
+            UserRole roleProfessor = new UserRole
+            {
+                UserID = professor.UserID,
+                RoleID = roleService.GetAll().FirstOrDefault(r => r.RoleName == "Professor").RoleID
 
-                return RedirectToAction("Index");
-           
+            };
+            professor.UserRoles.Add(roleUser);
+            professor.UserRoles.Add(roleProfessor);
+
+            professor.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
+            professorAppService.Add(professor);
+
+            return RedirectToAction("Index");
+
         }
+
     }
 }

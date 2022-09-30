@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_4_BusinessObjectModel.Models.CollegeStudent>
+﻿@model IEnumerable<_1_PresentationLayer.ViewModels.CollegeStudentViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -7,16 +7,16 @@
 <h2>Index</h2>
 @if (User.Identity.IsAuthenticated && User.IsInRole("Professor"))
 {
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
 @using (Html.BeginForm("Index", "CollegeStudent", FormMethod.Post))
 {
 
     @Html.TextBox("filter")
-    <input type="submit" value="Search"  />
-    
+    <input type="submit" value="Search" />
+
 
 }
 
@@ -31,10 +31,10 @@
             Last Name
         </th>
         <th>
-           Birth Date
+            Birth Date
         </th>
         <th>
-           Email
+            Email
         </th>
         <th>
             Phone Number
@@ -82,7 +82,7 @@
             <td>
                 <div class="outer">
                     <div class="inner">
-                    <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "CollegeStudent", new { id = item.UserID })'">Details</button>
+                        <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "CollegeStudent", new { id = item.UserID })'">Details</button>
                     </div>
                     <div class="inner">
                         <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
@@ -90,7 +90,7 @@
                         </button>
                     </div>
                 </div>
-               
+
                 @using (Html.BeginForm("Delete", "CollegeStudent", new { id = item.UserID }))
                 {
                     @Html.AntiForgeryToken()

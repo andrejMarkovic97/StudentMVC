@@ -12,5 +12,16 @@ namespace _3_DataAccess.RoleRepository
         public RoleRepository(UserDBContext db) : base(db)
         {
         }
+
+        public override void Delete(Guid id)
+        {
+            var role = db.Roles.FirstOrDefault(r => r.RoleID == id);
+            if (role != null) {
+            var userRoles = db.UserRoles.ToList().Where(ur => ur.RoleID == id);
+            db.UserRoles.RemoveRange(userRoles);
+            db.Roles.Remove(role);
+            db.SaveChanges();
+            }
+        }
     }
 }

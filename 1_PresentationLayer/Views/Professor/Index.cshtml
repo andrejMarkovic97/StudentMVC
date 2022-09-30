@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_4_BusinessObjectModel.Models.Professor>
+﻿@model IEnumerable<_1_PresentationLayer.ViewModels.ProfessorViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +13,7 @@
 }
 <table class="table">
     <tr>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
@@ -43,54 +43,54 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    @Html.HiddenFor(m => item.Password)
-    <td>
-        @Html.DisplayFor(modelItem => item.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.LastName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.BirthDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.PhoneNumber)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Adress)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Cabinet)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Subject)
-    </td>
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-    {
-        <td>
-            <div class="outer">
-                <div class="inner">
-                    <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "Professor", new { id = item.UserID })'">Details</button>
-                </div>
-                <div class="inner">
-                    <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
-                        Delete
-                    </button>
-                </div>
-            </div>
-
-            @using (Html.BeginForm("Delete", "Professor", new { id = item.UserID }))
+        <tr>
+            @Html.HiddenFor(m => item.Password)
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cabinet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
-                @Html.AntiForgeryToken()
-                @Html.Partial("_ConfirmPopup")
+                <td>
+                    <div class="outer">
+                        <div class="inner">
+                            <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "Professor", new { id = item.UserID })'">Details</button>
+                        </div>
+                        <div class="inner">
+                            <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    @using (Html.BeginForm("Delete", "Professor", new { id = item.UserID }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Partial("_ConfirmPopup")
+                    }
+                </td>
             }
-        </td>
-    }   
-    </tr>
+        </tr>
     }
 
 </table>
