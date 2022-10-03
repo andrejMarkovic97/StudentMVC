@@ -16,40 +16,42 @@
         @Html.HiddenFor(model => model.UserID)
         @Html.Partial("_EditStudent")
         @Html.Partial("_EditHighSchoolStudent")
-        @{ if (Model.IsDisabled == false)
-            {
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
 
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @{
+                    if (!Model.IsDisabled)
+                    {
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
                             Submit
                         </button>
-                    </div>
-                </div>
-
+                    }
                 }
-            }
-        
+                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "HighSchoolStudent",new { id = Model.UserID })'">Export</button>
+
+                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "HighSchoolStudent", new { id = Model.UserID })'">Edit</button>
+
+                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "HighSchoolStudent")'">Back to list</button>
+            </div>
+        </div>
+
     </div>
 
 
     @Html.Partial("_ConfirmPopup")
 </div>
 
-}
+
 <p>
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "HighSchoolStudent",new { id = Model.UserID })'">Export</button>
-
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "HighSchoolStudent", new { id = Model.UserID })'">Edit</button>
-
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "HighSchoolStudent")'">Back to list</button>
-
+    
+ 
     <div>
         <b>
             @TempData["ExportMessage"]
         </b>
     </div>
 
-
+    
 
 </p>
+        }

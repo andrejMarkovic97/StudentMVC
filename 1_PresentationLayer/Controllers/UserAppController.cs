@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace _1_PresentationLayer.Controllers
 {
     public class UserAppController<TViewModel, TModel> : GenericAppController<TViewModel,TModel> where TModel:User
-                                                                                                 where TViewModel:UserViewModel
+                                                                                                 where TViewModel:UserViewModel,new()
     {
         private readonly IUserAppService<TViewModel, TModel> userAppService;
 
@@ -19,11 +19,22 @@ namespace _1_PresentationLayer.Controllers
             this.userAppService = userAppService;
         }
 
+        public override ActionResult Create()
+        {
+            TViewModel tvm = new TViewModel
+            {
+                Title = "Create",
+                IsReadOnly = false,
+                BirthDate = new DateTime(1990, 1, 1)
+                
+                
+            };
+            return View("Create",tvm);
+        }
+
         public override ActionResult Details(Guid id)
         {
-            
             TViewModel user = userAppService.Get(id);
-            
             if (user != null)
             {
                 user.IsDisabled = true;
@@ -79,5 +90,7 @@ namespace _1_PresentationLayer.Controllers
                 }
             }
         }
+
+       
     }
 }

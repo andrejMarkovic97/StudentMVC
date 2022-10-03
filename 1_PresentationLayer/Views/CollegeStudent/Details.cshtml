@@ -18,20 +18,27 @@
             @Html.HiddenFor(model => model.UserID)
             @Html.Partial("_EditStudent")
             @Html.Partial("_EditCollegeStudent")
-            @{
-                if (!Model.IsDisabled)
-                {
+           
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
+                        @{
+                            if (!Model.IsDisabled)
+                            {
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
+                                    Submit
+                                </button>
+                                }
+                            }
+                                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "CollegeStudent",new { id = Model.UserID })'">Export</button>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal" @ViewBag.disabled>
-                            Submit
-                        </button>
-                    </div>
+                                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "CollegeStudent", new { id = Model.UserID })'">Edit</button>
+
+                                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "CollegeStudent")'">Back to list</button>
+                            </div>
                 </div>
-                    }
-                }
+                    
+                
         </div>
 
 
@@ -40,11 +47,7 @@
 }
 <p>
 
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "CollegeStudent",new { id = Model.UserID })'">Export</button>
-
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "CollegeStudent", new { id = Model.UserID })'">Edit</button>
-
-    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "CollegeStudent")'">Back to list</button>
+    
 
     <div>
         <b>

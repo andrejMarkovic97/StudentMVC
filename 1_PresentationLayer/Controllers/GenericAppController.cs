@@ -1,4 +1,5 @@
 ﻿using _1_PresentationLayer.ApplicationService.GenericAppService;
+using _1_PresentationLayer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace _1_PresentationLayer.Controllers
         }
         public virtual ActionResult Index()
         {
+            
             var list = genericAppService.GetAll();
             return View(list);
         }
@@ -34,6 +36,8 @@ namespace _1_PresentationLayer.Controllers
         // GET: Generic/Create
         public virtual ActionResult Create()
         {
+            
+            
             return View("Create");
         }
 

@@ -9,6 +9,10 @@ namespace _1_PresentationLayer.ViewModels
 {
     public class UserViewModel:GenericViewModel
     {
+        public UserViewModel()
+        {
+
+        }
         public Guid UserID { get; set; }
 
 
