@@ -26,7 +26,7 @@
 
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            
                             <li>@Html.ActionLink("Admin Area", "AdminArea", "Home")</li>
                             <li>@Html.ActionLink("High School Students", "Index", "HighSchoolStudent")</li>
                             <li>@Html.ActionLink("College Students", "Index", "CollegeStudent")</li>
@@ -37,26 +37,26 @@
 
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Professor"))
                         {
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("User Area", "UserArea", "Home", HttpContext.Current.User)</li>
+                           
+                            <li>@Html.ActionLink("User Profile", "UserProfile", "Professor", HttpContext.Current.User.Identity.Name)</li>
                             <li>@Html.ActionLink("High School Students", "Index", "HighSchoolStudent")</li>
-                            <li>@Html.ActionLink("Professors", "Index", "Professor")</li>
+                           
                             <li>@Html.ActionLink("College Students", "Index", "CollegeStudent")</li>
                             <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
                         }
                         @if (User.Identity.IsAuthenticated && User.IsInRole("HighSchoolStudent"))
                         {
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("User Area", "UserArea", "Home", HttpContext.Current.User)</li>
-                            <li>@Html.ActionLink("High School Students", "Index", "HighSchoolStudent")</li>
+                            
+                            <li>@Html.ActionLink("User Profile", "UserProfile", "HighSchoolStudent", HttpContext.Current.User.Identity.Name)</li>
+                            
                             <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
 
                         }
                         @if (User.Identity.IsAuthenticated && User.IsInRole("CollegeStudent"))
                         {
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("User Area", "UserArea", "Home", HttpContext.Current.User)</li>
-                            <li>@Html.ActionLink("College Students", "Index", "CollegeStudent")</li>
+                            
+                            <li>@Html.ActionLink("User Profile", "UserProfile", "CollegeStudent", HttpContext.Current.User.Identity.Name)</li>
+                            
                             <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
                         }
                     </ul>

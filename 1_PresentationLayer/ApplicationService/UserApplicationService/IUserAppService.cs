@@ -15,5 +15,7 @@ namespace _1_PresentationLayer.ApplicationService.UserAppService
         List<TViewModel> Search(string filter);
 
         void ExportData(TViewModel student);
+
+        TViewModel GetUserByCredentials(string email, string password);
     }
 }

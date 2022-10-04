@@ -11,7 +11,7 @@ namespace _1_PresentationLayer.Controllers
     public class GenericAppController<TViewModel,TModel> : Controller where TViewModel:class
                                                                       where TModel:class
     {
-        private readonly IGenericAppService<TViewModel, TModel> genericAppService;
+        protected readonly IGenericAppService<TViewModel, TModel> genericAppService;
 
         public GenericAppController(IGenericAppService<TViewModel,TModel> genericAppService)
         {

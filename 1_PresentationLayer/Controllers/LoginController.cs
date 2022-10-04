@@ -1,4 +1,6 @@
-﻿using _2_BusinessLayer.GenericServices;
+﻿using _1_PresentationLayer.ApplicationService.UserAppService;
+using _1_PresentationLayer.ViewModels;
+using _2_BusinessLayer.GenericServices;
 using _2_BusinessLayer.StudentServices;
 using _4_BusinessObjectModel.Models;
 using System;
@@ -12,11 +14,11 @@ namespace _1_PresentationLayer.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUserService<User> userService;
+        private readonly IUserAppService<UserViewModel, User> userAppService;
 
-        public LoginController(IUserService<User> userService) 
+        public LoginController(IUserAppService<UserViewModel,User> userAppService)
         {
-            this.userService = userService;
+            this.userAppService = userAppService;
         }
         public ActionResult Login()
         {
@@ -25,9 +27,9 @@ namespace _1_PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(UserViewModel user)
         {
-            var existingUser = userService.GetUserByCredentials(user.Email, user.Password);
+            var existingUser = userAppService.GetUserByCredentials(user.Email, user.Password);
             if (existingUser != null)
             {
                 var Ticket = new FormsAuthenticationTicket(user.Email, true, 3000);
@@ -43,7 +45,18 @@ namespace _1_PresentationLayer.Controllers
                     
                     return RedirectToAction("AdminArea", "User");
                 }
-                return RedirectToAction("UserArea", "User",existingUser);
+                if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "CollegeStudent") != null)
+                {
+                    return RedirectToAction("UserProfile", "CollegeStudent",existingUser);
+                }
+                if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "HighSchoolStudent") != null)
+                {
+                    return RedirectToAction("UserProfile", "HighSchoolStudent", existingUser);
+                }
+                if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Professor") != null)
+                {
+                    return RedirectToAction("UserProfile", "Professor", existingUser);
+                }
             }
             TempData["LoginMessage"] = $"Invalid credentials";
             return View("Login");

@@ -54,20 +54,11 @@ namespace _1_PresentationLayer.Controllers
 
         }
 
-        public override ActionResult Create()
-        {
-            
-            return base.Create();
-        }
-
-        public override ActionResult Details(Guid id)
-        {
-            return base.Details(id);
-        }
-
-        public override ActionResult Index()
-        {
-            return base.Index();
-        }
+        //public ActionResult UserProfile(CollegeStudentViewModel student)
+        //{
+        //    var cs = studentAppService.Get(student.UserID);
+        //    return View(cs);
+        //}
+        
     }
 }

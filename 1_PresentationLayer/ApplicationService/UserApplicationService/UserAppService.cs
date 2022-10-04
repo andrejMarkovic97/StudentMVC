@@ -29,6 +29,17 @@ namespace _1_PresentationLayer.ApplicationService.UserAppService
             
         }
 
+        public TViewModel GetUserByCredentials(string email, string password)
+        {
+            var user = userService.GetUserByCredentials(email, password);
+            if (user != null)
+            {
+                TViewModel existingUser = mapper.Map<TViewModel>(user);
+                return existingUser;
+            }
+            return null;
+        }
+
         public List<TViewModel> Search(string filter)
         {
             List<TModel> users = userService.Search(filter);

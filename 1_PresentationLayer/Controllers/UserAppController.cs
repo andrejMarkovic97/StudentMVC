@@ -12,7 +12,7 @@ namespace _1_PresentationLayer.Controllers
     public class UserAppController<TViewModel, TModel> : GenericAppController<TViewModel,TModel> where TModel:User
                                                                                                  where TViewModel:UserViewModel,new()
     {
-        private readonly IUserAppService<TViewModel, TModel> userAppService;
+        protected readonly IUserAppService<TViewModel, TModel> userAppService;
 
         public UserAppController(IUserAppService<TViewModel, TModel> userAppService):base(userAppService)
         {
@@ -91,6 +91,17 @@ namespace _1_PresentationLayer.Controllers
             }
         }
 
-       
+        public ActionResult UserProfile(TViewModel student)
+        {
+            var cs = userAppService.Get(student.UserID);
+            return View(cs);
+        }
+
+        [HttpPost]
+        public ActionResult UserProfile(string identity)
+        {
+            var cs = userAppService.GetAll().FirstOrDefault(user => user.Email == identity);
+            return RedirectToAction("UserProfile",cs);
+        }
     }
 }
