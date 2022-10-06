@@ -108,9 +108,10 @@ namespace _2_BusinessLayer.Tests.ProfessorServiceTest
 
         public void GetUserByCredentials_If_EmailAndPassword_Exist()
         {
-            string email = "test@gmail.com";
-            string password = "123";
             var expected = DummyProfessors()[1];
+            string email = expected.Email;
+            string password = expected.Password;
+            
             _sut.Setup(gr => gr.GetUserByCredentials(email, password)).Returns(expected);
 
             var actual = _sut.Object.GetUserByCredentials(email, password);
