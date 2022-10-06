@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_BusinessObjectModel", "4_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5_InfrastructureLayer", "5_InfrastructureLayer\5_InfrastructureLayer.csproj", "{D926E374-4D73-4F2E-8B46-DEEF8888AF4C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2_BusinessLayer.Tests", "2_BusinessLayer.Tests\2_BusinessLayer.Tests.csproj", "{984D9A04-DD6F-4B55-A996-B655F1C88E96}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3_DataAccess.Tests", "3_DataAccessLayer.Tests\3_DataAccess.Tests.csproj", "{F007CE8F-F297-4958-A659-C3CF01ED6432}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{D926E374-4D73-4F2E-8B46-DEEF8888AF4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D926E374-4D73-4F2E-8B46-DEEF8888AF4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D926E374-4D73-4F2E-8B46-DEEF8888AF4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{984D9A04-DD6F-4B55-A996-B655F1C88E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{984D9A04-DD6F-4B55-A996-B655F1C88E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{984D9A04-DD6F-4B55-A996-B655F1C88E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{984D9A04-DD6F-4B55-A996-B655F1C88E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F007CE8F-F297-4958-A659-C3CF01ED6432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F007CE8F-F297-4958-A659-C3CF01ED6432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F007CE8F-F297-4958-A659-C3CF01ED6432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F007CE8F-F297-4958-A659-C3CF01ED6432}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

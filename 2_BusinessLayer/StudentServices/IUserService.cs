@@ -1,4 +1,4 @@
-﻿using _2_BusinessLayer.GenericServices;
+﻿using _2_BusinessLayer.GenericService;
 using _4_BusinessObjectModel.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace _2_BusinessLayer.StudentServices
 
         List<T> Search(string filter);
 
-        void ExportData(T student);
+        bool ExportData(T student);
 
         User GetUserByCredentials(string email, string password);
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace _2_BusinessLayer.GenericServices
+namespace _2_BusinessLayer.GenericService
 {
     public interface IGenericService<T> where T: class
     {
@@ -12,5 +12,7 @@ namespace _2_BusinessLayer.GenericServices
         T Get(Guid id);
         void Edit(T entity);
         void Delete(Guid id);
+
+        
     }
 }

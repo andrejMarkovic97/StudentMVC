@@ -17,10 +17,10 @@ namespace _3_DataAccess
         public DbSet<User> Users {get; set;}
         public DbSet<HighSchoolStudent> HighschoolStudents { get; set; }
         public DbSet<CollegeStudent> CollegeStudents { get; set; }
-        public DbSet<Professor> Professors { get; set; }
+        public virtual DbSet<Professor> Professors { get; set; }
 
         public DbSet<Role> Roles{ get; set; }
-        public DbSet<UserRole> UserRoles{ get; set; }
+        public virtual DbSet<UserRole> UserRoles{ get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

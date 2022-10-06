@@ -39,5 +39,11 @@ namespace _3_DataAccess.Repository
            
            
         }
+
+        public override List<HighSchoolStudent> Search(string filter)
+        {
+            return db.HighschoolStudents.ToList().FindAll(x => x.FirstName.ToLower() == filter || x.LastName.ToLower() == filter || x.BirthDate.ToString() == filter ||
+            x.Email.ToLower() == filter || x.PhoneNumber == filter || x.Adress.ToLower() == filter || x.SchoolName.ToLower() == filter || x.EnrollmentDate.ToString() == filter);
+        }
     }
 }

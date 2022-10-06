@@ -1,6 +1,6 @@
 ﻿using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
-using _2_BusinessLayer.GenericServices;
+using _2_BusinessLayer.GenericService;
 using _2_BusinessLayer.StudentServices;
 using _4_BusinessObjectModel.Models;
 using System;
@@ -29,38 +29,45 @@ namespace _1_PresentationLayer.Controllers
         [HttpPost]
         public ActionResult Login(UserViewModel user)
         {
-            var existingUser = userAppService.GetUserByCredentials(user.Email, user.Password);
-            if (existingUser != null)
+            if (user != null && user.Email != null && user.Password != null)
             {
-                var Ticket = new FormsAuthenticationTicket(user.Email, true, 3000);
-                string Encrypt = FormsAuthentication.Encrypt(Ticket);
-                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt)
+                var existingUser = userAppService.GetUserByCredentials(user.Email, user.Password);
+                if (existingUser != null)
                 {
-                    Expires = DateTime.Now.AddHours(3000),
-                    HttpOnly = true
-                };
-                Response.Cookies.Add(cookie);
-                if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
-                {
-                    
-                    return RedirectToAction("AdminArea", "User");
-                }
-                if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "CollegeStudent") != null)
-                {
-                    return RedirectToAction("UserProfile", "CollegeStudent",existingUser);
-                }
-                if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "HighSchoolStudent") != null)
-                {
-                    return RedirectToAction("UserProfile", "HighSchoolStudent", existingUser);
-                }
-                if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Professor") != null)
-                {
-                    return RedirectToAction("UserProfile", "Professor", existingUser);
-                }
-            }
-            TempData["LoginMessage"] = $"Invalid credentials";
-            return View("Login");
+                    var Ticket = new FormsAuthenticationTicket(user.Email, true, 3000);
+                    string Encrypt = FormsAuthentication.Encrypt(Ticket);
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt)
+                    {
+                        Expires = DateTime.Now.AddHours(3000),
+                        HttpOnly = true
+                    };
+                    Response.Cookies.Add(cookie);
+                    existingUser.IsDisabled = true;
+                    existingUser.IsReadOnly = true;
 
+
+                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
+                    {
+
+                        return RedirectToAction("AdminArea", "User");
+                    }
+                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "CollegeStudent") != null)
+                    {
+                        return RedirectToAction("UserProfile", "CollegeStudent", existingUser);
+                    }
+                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "HighSchoolStudent") != null)
+                    {
+                        return RedirectToAction("UserProfile", "HighSchoolStudent", existingUser);
+                    }
+                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Professor") != null)
+                    {
+                        return RedirectToAction("UserProfile", "Professor", existingUser);
+                    }
+                }
+                TempData["LoginMessage"] = $"Invalid credentials";
+                return View("Login");
+            }
+            return View("Login");
         }
 
         public ActionResult Logout()

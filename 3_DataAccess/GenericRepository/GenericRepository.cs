@@ -59,5 +59,10 @@ namespace _3_DataAccess.GenericRepository
         {
             return null;
         }
+
+        public virtual List<T> Search(string filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

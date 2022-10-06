@@ -1,6 +1,6 @@
 ﻿using _1_PresentationLayer.ApplicationService.GenericAppService;
 using _1_PresentationLayer.ViewModels;
-using _2_BusinessLayer.GenericServices;
+using _2_BusinessLayer.GenericService;
 using _4_BusinessObjectModel.Models;
 using System;
 using System.Collections.Generic;

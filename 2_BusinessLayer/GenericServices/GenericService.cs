@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace _2_BusinessLayer.GenericServices
+namespace _2_BusinessLayer.GenericService
 {
     public class GenericService<T> : IGenericService<T> where T : class
     {
-        private readonly IGenericRepository<T> genericRepository;
+        protected readonly IGenericRepository<T> genericRepository;
 
         public GenericService(IGenericRepository<T> genericRepository)
         {

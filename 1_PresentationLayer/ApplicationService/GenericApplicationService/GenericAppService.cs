@@ -1,4 +1,4 @@
-﻿using _2_BusinessLayer.GenericServices;
+﻿using _2_BusinessLayer.GenericService;
 using AutoMapper;
 using System;
 using System.Collections.Generic;

@@ -35,5 +35,13 @@ namespace _3_DataAccess.Repository
         {
             return db.CollegeStudents.Include("UserRoles").ToList();
         }
+
+        public override List<CollegeStudent> Search(string filter)
+        {
+            var list = db.CollegeStudents.ToList();
+
+             return list.FindAll(x => x.FirstName.ToLower() == filter || x.LastName.ToLower() == filter || x.BirthDate.ToString() == filter ||
+            x.Email.ToLower() == filter || x.PhoneNumber == filter || x.Adress.ToLower() == filter || x.InstitutionName.ToLower() == filter || x.Generation.ToString() == filter);
+        }
     }
 }

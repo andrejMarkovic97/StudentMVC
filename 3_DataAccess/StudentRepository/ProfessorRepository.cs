@@ -18,15 +18,25 @@ namespace _3_DataAccess.StudentRepository
 
         public override void Add(Professor professor)
         {
-            db.Users.Add(professor);
-            db.UserRoles.AddRange(professor.UserRoles);
-            db.SaveChanges();
+            if (professor != null)
+            {
+                db.Professors.Add(professor);
+                if (professor.UserRoles != null && professor.UserRoles.Count > 0)
+                {
+                    db.UserRoles.AddRange(professor.UserRoles);
+                }
+
+                db.SaveChanges();
+            }
         }
         
         public override void Delete(Guid id)
         {
             var userRoles = db.UserRoles.ToList().Where(ur => ur.UserID == id);
-            db.UserRoles.RemoveRange(userRoles);
+            if (userRoles != null)
+            {
+                db.UserRoles.RemoveRange(userRoles);
+            }
             db.Users.Remove(Get(id));
             db.SaveChanges();
         }

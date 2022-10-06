@@ -1,4 +1,4 @@
-﻿using _2_BusinessLayer.GenericServices;
+﻿using _2_BusinessLayer.GenericService;
 using _3_DataAccess.Repository;
 using _4_BusinessObjectModel.Models;
 using System;

@@ -1,4 +1,4 @@
-﻿using _2_BusinessLayer.GenericServices;
+﻿using _2_BusinessLayer.GenericService;
 using _3_DataAccess.Repository;
 using _4_BusinessObjectModel;
 using _4_BusinessObjectModel.Models;
@@ -18,14 +18,12 @@ namespace _2_BusinessLayer.StudentServices
 
        
 
-        public override List<CollegeStudent> Search(string filter)
-        {
-            filter = filter.ToLower();
-            var list = GetAll();
-            return list.FindAll(x => x.FirstName.ToLower() == filter || x.LastName.ToLower() == filter || x.BirthDate.ToString() == filter ||
-            x.Email.ToLower() == filter || x.PhoneNumber == filter || x.Adress.ToLower() == filter || x.InstitutionName.ToLower() == filter || x.Generation.ToString() == filter);
+        //public override List<CollegeStudent> Search(string filter)
+        //{
+        //    filter = filter.ToLower();
+        //    return genericRepository.Search(filter);
 
-        }
+        //}
 
     }
 }

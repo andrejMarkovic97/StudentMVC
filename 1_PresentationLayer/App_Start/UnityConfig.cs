@@ -5,7 +5,7 @@ using _1_PresentationLayer.ApplicationService.ProfessorApplicationService;
 using _1_PresentationLayer.ApplicationService.RoleAppService;
 using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
-using _2_BusinessLayer.GenericServices;
+using _2_BusinessLayer.GenericService;
 
 using _2_BusinessLayer.RoleServices;
 using _2_BusinessLayer.StudentServices;
