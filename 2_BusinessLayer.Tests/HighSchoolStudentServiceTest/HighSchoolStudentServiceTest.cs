@@ -13,78 +13,96 @@ namespace _2_BusinessLayer.Tests.HighSchoolStudentServiceTest
 {
    public class HighSchoolStudentServiceTest
     {
-        private readonly HighSchoolStudentService _sut;
-        private readonly Mock<IGenericRepository<HighSchoolStudent>> _genericRepoMock = new Mock<IGenericRepository<HighSchoolStudent>>();
+        private readonly Mock<IUserService<HighSchoolStudent>> _sut;
+        
 
         public HighSchoolStudentServiceTest()
         {
-            _sut = new HighSchoolStudentService(_genericRepoMock.Object);
+            _sut = new Mock<IUserService<HighSchoolStudent>>();
         }
 
         [Fact]
-        public void Add_When_HighSchoolStudent_Exists()
+        public void Add_When_CollegeStudent_Exists()
         {
             //Arrange
             var student = DummyStudents()[0];
-            _genericRepoMock.Setup(gr => gr.Add(student));
+            _sut.Setup(gr => gr.Add(student)).Verifiable();
 
             //Act
-            _sut.Add(student);
+            _sut.Object.Add(student);
 
             //Assert
-            _genericRepoMock.Verify(m => m.Add(It.Is<HighSchoolStudent>(hs => hs.UserID == student.UserID)));
+            _sut.Verify(m => m.Add(It.Is<HighSchoolStudent>(cs => cs.UserID == student.UserID)));
         }
         [Fact]
         public void Delete_When_CollegeStudent_Exists()
         {
             Guid studentID = DummyStudents()[0].UserID;
-            _genericRepoMock.Setup(gr => gr.Delete(studentID));
+            _sut.Setup(gr => gr.Delete(studentID)).Verifiable();
 
-            _sut.Delete(studentID);
+            _sut.Object.Delete(studentID);
 
-            _genericRepoMock.Verify(gr => gr.Delete(studentID));
+            _sut.Verify(gr => gr.Delete(studentID));
         }
 
         [Fact]
         public void Edit_When_Entity_Exists()
         {
             var student = DummyStudents()[0];
-            _genericRepoMock.Setup(gr => gr.Edit(student));
+            _sut.Setup(gr => gr.Edit(student)).Verifiable();
 
-            _sut.Edit(student);
+            _sut.Object.Edit(student);
 
-            _genericRepoMock.Verify(gr => gr.Edit(student));
+            _sut.Verify(gr => gr.Edit(student));
         }
 
         [Fact]
 
-        public void Get_ReturnHighSchoolStudent_WhenHSExist()
+        public void Get_ReturnEntity_WhenEntityExist()
         {
             //Arrange
-            var highSchoolStudent = DummyStudents()[0];
-            Guid highSchoolStudentID = highSchoolStudent.UserID;
-            _genericRepoMock.Setup(gr => gr.Get(highSchoolStudentID)).Returns(highSchoolStudent);
+            var expected = DummyStudents()[0];
+            _sut.Setup(gr => gr.Get(expected.UserID)).Returns(expected);
 
             //Act
-            var cs = _sut.Get(highSchoolStudentID);
+            var actual = _sut.Object.Get(expected.UserID);
 
             //Assert
-            Assert.Equal(cs.UserID, highSchoolStudent.UserID);
-            Assert.Equal(cs.FirstName, highSchoolStudent.FirstName);
+            Assert.Equal(actual.UserID, expected.UserID);
+            Assert.Equal(actual.FirstName, expected.FirstName);
         }
         [Fact]
         public void GetAll_ShouldReturnList_WhenListExists()
         {
             //Arrange
-            var expectedList = DummyStudents();
-            _genericRepoMock.Setup(gr => gr.GetAll()).Returns(expectedList);
+           var expectedList = DummyStudents();
+            _sut.Setup(s => s.GetAll()).Returns(expectedList);
 
             //Act
-           var actualList = _sut.GetAll();
+           var actualList = _sut.Object.GetAll();
 
             //Assert
             Assert.Equal(expectedList, actualList);
 
+        }
+        [Fact]
+        public void Search_If_Filter_Not_Null()
+        {
+            List<HighSchoolStudent> expectedList = new List<HighSchoolStudent>
+            {
+                DummyStudents()[0]
+            };
+            string filter = DummyStudents()[0].FirstName;
+
+            _sut.Setup(s => s.Search(filter)).Returns(expectedList);
+
+            //Act
+
+            var actualList = _sut.Object.Search(filter);
+
+            //Assert
+
+            Assert.Equal(expectedList, actualList);
         }
 
         [Fact]
@@ -94,9 +112,9 @@ namespace _2_BusinessLayer.Tests.HighSchoolStudentServiceTest
             string email = "test@gmail.com";
             string password = "123";
             var expected = DummyStudents()[1];
-            _genericRepoMock.Setup(gr => gr.GetUserByCredentials(email, password)).Returns(expected);
+            _sut.Setup(gr => gr.GetUserByCredentials(email, password)).Returns(expected);
 
-            var actual = _sut.GetUserByCredentials(email, password);
+            var actual = _sut.Object.GetUserByCredentials(email, password);
 
             Assert.Equal(expected, actual);
         }
@@ -107,7 +125,10 @@ namespace _2_BusinessLayer.Tests.HighSchoolStudentServiceTest
             var student = DummyStudents()[1];
             var expected = true;
 
-            var actual = _sut.ExportData(student);
+
+            _sut.Setup(s => s.ExportData(student)).Returns(expected);
+
+            var actual = _sut.Object.ExportData(student);
 
             Assert.Equal(expected, actual);
 

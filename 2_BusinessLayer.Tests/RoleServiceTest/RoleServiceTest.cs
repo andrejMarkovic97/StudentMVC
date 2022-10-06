@@ -1,4 +1,5 @@
-﻿using _2_BusinessLayer.RoleServices;
+﻿using _2_BusinessLayer.GenericService;
+using _2_BusinessLayer.RoleServices;
 using _3_DataAccess.Repository;
 using _4_BusinessObjectModel.Models;
 using Moq;
@@ -13,78 +14,78 @@ namespace _2_BusinessLayer.Tests.RoleServiceTest
 {
     public class RoleServiceTest
     {
-        private readonly RoleService _sut;
-        private readonly Mock<IGenericRepository<Role>> _genericRepoMock = new Mock<IGenericRepository<Role>>();
+        private readonly Mock<IGenericService<Role>> _sut;
+       
         public RoleServiceTest()
         {
-            _sut = new RoleService(_genericRepoMock.Object);
+            _sut = new Mock<IGenericService<Role>>(); 
         }
         [Fact]
-        public void Add_When_Role_Exists()
+        public void Add_When_Entity_Exists()
         {
             //Arrange
-            var role = DummyRoles()[0];
-            _genericRepoMock.Setup(gr => gr.Add(role));
+            var entity = DummyRoles()[0];
+            _sut.Setup(gr => gr.Add(entity)).Verifiable();
 
             //Act
-            _sut.Add(role);
+            _sut.Object.Add(entity);
 
             //Assert
-            _genericRepoMock.Verify(m => m.Add(It.Is<Role>(r=> r.RoleID == role.RoleID)));
+            _sut.Verify(m => m.Add(It.Is<Role>(cs => cs.RoleID == entity.RoleID)));
         }
         [Fact]
-        public void Delete_When_Role_Exists()
+        public void Delete_When_Entity_Exists()
         {
             Guid roleID = DummyRoles()[0].RoleID;
-            _genericRepoMock.Setup(gr => gr.Delete(roleID));
+            _sut.Setup(gr => gr.Delete(roleID)).Verifiable();
 
-            _sut.Delete(roleID);
+            _sut.Object.Delete(roleID);
 
-            _genericRepoMock.Verify(gr => gr.Delete(roleID));
+            _sut.Verify(gr => gr.Delete(roleID));
         }
 
         [Fact]
-        public void Edit_When_Role_Exists()
+        public void Edit_When_Entity_Exists()
         {
             var role = DummyRoles()[0];
-            _genericRepoMock.Setup(gr => gr.Edit(role));
+            _sut.Setup(gr => gr.Edit(role)).Verifiable();
 
-            _sut.Edit(role);
+            _sut.Object.Edit(role);
 
-            _genericRepoMock.Verify(gr => gr.Edit(role));
+            _sut.Verify(gr => gr.Edit(role));
         }
 
         [Fact]
 
-        public void Get_ReturnRole_WhenRoleExist()
+        public void Get_ReturnEntity_WhenEntityExist()
         {
             //Arrange
-            var expectedRole = DummyRoles()[1];
-            var roleID = expectedRole.RoleID;
-            _genericRepoMock.Setup(gr => gr.Get(roleID)).Returns(expectedRole);
+            var expected = DummyRoles()[0];
+            _sut.Setup(gr => gr.Get(expected.RoleID)).Returns(expected);
 
             //Act
-            var actualRole = _sut.Get(roleID);
+            var actual = _sut.Object.Get(expected.RoleID);
 
             //Assert
-            Assert.Equal(expectedRole.RoleID, actualRole.RoleID);
+            Assert.Equal(actual, expected);
+           
         }
         [Fact]
         public void GetAll_ShouldReturnList_WhenListExists()
         {
             //Arrange
             var expectedList = DummyRoles();
-            _genericRepoMock.Setup(gr => gr.GetAll()).Returns(expectedList);
+            _sut.Setup(s => s.GetAll()).Returns(expectedList);
 
             //Act
-            var actualList = _sut.GetAll();
+            var actualList = _sut.Object.GetAll();
 
             //Assert
             Assert.Equal(expectedList, actualList);
 
         }
 
-       
+
         private List<Role> DummyRoles()
         {
             List<Role> list = new List<Role>();

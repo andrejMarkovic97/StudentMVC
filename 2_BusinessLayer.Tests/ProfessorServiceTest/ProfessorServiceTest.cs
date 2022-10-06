@@ -14,76 +14,94 @@ namespace _2_BusinessLayer.Tests.ProfessorServiceTest
 
     public class ProfessorServiceTest
     {
-        private readonly ProfessorService _sut;
-        private readonly Mock<IGenericRepository<Professor>> _genericRepoMock = new Mock<IGenericRepository<Professor>>();
+        private readonly Mock<IUserService<Professor>> _sut;
+       
         public ProfessorServiceTest()
         {
-            _sut = new ProfessorService(_genericRepoMock.Object);
+            _sut = new Mock<IUserService<Professor>>();
         }
         [Fact]
-        public void Add_When_Professor_Exists()
+        public void Add_When_Entity_Exists()
         {
             //Arrange
-            var professor = DummyProfessors()[0];
-            _genericRepoMock.Setup(gr => gr.Add(professor));
+            var entity = DummyProfessors()[0];
+            _sut.Setup(gr => gr.Add(entity)).Verifiable();
 
             //Act
-            _sut.Add(professor);
+            _sut.Object.Add(entity);
 
             //Assert
-            _genericRepoMock.Verify(m => m.Add(It.Is<Professor>(prof => prof.UserID == professor.UserID)));
+            _sut.Verify(m => m.Add(It.Is<Professor>(cs => cs.UserID == entity.UserID)));
         }
         [Fact]
-        public void Delete_When_Professor_Exists()
+        public void Delete_When_Entity_Exists()
         {
             Guid professorID = DummyProfessors()[0].UserID;
-            _genericRepoMock.Setup(gr => gr.Delete(professorID));
+            _sut.Setup(gr => gr.Delete(professorID)).Verifiable();
 
-            _sut.Delete(professorID);
+            _sut.Object.Delete(professorID);
 
-            _genericRepoMock.Verify(gr => gr.Delete(professorID));
+            _sut.Verify(gr => gr.Delete(professorID));
         }
 
         [Fact]
-        public void Edit_When_Professor_Exists()
+        public void Edit_When_Entity_Exists()
         {
             var professor = DummyProfessors()[0];
-            _genericRepoMock.Setup(gr => gr.Edit(professor));
+            _sut.Setup(gr => gr.Edit(professor)).Verifiable();
 
-            _sut.Edit(professor);
+            _sut.Object.Edit(professor);
 
-            _genericRepoMock.Verify(gr => gr.Edit(professor));
+            _sut.Verify(gr => gr.Edit(professor));
         }
 
         [Fact]
 
-        public void Get_ReturnProfessor_WhenProfessorExist()
+        public void Get_ReturnEntity_WhenEntityExist()
         {
             //Arrange
-            var professor = DummyProfessors()[0];
-            Guid professorID = professor.UserID;
-            _genericRepoMock.Setup(gr => gr.Get(professorID)).Returns(professor);
+            var expected =DummyProfessors()[0];
+            _sut.Setup(gr => gr.Get(expected.UserID)).Returns(expected);
 
             //Act
-            var prof = _sut.Get(professorID);
+            var actual = _sut.Object.Get(expected.UserID);
 
             //Assert
-            Assert.Equal(prof.UserID, professor.UserID);
-            Assert.Equal(prof.FirstName, professor.FirstName);
+            Assert.Equal(actual.UserID, expected.UserID);
+            Assert.Equal(actual.FirstName, expected.FirstName);
         }
         [Fact]
         public void GetAll_ShouldReturnList_WhenListExists()
         {
             //Arrange
             var expectedList = DummyProfessors();
-            _genericRepoMock.Setup(gr => gr.GetAll()).Returns(expectedList);
+            _sut.Setup(s => s.GetAll()).Returns(expectedList);
 
             //Act
-            var actualList = _sut.GetAll();
+            var actualList = _sut.Object.GetAll();
 
             //Assert
             Assert.Equal(expectedList, actualList);
 
+        }
+        [Fact]
+        public void Search_If_Filter_Not_Null()
+        {
+            List<Professor> expectedList = new List<Professor>
+            {
+                DummyProfessors()[0]
+            };
+            string filter = DummyProfessors()[0].FirstName;
+
+            _sut.Setup(s => s.Search(filter)).Returns(expectedList);
+
+            //Act
+
+            var actualList = _sut.Object.Search(filter);
+
+            //Assert
+
+            Assert.Equal(expectedList, actualList);
         }
 
         [Fact]
@@ -93,14 +111,27 @@ namespace _2_BusinessLayer.Tests.ProfessorServiceTest
             string email = "test@gmail.com";
             string password = "123";
             var expected = DummyProfessors()[1];
-            _genericRepoMock.Setup(gr => gr.GetUserByCredentials(email, password)).Returns(expected);
+            _sut.Setup(gr => gr.GetUserByCredentials(email, password)).Returns(expected);
 
-            var actual = _sut.GetUserByCredentials(email, password);
+            var actual = _sut.Object.GetUserByCredentials(email, password);
 
             Assert.Equal(expected, actual);
         }
 
-        
+        [Fact]
+        public void ExportData_If_Professor_Exist()
+        {
+            var professor = DummyProfessors()[1];
+            var expected = true;
+
+
+            _sut.Setup(s => s.ExportData(professor)).Returns(expected);
+
+            var actual = _sut.Object.ExportData(professor);
+
+            Assert.Equal(expected, actual);
+
+        }
 
         private List<Professor> DummyProfessors()
         {
