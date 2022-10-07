@@ -1,7 +1,9 @@
-﻿using _1_PresentationLayer.ApplicationService.UserAppService;
+﻿using _1_PresentationLayer.ApplicationService.GenericAppService;
+using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
 using _2_BusinessLayer.GenericService;
 using _2_BusinessLayer.RoleServices;
+using _3_DataAccess.QueryModels;
 using _4_BusinessObjectModel.Models;
 using System;
 using System.Collections.Generic;
@@ -16,11 +18,14 @@ namespace _1_PresentationLayer.Controllers
     {
         private readonly IUserAppService<ProfessorViewModel, Professor> professorAppService;
         private readonly RoleService roleService;
+        private readonly IGenericAppService<ProfessorViewModel, ProfessorQueryModel> genericQMService;
 
-        public ProfessorController(IUserAppService<ProfessorViewModel, Professor> professorAppService,RoleService roleService) : base(professorAppService)
+        public ProfessorController(IUserAppService<ProfessorViewModel, Professor> professorAppService,RoleService roleService, 
+            IGenericAppService<ProfessorViewModel, ProfessorQueryModel> genericQMService) : base(professorAppService)
         {
             this.professorAppService = professorAppService;
             this.roleService = roleService;
+            this.genericQMService = genericQMService;
         }
 
 
@@ -52,5 +57,10 @@ namespace _1_PresentationLayer.Controllers
 
         }
 
+        public override ActionResult Index()
+        {
+            var list = genericQMService.GetAll();
+            return View(list);
+        }
     }
 }

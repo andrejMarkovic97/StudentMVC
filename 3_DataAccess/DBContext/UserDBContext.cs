@@ -1,4 +1,5 @@
-﻿using _4_BusinessObjectModel.Models;
+﻿using _3_DataAccess.QueryModels;
+using _4_BusinessObjectModel.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -85,6 +86,12 @@ namespace _3_DataAccess
             modelBuilder.Entity<Professor>()
 
                .Map<Professor>(m => m.Requires("Discriminator").HasValue(3));
+
+            
+
+           
+
+
 
             //MAPPING ASSOCIATION(MANY TO MANY)
             modelBuilder.Entity<UserRole>()

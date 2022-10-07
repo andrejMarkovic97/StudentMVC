@@ -1,4 +1,5 @@
 ﻿using _1_PresentationLayer.ViewModels;
+using _3_DataAccess.QueryModels;
 using _4_BusinessObjectModel.Models;
 using AutoMapper;
 using System;
@@ -31,6 +32,19 @@ namespace _1_PresentationLayer.App_Start
 
                    config.CreateMap<Professor, ProfessorViewModel>();
                    config.CreateMap<ProfessorViewModel, Professor>();
+
+                   
+
+                   config.CreateMap<HighSchoolStudentQueryModel, HighSchoolStudentViewModel>();
+                   config.CreateMap<HighSchoolStudentViewModel, HighSchoolStudentQueryModel>();
+
+                   config.CreateMap<CollegeStudentQueryModel, CollegeStudentViewModel>();
+                   config.CreateMap<CollegeStudentViewModel, CollegeStudentQueryModel>();
+
+                   config.CreateMap<ProfessorQueryModel, ProfessorViewModel>();
+                   config.CreateMap<ProfessorViewModel, ProfessorQueryModel>();
+
+
 
                });
 

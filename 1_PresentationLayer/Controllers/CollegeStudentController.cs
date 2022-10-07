@@ -1,8 +1,10 @@
-﻿using _1_PresentationLayer.ApplicationService.UserAppService;
+﻿using _1_PresentationLayer.ApplicationService.GenericAppService;
+using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
 using _2_BusinessLayer.GenericService;
 using _2_BusinessLayer.RoleServices;
 using _2_BusinessLayer.StudentServices;
+using _3_DataAccess.QueryModels;
 using _4_BusinessObjectModel;
 using _4_BusinessObjectModel.Models;
 using System;
@@ -18,11 +20,14 @@ namespace _1_PresentationLayer.Controllers
     {
         private readonly IUserAppService<CollegeStudentViewModel, CollegeStudent> studentAppService;
         private readonly RoleService roleService;
+        private readonly IGenericAppService<CollegeStudentViewModel, CollegeStudentQueryModel> genericQMService;
 
-        public CollegeStudentController(IUserAppService<CollegeStudentViewModel, CollegeStudent> studentAppService,  RoleService roleService) : base(studentAppService)
+        public CollegeStudentController(IUserAppService<CollegeStudentViewModel, CollegeStudent> studentAppService, 
+            RoleService roleService, IGenericAppService<CollegeStudentViewModel, CollegeStudentQueryModel> genericQMService) : base(studentAppService)
         {
             this.studentAppService = studentAppService;
             this.roleService = roleService;
+            this.genericQMService = genericQMService;
         }
 
         [Authorize(Roles = "Professor")]
@@ -54,11 +59,18 @@ namespace _1_PresentationLayer.Controllers
 
         }
 
+        public override ActionResult Index()
+        {
+
+            var list = genericQMService.GetAll();
+            return View(list);
+        }
+
         //public ActionResult UserProfile(CollegeStudentViewModel student)
         //{
         //    var cs = studentAppService.Get(student.UserID);
         //    return View(cs);
         //}
-        
+
     }
 }

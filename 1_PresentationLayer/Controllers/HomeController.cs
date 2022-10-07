@@ -28,6 +28,11 @@ namespace _1_PresentationLayer.Controllers
 
             return View();
         }
+
+        public ActionResult AdminArea()
+        {
+            return View();
+        }
     }
        
     

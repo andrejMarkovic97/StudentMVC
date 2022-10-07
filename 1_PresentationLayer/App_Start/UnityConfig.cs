@@ -9,6 +9,8 @@ using _2_BusinessLayer.GenericService;
 
 using _2_BusinessLayer.RoleServices;
 using _2_BusinessLayer.StudentServices;
+using _3_DataAccess.QueryModelRepository;
+using _3_DataAccess.QueryModels;
 using _3_DataAccess.Repository;
 using _3_DataAccess.RoleRepository;
 using _3_DataAccess.StudentRepository;
@@ -45,8 +47,10 @@ namespace _1_PresentationLayer.App_Start
 			container.RegisterType<IGenericRepository<User>, UserRepository>();
 			container.RegisterType<IGenericRepository<Role>, RoleRepository>();
 
+			container.RegisterType<IGenericRepository<HighSchoolStudentQueryModel>, HighSchoolStudentQueryModelRepository>();
+			container.RegisterType<IGenericRepository<CollegeStudentQueryModel>, CollegeStudentQueryModelRepository>();
+			container.RegisterType<IGenericRepository<ProfessorQueryModel>, ProfessorQueryModelRepository>();
 
-			
 			//SERVICE REGISTRATION
 			//container.RegisterType<IGenericService<User>, StudentService<User>>();
 
@@ -54,10 +58,14 @@ namespace _1_PresentationLayer.App_Start
 			container.RegisterType<IUserService<CollegeStudent>, CollegeStudentService>();
 			container.RegisterType<IUserService<Professor>, ProfessorService>();
 
-            container.RegisterType<IUserService<User>, UserService<User>>();
+			container.RegisterType<IUserService<User>, UserService<User>>();
             container.RegisterType<IGenericService<User>, UserService<User>>();
 
 			container.RegisterType<IGenericService<Role>, RoleService>();
+
+			container.RegisterType<IGenericService<HighSchoolStudentQueryModel>, GenericService<HighSchoolStudentQueryModel>>();
+			container.RegisterType<IGenericService<CollegeStudentQueryModel>, GenericService<CollegeStudentQueryModel>>();
+			container.RegisterType<IGenericService<ProfessorQueryModel>, GenericService<ProfessorQueryModel>>();
 
 			//APPLICATION SERVICE REGISTRATION 
 			container.RegisterType<IGenericAppService<RoleViewModel,Role>, RoleAppService>();
@@ -72,6 +80,10 @@ namespace _1_PresentationLayer.App_Start
 
 			container.RegisterType<IUserAppService<ProfessorViewModel, Professor>, ProfessorAppService>();
 
+
+			container.RegisterType<IGenericAppService<HighSchoolStudentViewModel, HighSchoolStudentQueryModel>, GenericAppService<HighSchoolStudentViewModel, HighSchoolStudentQueryModel>>();
+			container.RegisterType<IGenericAppService<CollegeStudentViewModel, CollegeStudentQueryModel>, GenericAppService<CollegeStudentViewModel, CollegeStudentQueryModel>>();
+			container.RegisterType<IGenericAppService<ProfessorViewModel, ProfessorQueryModel>, GenericAppService<ProfessorViewModel, ProfessorQueryModel>>();
 			//AUTOMAPPER REGISTRATION
 			MapperConfiguration config = AutoMappingProfile.Configure();
 

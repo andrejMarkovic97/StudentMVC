@@ -49,7 +49,7 @@ namespace _1_PresentationLayer.Controllers
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
                     {
 
-                        return RedirectToAction("AdminArea", "User");
+                        return RedirectToAction("AdminArea", "Home");
                     }
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "CollegeStudent") != null)
                     {

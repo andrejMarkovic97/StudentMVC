@@ -1,8 +1,10 @@
-﻿using _1_PresentationLayer.ApplicationService.UserAppService;
+﻿using _1_PresentationLayer.ApplicationService.GenericAppService;
+using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
 using _2_BusinessLayer.GenericService;
 using _2_BusinessLayer.RoleServices;
 using _2_BusinessLayer.StudentServices;
+using _3_DataAccess.QueryModels;
 using _4_BusinessObjectModel;
 using _4_BusinessObjectModel.Models;
 using System;
@@ -17,12 +19,18 @@ namespace _1_PresentationLayer.Controllers
     public class HighSchoolStudentController : UserAppController<HighSchoolStudentViewModel,HighSchoolStudent>
     {
         private readonly IUserAppService<HighSchoolStudentViewModel, HighSchoolStudent> studentService;
+        
         private readonly RoleService roleService;
+        private readonly IGenericAppService<HighSchoolStudentViewModel, HighSchoolStudentQueryModel> genericQMService;
 
-        public HighSchoolStudentController(IUserAppService<HighSchoolStudentViewModel, HighSchoolStudent> studentService,RoleService roleService):base(studentService)
+        public HighSchoolStudentController
+            (IUserAppService<HighSchoolStudentViewModel, HighSchoolStudent> studentService,
+            RoleService roleService,IGenericAppService<HighSchoolStudentViewModel,HighSchoolStudentQueryModel> genericQMService)
+            :base(studentService)
         {
             this.studentService = studentService;
             this.roleService = roleService;
+            this.genericQMService = genericQMService;
         }
 
         
@@ -55,8 +63,10 @@ namespace _1_PresentationLayer.Controllers
             
         }
 
-       
-
-
+        public override ActionResult Index()
+        {
+            var list = genericQMService.GetAll();
+            return View(list);
+        }
     }
 }
