@@ -15,7 +15,7 @@ namespace _2_BusinessLayer.StudentServices
         //void Edit(T student);
         //void Delete(Guid id);
 
-        List<T> Search(string filter);
+        //List<T> Search(string filter);
 
         bool ExportData(T student);
 

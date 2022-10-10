@@ -60,17 +60,17 @@ namespace _2_BusinessLayer.StudentServices
             return null;
         }
 
-        public virtual List<T> Search(string filter)
-        {
-            if(filter!=null || filter.Length!=0)
-            {
-                filter = filter.ToLower();
-                return genericRepository.Search(filter);
+        //public virtual List<T> Search(string filter)
+        //{
+        //    if(filter!=null || filter.Length!=0)
+        //    {
+        //        filter = filter.ToLower();
+        //        return genericRepository.Search(filter);
                
-            }
-            return null;
+        //    }
+        //    return null;
             
-        }
+        //}
 
         
 

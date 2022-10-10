@@ -14,7 +14,7 @@ namespace _3_DataAccessLayer.Tests.CollegeStudentRepositoryTest
    public  class CollegeStudentRepositoryTest
     {
         private readonly Mock<IGenericRepository<CollegeStudent>> _sut;
-        private readonly Mock<UserDBContext> _dbMock = new Mock<UserDBContext>();
+        
 
         public CollegeStudentRepositoryTest()
         {
