@@ -44,5 +44,16 @@ namespace _2_BusinessLayer.GenericService
         {
             return genericRepository.GetAll();
         }
+
+        public List<T> Search(string filter)
+        {
+            if (filter != null || filter.Length != 0)
+            {
+                filter = filter.ToLower();
+                return genericRepository.Search(filter);
+
+            }
+            return null;
+        }
     }
 }

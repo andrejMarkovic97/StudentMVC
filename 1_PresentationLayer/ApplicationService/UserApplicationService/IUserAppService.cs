@@ -12,10 +12,12 @@ namespace _1_PresentationLayer.ApplicationService.UserAppService
     public interface IUserAppService<TViewModel, TModel> : IGenericAppService<TViewModel,TModel> where TModel:User 
                                                                                                 where TViewModel:UserViewModel
     {
-        List<TViewModel> Search(string filter);
+        
 
         void ExportData(TViewModel student);
 
         TViewModel GetUserByCredentials(string email, string password);
+
+        TViewModel GetUserByEmail(string email);
     }
 }

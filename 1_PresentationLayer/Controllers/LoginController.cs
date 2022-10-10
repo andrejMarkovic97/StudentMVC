@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
+
 namespace _1_PresentationLayer.Controllers
 {
     public class LoginController : Controller
@@ -42,8 +43,7 @@ namespace _1_PresentationLayer.Controllers
                         HttpOnly = true
                     };
                     Response.Cookies.Add(cookie);
-                    existingUser.IsDisabled = true;
-                    existingUser.IsReadOnly = true;
+                   
 
 
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
@@ -53,15 +53,15 @@ namespace _1_PresentationLayer.Controllers
                     }
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "CollegeStudent") != null)
                     {
-                        return RedirectToAction("UserProfile", "CollegeStudent", existingUser);
+                        return RedirectToAction("UserProfile", "CollegeStudent");
                     }
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "HighSchoolStudent") != null)
                     {
-                        return RedirectToAction("UserProfile", "HighSchoolStudent", existingUser);
+                        return RedirectToAction("UserProfile", "HighSchoolStudent");
                     }
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Professor") != null)
                     {
-                        return RedirectToAction("UserProfile", "Professor", existingUser);
+                        return RedirectToAction("UserProfile", "Professor");
                     }
                 }
                 TempData["LoginMessage"] = $"Invalid credentials";

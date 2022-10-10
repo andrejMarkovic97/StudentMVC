@@ -42,21 +42,20 @@ namespace _3_DataAccess.QueryModelRepository
             
             using (db)
             {
-                var query = @"SELECT   user_id AS UserID,
-                              first_name as FirstName,
-                              last_name as LastName,
-                              birth_date as BirthDate,
-                              cabinet as Cabinet,
-                              subject as Subject 
-                                    from t_user
-                              where cabinet is not null and  subject is not null";
+                var query = @"SELECT u.user_id AS UserID,
+                             u.first_name as FirstName,
+                            u.last_name as LastName,
+                            u.birth_date as BirthDate,
+                            u.subject as Subject,
+                            u.cabinet as Cabinet
+                            from t_user u
+                            inner join t_user_roles ur on u.user_id = ur.user_id
+                            inner join t_roles r on ur.role_id = r.role_id
+                            where r.role_name='Professor'";
 
                 var professorQueryModelList = db.Database.SqlQuery<ProfessorQueryModel>(query).ToList();
 
-                foreach (var prof in professorQueryModelList)
-                {
-                    prof.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == prof.UserID).ToList();
-                }
+                
 
                 return professorQueryModelList;
             }
@@ -64,6 +63,11 @@ namespace _3_DataAccess.QueryModelRepository
         }
 
         public ProfessorQueryModel GetUserByCredentials(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ProfessorQueryModel GetUserByEmail(string email)
         {
             throw new NotImplementedException();
         }

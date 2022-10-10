@@ -39,6 +39,16 @@ namespace _3_DataAccess.UserRepository
             }
             return user;
         }
+
+        public override User GetUserByEmail(string email)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Email == email);
+            if (user != null)
+            {
+                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == user.UserID).ToList();
+            }
+            return user;
+        }
     }
         
 }

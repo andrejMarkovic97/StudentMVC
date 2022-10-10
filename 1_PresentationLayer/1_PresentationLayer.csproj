@@ -208,10 +208,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\QueryViewModels\HighSchoolStudentQueryViewModel.cs" />
+    <Compile Include="ViewModels\QueryViewModels\ProfessorQueryViewModel.cs" />
+    <Compile Include="ViewModels\QueryViewModels\CollegeStudentQueryViewModel.cs" />
     <Compile Include="ViewModels\CollegeStudentViewModel.cs" />
-    <Compile Include="ViewModels\GenericViewModel.cs" />
+    <Compile Include="ViewModels\DetailsViewModel.cs" />
     <Compile Include="ViewModels\HighSchoolStudentViewModel.cs" />
     <Compile Include="ViewModels\ProfessorViewModel.cs" />
+    <Compile Include="ViewModels\QueryViewModels\UserQueryViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>

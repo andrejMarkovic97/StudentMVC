@@ -91,17 +91,18 @@ namespace _1_PresentationLayer.Controllers
             }
         }
 
-        public ActionResult UserProfile(TViewModel student)
+        public ActionResult UserProfile()
         {
-            var cs = userAppService.Get(student.UserID);
-            return View(cs);
+
+                var email = User.Identity.Name;
+            //var user = userAppService.GetAll().FirstOrDefault(u => u.Email == email);
+                 var user = userAppService.GetUserByEmail(email);
+                user.IsReadOnly = true;
+                user.IsDisabled = true;
+                return View(user);
+            
         }
 
-        [HttpPost]
-        public ActionResult UserProfile(string identity)
-        {
-            var cs = userAppService.GetAll().FirstOrDefault(user => user.Email == identity);
-            return RedirectToAction("UserProfile",cs);
-        }
+       
     }
 }

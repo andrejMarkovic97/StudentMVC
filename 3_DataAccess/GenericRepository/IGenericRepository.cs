@@ -17,7 +17,9 @@ namespace _3_DataAccess.Repository
         void Delete(Guid id);
 
         T GetUserByCredentials(string email, string password);
-
+        T GetUserByEmail(string email);
         List<T> Search(string filter);
+
+        
     }
 }

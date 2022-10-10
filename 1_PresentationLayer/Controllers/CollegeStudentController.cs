@@ -1,6 +1,7 @@
 ﻿using _1_PresentationLayer.ApplicationService.GenericAppService;
 using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
+using _1_PresentationLayer.ViewModels.QueryViewModels;
 using _2_BusinessLayer.GenericService;
 using _2_BusinessLayer.RoleServices;
 using _2_BusinessLayer.StudentServices;
@@ -20,10 +21,11 @@ namespace _1_PresentationLayer.Controllers
     {
         private readonly IUserAppService<CollegeStudentViewModel, CollegeStudent> studentAppService;
         private readonly RoleService roleService;
-        private readonly IGenericAppService<CollegeStudentViewModel, CollegeStudentQueryModel> genericQMService;
+        private readonly IGenericAppService<CollegeStudentQueryViewModel, CollegeStudentQueryModel> genericQMService;
 
         public CollegeStudentController(IUserAppService<CollegeStudentViewModel, CollegeStudent> studentAppService, 
-            RoleService roleService, IGenericAppService<CollegeStudentViewModel, CollegeStudentQueryModel> genericQMService) : base(studentAppService)
+            RoleService roleService, IGenericAppService<CollegeStudentQueryViewModel, CollegeStudentQueryModel> genericQMService) :
+            base(studentAppService)
         {
             this.studentAppService = studentAppService;
             this.roleService = roleService;
@@ -65,6 +67,31 @@ namespace _1_PresentationLayer.Controllers
             var list = genericQMService.GetAll();
             return View(list);
         }
+
+        public override ActionResult Index(string filter)
+        {
+            if (filter == null || filter == "")
+            {
+                var list = genericQMService.GetAll();
+
+                return View(list);
+            }
+            else
+            {
+                List<CollegeStudentQueryViewModel> list = genericQMService.Search(filter);
+                if (list == null || list.Count == 0)
+                {
+                    TempData["ErrorSearch"] = " No results found";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(list);
+                }
+            }
+        }
+
+
 
         //public ActionResult UserProfile(CollegeStudentViewModel student)
         //{

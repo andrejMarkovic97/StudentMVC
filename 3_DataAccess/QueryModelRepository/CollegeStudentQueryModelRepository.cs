@@ -39,23 +39,24 @@ namespace _3_DataAccess.QueryModelRepository
 
         public List<CollegeStudentQueryModel> GetAll()
         {
+           
             using (db)
             {
-                var query = @"SELECT   user_id AS UserID,
-                              first_name as FirstName,
-                              last_name as LastName,
-                              birth_date as BirthDate,
-                              institution_name as InstitutionName,
-                              generation as Generation 
-                                from t_user
-                    where institution_name is not null and generation is not null";
+                var query = @"SELECT u.user_id AS UserID,
+                             u.first_name as FirstName,
+                            u.last_name as LastName,
+                            u.birth_date as BirthDate,
+                            u.institution_name as InstitutionName,
+                            u.generation as Generation
+                            from t_user u
+                            inner join t_user_roles ur on u.user_id = ur.user_id
+                            inner join t_roles r on ur.role_id = r.role_id
+                            where r.role_name='CollegeStudent'";
+
 
                 var collegeStudentQueryModelList = db.Database.SqlQuery<CollegeStudentQueryModel>(query).ToList();
 
-                foreach (var cs in collegeStudentQueryModelList)
-                {
-                   cs.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == cs.UserID).ToList();
-                }
+                
 
                 return collegeStudentQueryModelList;
             }
@@ -67,9 +68,15 @@ namespace _3_DataAccess.QueryModelRepository
             throw new NotImplementedException();
         }
 
-        public List<CollegeStudentQueryModel> Search(string filter)
+        public CollegeStudentQueryModel GetUserByEmail(string email)
         {
             throw new NotImplementedException();
+        }
+
+        public List<CollegeStudentQueryModel> Search(string filter)
+        {
+            return GetAll().FindAll(x => x.FirstName.ToLower() == filter || x.LastName.ToLower() == filter || x.BirthDate.ToString() == filter
+            || x.InstitutionName.ToLower() == filter || x.Generation.ToString() == filter);
         }
     }
 }

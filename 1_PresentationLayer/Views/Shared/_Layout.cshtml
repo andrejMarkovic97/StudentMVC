@@ -38,7 +38,7 @@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Professor"))
                         {
                            
-                            <li>@Html.ActionLink("User Profile", "UserProfile", "Professor", HttpContext.Current.User.Identity.Name)</li>
+                            <li>@Html.ActionLink("User Profile", "UserProfile", "Professor")</li>
                             <li>@Html.ActionLink("High School Students", "Index", "HighSchoolStudent")</li>
                            
                             <li>@Html.ActionLink("College Students", "Index", "CollegeStudent")</li>
@@ -47,7 +47,7 @@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("HighSchoolStudent"))
                         {
                             
-                            <li>@Html.ActionLink("User Profile", "UserProfile", "HighSchoolStudent", HttpContext.Current.User.Identity.Name)</li>
+                            <li>@Html.ActionLink("User Profile", "UserProfile", "HighSchoolStudent")</li>
                             
                             <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
 
@@ -55,7 +55,7 @@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("CollegeStudent"))
                         {
                             
-                            <li>@Html.ActionLink("User Profile", "UserProfile", "CollegeStudent", HttpContext.Current.User.Identity.Name)</li>
+                            <li>@Html.ActionLink("User Profile", "UserProfile", "CollegeStudent")</li>
                             
                             <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
                         }

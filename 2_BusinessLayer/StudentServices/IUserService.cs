@@ -21,5 +21,7 @@ namespace _2_BusinessLayer.StudentServices
 
         User GetUserByCredentials(string email, string password);
 
+        User GetUserByEmail(string email);
+
     }
 }

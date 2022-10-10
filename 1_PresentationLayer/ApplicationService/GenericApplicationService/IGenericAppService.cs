@@ -11,7 +11,10 @@ namespace _1_PresentationLayer.ApplicationService.GenericAppService
     {
         void Add(TViewModel entity);
         List<TViewModel> GetAll();
+        List<TViewModel> Search(string filter);
         TViewModel Get(Guid id);
+
+       
         void Edit(TViewModel entity);
         void Delete(Guid id);
 

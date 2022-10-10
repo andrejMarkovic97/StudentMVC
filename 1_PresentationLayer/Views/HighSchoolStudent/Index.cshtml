@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_1_PresentationLayer.ViewModels.HighSchoolStudentViewModel>
+﻿@model IEnumerable<_1_PresentationLayer.ViewModels.QueryViewModels.HighSchoolStudentQueryViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -35,15 +35,7 @@
         <th>
             Birth Date
         </th>
-        <th>
-            Email
-        </th>
-        <th>
-            Phone Number
-        </th>
-        <th>
-            Adress
-        </th>
+       
 
         <th>
             School Name
@@ -65,15 +57,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adress)
             </td>
 
             <td>

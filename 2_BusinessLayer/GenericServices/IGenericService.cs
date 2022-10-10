@@ -9,9 +9,12 @@ namespace _2_BusinessLayer.GenericService
     {
         void Add(T entity);
         List<T> GetAll();
+        List<T> Search(string filter);
         T Get(Guid id);
         void Edit(T entity);
         void Delete(Guid id);
+
+        
 
         
     }

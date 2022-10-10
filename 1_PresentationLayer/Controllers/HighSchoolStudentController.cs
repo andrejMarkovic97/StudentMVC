@@ -1,6 +1,7 @@
 ﻿using _1_PresentationLayer.ApplicationService.GenericAppService;
 using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
+using _1_PresentationLayer.ViewModels.QueryViewModels;
 using _2_BusinessLayer.GenericService;
 using _2_BusinessLayer.RoleServices;
 using _2_BusinessLayer.StudentServices;
@@ -21,11 +22,11 @@ namespace _1_PresentationLayer.Controllers
         private readonly IUserAppService<HighSchoolStudentViewModel, HighSchoolStudent> studentService;
         
         private readonly RoleService roleService;
-        private readonly IGenericAppService<HighSchoolStudentViewModel, HighSchoolStudentQueryModel> genericQMService;
+        private readonly IGenericAppService<HighSchoolStudentQueryViewModel, HighSchoolStudentQueryModel> genericQMService;
 
         public HighSchoolStudentController
             (IUserAppService<HighSchoolStudentViewModel, HighSchoolStudent> studentService,
-            RoleService roleService,IGenericAppService<HighSchoolStudentViewModel,HighSchoolStudentQueryModel> genericQMService)
+            RoleService roleService,IGenericAppService<HighSchoolStudentQueryViewModel,HighSchoolStudentQueryModel> genericQMService)
             :base(studentService)
         {
             this.studentService = studentService;
@@ -67,6 +68,29 @@ namespace _1_PresentationLayer.Controllers
         {
             var list = genericQMService.GetAll();
             return View(list);
+        }
+
+        public override ActionResult Index(string filter)
+        {
+            if (filter == null || filter == "")
+            {
+                var list = genericQMService.GetAll();
+
+                return View(list);
+            }
+            else
+            {
+                List<HighSchoolStudentQueryViewModel> list = genericQMService.Search(filter);
+                if (list == null || list.Count == 0)
+                {
+                    TempData["ErrorSearch"] = " No results found";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(list);
+                }
+            }
         }
     }
 }

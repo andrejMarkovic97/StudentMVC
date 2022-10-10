@@ -53,5 +53,12 @@ namespace _1_PresentationLayer.ApplicationService.GenericAppService
             
             return list;
         }
+
+        public virtual List<TViewModel> Search(string filter)
+        {
+            List<TModel> users = genericService.Search(filter);
+            List<TViewModel> usersVM = mapper.Map<List<TViewModel>>(users);
+            return usersVM;
+        }
     }
 }

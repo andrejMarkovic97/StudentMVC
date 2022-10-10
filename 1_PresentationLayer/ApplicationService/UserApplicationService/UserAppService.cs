@@ -40,7 +40,18 @@ namespace _1_PresentationLayer.ApplicationService.UserAppService
             return null;
         }
 
-        public List<TViewModel> Search(string filter)
+        public TViewModel GetUserByEmail(string email)
+        {
+            var user = userService.GetUserByEmail(email);
+            if (user != null)
+            {
+                TViewModel existingUser = mapper.Map<TViewModel>(user);
+                return existingUser;
+            }
+            return null;
+        }
+
+        public override List<TViewModel> Search(string filter)
         {
             List<TModel> users = userService.Search(filter);
             List<TViewModel> usersVM = mapper.Map<List<TViewModel>>(users);

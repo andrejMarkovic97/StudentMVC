@@ -51,6 +51,15 @@ namespace _2_BusinessLayer.StudentServices
             return null;
         }
 
+        public User GetUserByEmail(string email)
+        {
+            if(email!=null && email.Length > 0)
+            {
+                return genericRepository.GetUserByEmail(email);
+            }
+            return null;
+        }
+
         public virtual List<T> Search(string filter)
         {
             if(filter!=null || filter.Length!=0)

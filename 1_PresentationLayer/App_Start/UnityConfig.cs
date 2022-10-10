@@ -5,6 +5,7 @@ using _1_PresentationLayer.ApplicationService.ProfessorApplicationService;
 using _1_PresentationLayer.ApplicationService.RoleAppService;
 using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
+using _1_PresentationLayer.ViewModels.QueryViewModels;
 using _2_BusinessLayer.GenericService;
 
 using _2_BusinessLayer.RoleServices;
@@ -81,9 +82,9 @@ namespace _1_PresentationLayer.App_Start
 			container.RegisterType<IUserAppService<ProfessorViewModel, Professor>, ProfessorAppService>();
 
 
-			container.RegisterType<IGenericAppService<HighSchoolStudentViewModel, HighSchoolStudentQueryModel>, GenericAppService<HighSchoolStudentViewModel, HighSchoolStudentQueryModel>>();
-			container.RegisterType<IGenericAppService<CollegeStudentViewModel, CollegeStudentQueryModel>, GenericAppService<CollegeStudentViewModel, CollegeStudentQueryModel>>();
-			container.RegisterType<IGenericAppService<ProfessorViewModel, ProfessorQueryModel>, GenericAppService<ProfessorViewModel, ProfessorQueryModel>>();
+			container.RegisterType<IGenericAppService<HighSchoolStudentQueryViewModel, HighSchoolStudentQueryModel>, GenericAppService<HighSchoolStudentQueryViewModel, HighSchoolStudentQueryModel>>();
+			container.RegisterType<IGenericAppService<CollegeStudentQueryViewModel, CollegeStudentQueryModel>, GenericAppService<CollegeStudentQueryViewModel, CollegeStudentQueryModel>>();
+			container.RegisterType<IGenericAppService<ProfessorQueryViewModel, ProfessorQueryModel>, GenericAppService<ProfessorQueryViewModel, ProfessorQueryModel>>();
 			//AUTOMAPPER REGISTRATION
 			MapperConfiguration config = AutoMappingProfile.Configure();
 

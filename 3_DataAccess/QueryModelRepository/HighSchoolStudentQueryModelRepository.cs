@@ -42,21 +42,22 @@ namespace _3_DataAccess.QueryModelRepository
 
             using (db)
             {
-                var query = @"SELECT user_id AS UserID,
-                              first_name as FirstName,
-                              last_name as LastName,
-                              birth_date as BirthDate,
-                              school_name as SchoolName,
-                              enrollment_date as EnrollmentDate
-                              from t_user
-                              where school_name is not null and enrollment_date is not null";
+
+
+                var query = @"SELECT u.user_id AS UserID,
+                             u.first_name as FirstName,
+                            u.last_name as LastName,
+                            u.birth_date as BirthDate,
+                            u.enrollment_date as EnrollmentDate,
+                            u.school_name as SchoolName
+                            from t_user u
+                            inner join t_user_roles ur on u.user_id = ur.user_id
+                            inner join t_roles r on ur.role_id = r.role_id
+                            where r.role_name='HighSchoolStudent'";
 
                 var highSchoolStudentQueryModelList = db.Database.SqlQuery<HighSchoolStudentQueryModel>(query).ToList();
 
-                foreach (var hs in highSchoolStudentQueryModelList)
-                {
-                    var userRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == hs.UserID).ToList();
-                }
+               
 
                 return highSchoolStudentQueryModelList;
             }
@@ -68,9 +69,15 @@ namespace _3_DataAccess.QueryModelRepository
             throw new NotImplementedException();
         }
 
-        public List<HighSchoolStudentQueryModel> Search(string filter)
+        public HighSchoolStudentQueryModel GetUserByEmail(string email)
         {
             throw new NotImplementedException();
+        }
+
+        public List<HighSchoolStudentQueryModel> Search(string filter)
+        {
+            return GetAll().FindAll(x => x.FirstName.ToLower() == filter || x.LastName.ToLower() == filter 
+            || x.BirthDate.ToString() == filter ||x.SchoolName.ToLower() == filter || x.EnrollmentDate.ToString() == filter);
         }
     }
 }

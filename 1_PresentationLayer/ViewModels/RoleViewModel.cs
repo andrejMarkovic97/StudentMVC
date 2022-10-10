@@ -7,7 +7,7 @@ using System.Web;
 
 namespace _1_PresentationLayer.ViewModels
 {
-    public class RoleViewModel : GenericViewModel
+    public class RoleViewModel : DetailsViewModel
     {
         public RoleViewModel()
         {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_1_PresentationLayer.ViewModels.ProfessorViewModel>
+﻿@model IEnumerable<_1_PresentationLayer.ViewModels.QueryViewModels.ProfessorQueryViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -14,9 +14,7 @@
 <table class="table">
     <tr>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -26,12 +24,7 @@
         <th>
             @Html.DisplayNameFor(model => model.BirthDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Adress)
-        </th>
+        >
         <th>
             @Html.DisplayNameFor(model => model.Cabinet)
         </th>
@@ -44,10 +37,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            @Html.HiddenFor(m => item.Password)
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -57,12 +47,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BirthDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adress)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Cabinet)
             </td>

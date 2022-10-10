@@ -5,9 +5,9 @@ using System.Web;
 
 namespace _1_PresentationLayer.ViewModels
 {
-    public class GenericViewModel
+    public class DetailsViewModel
     {
-        public GenericViewModel()
+        public DetailsViewModel()
         {
 
         }

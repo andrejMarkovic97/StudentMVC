@@ -5,24 +5,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace _1_PresentationLayer.ViewModels
+namespace _1_PresentationLayer.ViewModels.QueryViewModels
 {
-    public class UserViewModel:DetailsViewModel
+    public class UserQueryViewModel : DetailsViewModel
     {
-        public UserViewModel()
-        {
-
-        }
         public Guid UserID { get; set; }
 
 
-        [EmailAddress]
-        public string Email { get; set; }
 
-
-        [DataType(DataType.Password)]
-
-        public string Password { get; set; }
 
 
         public string FirstName { get; set; }
@@ -36,10 +26,6 @@ namespace _1_PresentationLayer.ViewModels
         public DateTime BirthDate { get; set; }
 
 
-        public string PhoneNumber { get; set; }
-
-
-        public string Adress { get; set; }
 
 
         public List<UserRole> UserRoles { get; set; }
