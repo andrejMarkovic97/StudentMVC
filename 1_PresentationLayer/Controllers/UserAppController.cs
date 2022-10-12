@@ -94,10 +94,10 @@ namespace _1_PresentationLayer.Controllers
         public ActionResult UserProfile()
         {
 
-              var email = User.Identity.Name;
+            var email = User.Identity.Name;
             if (email != null && email.Length > 0) {
-                var user = userAppService.GetAll().FirstOrDefault(u => u.Email == email);
-                //var user = userAppService.GetUserByEmail(email);
+              
+                var user = userAppService.GetUserByEmail(email);
                 user.IsReadOnly = true;
                 user.IsDisabled = true;
                 return View(user);

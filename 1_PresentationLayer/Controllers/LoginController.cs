@@ -35,17 +35,8 @@ namespace _1_PresentationLayer.Controllers
                 var existingUser = userAppService.GetUserByCredentials(user.Email, user.Password);
                 if (existingUser != null)
                 {
-                    var Ticket = new FormsAuthenticationTicket(user.Email, true, 3000);
-                    string Encrypt = FormsAuthentication.Encrypt(Ticket);
-                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt)
-                    {
-                        Expires = DateTime.Now.AddHours(3000),
-                        HttpOnly = true
-                    };
-                    Response.Cookies.Add(cookie);
+                    AddLoginCookie(user.Email);
                    
-
-
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
                     {
 
@@ -74,6 +65,19 @@ namespace _1_PresentationLayer.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
+        }
+
+
+        private void AddLoginCookie(string email)
+        {
+            var Ticket = new FormsAuthenticationTicket(email, true, 3000);
+            string Encrypt = FormsAuthentication.Encrypt(Ticket);
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt)
+            {
+                Expires = DateTime.Now.AddHours(3000),
+                HttpOnly = true
+            };
+            Response.Cookies.Add(cookie);
         }
     }
 }

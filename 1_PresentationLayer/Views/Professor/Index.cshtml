@@ -14,7 +14,7 @@
 <table class="table">
     <tr>
 
-        
+
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -24,7 +24,7 @@
         <th>
             @Html.DisplayNameFor(model => model.BirthDate)
         </th>
-        >
+
         <th>
             @Html.DisplayNameFor(model => model.Cabinet)
         </th>
@@ -37,7 +37,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            
+
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -47,7 +47,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BirthDate)
             </td>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.Cabinet)
             </td>
@@ -68,14 +68,16 @@
                         </div>
                     </div>
 
-                    @using (Html.BeginForm("Delete", "Professor", new { id = item.UserID }))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.Partial("_ConfirmPopup")
-                    }
+
+
                 </td>
             }
         </tr>
+        using (Html.BeginForm("Delete", "Professor", new { id = item.UserID }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_ConfirmPopup")
+        }
     }
 
 </table>

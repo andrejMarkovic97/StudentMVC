@@ -40,6 +40,16 @@ namespace _3_DataAccess.Repository
            
         }
 
+        public override HighSchoolStudent GetUserByEmail(string email)
+        {
+            var user = db.HighschoolStudents.FirstOrDefault(u => u.Email == email);
+            if (user != null)
+            {
+                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == user.UserID).ToList();
+            }
+            return user;
+        }
+
         public override List<HighSchoolStudent> Search(string filter)
         {
             return db.HighschoolStudents.ToList().FindAll(x => x.FirstName.ToLower() == filter || x.LastName.ToLower() == filter || x.BirthDate.ToString() == filter ||

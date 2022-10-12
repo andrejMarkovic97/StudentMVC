@@ -36,6 +36,16 @@ namespace _3_DataAccess.Repository
             return db.CollegeStudents.Include("UserRoles").ToList();
         }
 
+        public override CollegeStudent GetUserByEmail(string email)
+        {
+            var user = db.CollegeStudents.FirstOrDefault(u => u.Email == email);
+            if (user != null)
+            {
+                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == user.UserID).ToList();
+            }
+            return user;
+        }
+
         public override List<CollegeStudent> Search(string filter)
         {
             var list = db.CollegeStudents.ToList();

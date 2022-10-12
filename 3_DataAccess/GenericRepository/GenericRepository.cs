@@ -62,7 +62,7 @@ namespace _3_DataAccess.GenericRepository
 
         public virtual T GetUserByEmail(string email)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         public virtual List<T> Search(string filter)

@@ -76,8 +76,8 @@ namespace _3_DataAccess.QueryModelRepository
 
         public List<HighSchoolStudentQueryModel> Search(string filter)
         {
-            return GetAll().FindAll(x => x.FirstName.ToLower() == filter || x.LastName.ToLower() == filter 
-            || x.BirthDate.ToString() == filter ||x.SchoolName.ToLower() == filter || x.EnrollmentDate.ToString() == filter);
+            return GetAll().FindAll(x => x.FirstName.ToLower().Contains(filter) || x.LastName.ToLower().Contains(filter)
+            || x.BirthDate.ToString().Contains(filter) ||x.SchoolName.ToLower().Contains(filter) || x.EnrollmentDate.ToString().Contains(filter));
         }
     }
 }

@@ -45,5 +45,15 @@ namespace _3_DataAccess.StudentRepository
         {
             return db.Professors.Include("UserRoles").ToList();
         }
+
+        public override Professor GetUserByEmail(string email)
+        {
+            var user = db.Professors.FirstOrDefault(u => u.Email == email);
+            if (user != null)
+            {
+                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == user.UserID).ToList();
+            }
+            return user;
+        }
     }
 }

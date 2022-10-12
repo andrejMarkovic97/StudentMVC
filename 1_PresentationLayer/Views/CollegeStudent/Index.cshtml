@@ -47,6 +47,7 @@
 
     @foreach (var item in Model)
     {
+        @Html.HiddenFor(modelItem=>item.UserID)
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -79,14 +80,16 @@
                     </div>
                 </div>
 
-                @using (Html.BeginForm("Delete", "CollegeStudent", new { id = item.UserID }))
+                @using (Html.BeginForm("Delete", "CollegeStudent",new { id = item.UserID }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.Partial("_ConfirmPopup")
                 }
             </td>
         </tr>
-    }
 
+    }
 </table>
+    
+
 

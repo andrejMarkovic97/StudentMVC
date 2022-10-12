@@ -24,9 +24,7 @@
                     if (!Model.IsDisabled)
                     {
 
-                        <button type="submit" class="btn btn-primary" >
-                            Submit
-                        </button>
+                       <input class="btn btn-primary" type="submit" value="Submit">
                     }
                 }
                 <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "Professor", new { id = Model.UserID })'">Edit</button>

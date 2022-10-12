@@ -38,7 +38,7 @@ namespace _1_PresentationLayer.Controllers
         [Authorize(Roles = "Professor")]
         public override ActionResult Create(HighSchoolStudentViewModel hs)
         {
-           
+            
                 hs.UserID = Guid.NewGuid();
                 hs.UserRoles = new List<UserRole>();
                 UserRole roleUser = new UserRole
@@ -61,6 +61,8 @@ namespace _1_PresentationLayer.Controllers
                 studentService.Add(hs);
 
                 return RedirectToAction("Index");
+            
+            
             
         }
 

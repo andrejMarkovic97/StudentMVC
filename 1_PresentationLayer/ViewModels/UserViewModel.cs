@@ -13,10 +13,13 @@ namespace _1_PresentationLayer.ViewModels
         {
 
         }
+        [Required]
+        
         public Guid UserID { get; set; }
 
 
         [EmailAddress]
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
 
 
@@ -24,15 +27,16 @@ namespace _1_PresentationLayer.ViewModels
 
         public string Password { get; set; }
 
-
+        [Required]
         public string FirstName { get; set; }
 
-
+        [Required]
         public string LastName { get; set; }
 
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
+        [Required]
         public DateTime BirthDate { get; set; }
 
 

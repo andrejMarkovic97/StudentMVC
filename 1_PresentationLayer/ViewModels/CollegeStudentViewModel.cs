@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,7 @@ namespace _1_PresentationLayer.ViewModels
     {
         public string InstitutionName { get; set; }
 
-
+       
         public int Generation { get; set; }
 
 

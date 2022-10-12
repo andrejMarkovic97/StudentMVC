@@ -1,5 +1,6 @@
 ﻿
 using _3_DataAccess.GenericRepository;
+using _3_DataAccess.Repository;
 using _4_BusinessObjectModel.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Web;
 
 namespace _3_DataAccess.UserRepository
 {
-    public class UserRepository : GenericRepository<User>
+    public class UserRepository : GenericRepository<User>,IGenericRepository<User>
     {
         public UserRepository(UserDBContext db) : base(db)
         {
@@ -41,15 +42,7 @@ namespace _3_DataAccess.UserRepository
             return user;
         }
 
-        public override User GetUserByEmail(string email)
-        {
-            var user = db.Users.FirstOrDefault(u => u.Email == email);
-            if (user != null)
-            {
-                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == user.UserID).ToList();
-            }
-            return user;
-        }
+        
     }
         
 }

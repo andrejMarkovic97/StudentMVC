@@ -22,9 +22,7 @@
                 @{
                     if (!Model.IsDisabled)
                     {
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
-                            Submit
-                        </button>
+                                <input class="btn btn-primary" type="submit" value="Submit">
                     }
                 }
                 <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "HighSchoolStudent",new { id = Model.UserID })'">Export</button>
@@ -38,7 +36,6 @@
     </div>
 
 
-    @Html.Partial("_ConfirmPopup")
 </div>
 
 

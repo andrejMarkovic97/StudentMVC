@@ -35,6 +35,10 @@ namespace _1_PresentationLayer.Controllers
         [Authorize(Roles = "Professor")]
         public override ActionResult Create(CollegeStudentViewModel cs)
         {
+            if (ModelState.IsValid)
+            {
+
+            
             cs.Title = "Create";
             cs.UserID = Guid.NewGuid();
             cs.UserRoles = new List<UserRole>();
@@ -57,7 +61,8 @@ namespace _1_PresentationLayer.Controllers
             studentAppService.Add(cs);
 
             return RedirectToAction("Index");
-
+            }
+            return RedirectToAction("Create");
 
         }
 

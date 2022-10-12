@@ -22,11 +22,11 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                       
+
 
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            
+
                             <li>@Html.ActionLink("Admin Area", "AdminArea", "Home")</li>
                             <li>@Html.ActionLink("High School Students", "Index", "HighSchoolStudent")</li>
                             <li>@Html.ActionLink("College Students", "Index", "CollegeStudent")</li>
@@ -37,26 +37,26 @@
 
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Professor"))
                         {
-                           
+
                             <li>@Html.ActionLink("User Profile", "UserProfile", "Professor")</li>
                             <li>@Html.ActionLink("High School Students", "Index", "HighSchoolStudent")</li>
-                           
+
                             <li>@Html.ActionLink("College Students", "Index", "CollegeStudent")</li>
                             <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
                         }
                         @if (User.Identity.IsAuthenticated && User.IsInRole("HighSchoolStudent"))
                         {
-                            
+
                             <li>@Html.ActionLink("User Profile", "UserProfile", "HighSchoolStudent")</li>
-                            
+
                             <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
 
                         }
                         @if (User.Identity.IsAuthenticated && User.IsInRole("CollegeStudent"))
                         {
-                            
+
                             <li>@Html.ActionLink("User Profile", "UserProfile", "CollegeStudent")</li>
-                            
+
                             <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
                         }
                     </ul>
@@ -68,11 +68,11 @@
     else if (ViewBag.Title == "Login")
     {
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <h2 class="navbar-brand"><b>Login</b></h2>
-    </div>
-</nav>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <h2 class="navbar-brand"><b>Login</b></h2>
+            </div>
+        </nav>
     }
     else
     {
@@ -93,5 +93,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
