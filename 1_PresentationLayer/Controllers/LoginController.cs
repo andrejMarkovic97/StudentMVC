@@ -33,29 +33,34 @@ namespace _1_PresentationLayer.Controllers
             if (user != null && user.Email != null && user.Password != null)
             {
                 var existingUser = userAppService.GetUserByCredentials(user.Email, user.Password);
+                
                 if (existingUser != null)
                 {
                     AddLoginCookie(user.Email);
-                   
-                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
+
+                    if(User.IsInRole("Admin"))
+                    
                     {
 
                         return RedirectToAction("AdminArea", "Home");
                     }
-                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "CollegeStudent") != null)
+                   
+                    if (User.IsInRole("CollegeStudent"))
                     {
                         return RedirectToAction("UserProfile", "CollegeStudent");
                     }
-                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "HighSchoolStudent") != null)
+                   
+                    if (User.IsInRole("HighSchoolStudent"))
                     {
                         return RedirectToAction("UserProfile", "HighSchoolStudent");
                     }
-                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Professor") != null)
+                   
+                    if (User.IsInRole("Professor"))
                     {
                         return RedirectToAction("UserProfile", "Professor");
                     }
                 }
-                TempData["LoginMessage"] = $"Invalid credentials";
+                TempData["LoginMessage"] = "Invalid credentials";
                 return View("Login");
             }
             return View("Login");

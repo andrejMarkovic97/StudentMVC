@@ -65,13 +65,24 @@ namespace _1_PresentationLayer.Controllers
             
             
         }
+        [Authorize(Roles = "Professor,HighSchoolStudent")]
+        public override ActionResult Details(Guid id)
+        {
+            return base.Details(id);
+        }
+        [Authorize(Roles = "Professor,HighSchoolStudent")]
+        public override ActionResult Edit(Guid id)
+        {
+            return base.Edit(id);
+        }
 
+        [Authorize(Roles = "Professor,Admin")]
         public override ActionResult Index()
         {
             var list = genericQMService.GetAll();
             return View(list);
         }
-
+        [Authorize(Roles = "Professor,Admin")]
         public override ActionResult Index(string filter)
         {
             if (filter == null || filter == "")

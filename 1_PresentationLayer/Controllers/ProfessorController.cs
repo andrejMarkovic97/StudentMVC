@@ -57,7 +57,23 @@ namespace _1_PresentationLayer.Controllers
             return RedirectToAction("Index");
 
         }
+        [Authorize(Roles = "Admin")]
+        public override ActionResult Create()
+        {
+            return base.Create();
+        }
+        [Authorize(Roles = "Admin,Professor")]
+        public override ActionResult Details(Guid id)
+        {
+            return base.Details(id);
+        }
+        [Authorize(Roles = "Admin,Professor")]
+        public override ActionResult Edit(Guid id)
+        {
+            return base.Edit(id);
+        }
 
+        [Authorize(Roles="Admin")]
         public override ActionResult Index()
         {
             var list = genericQMService.GetAll();

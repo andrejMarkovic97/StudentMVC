@@ -65,14 +65,25 @@ namespace _1_PresentationLayer.Controllers
             return RedirectToAction("Create");
 
         }
+        [Authorize(Roles = "Professor,CollegeStudent")]
+        public override ActionResult Details(Guid id)
+        {
+            return base.Details(id);
+        }
+        [Authorize(Roles = "Professor,CollegeStudent")]
+        public override ActionResult Edit(Guid id)
+        {
+            return base.Edit(id);
+        }
 
+        [Authorize(Roles = "Professor,Admin")]
         public override ActionResult Index()
         {
 
             var list = genericQMService.GetAll();
             return View(list);
         }
-
+        [Authorize(Roles = "Professor,Admin")]
         public override ActionResult Index(string filter)
         {
             if (filter == null || filter == "")
@@ -98,11 +109,7 @@ namespace _1_PresentationLayer.Controllers
 
 
 
-        //public ActionResult UserProfile(CollegeStudentViewModel student)
-        //{
-        //    var cs = studentAppService.Get(student.UserID);
-        //    return View(cs);
-        //}
+      
 
     }
 }

@@ -12,4 +12,5 @@ namespace _1_PresentationLayer.ViewModels
 
         public string Subject { get; set; }
     }
+    
 }

@@ -56,6 +56,17 @@ namespace _1_PresentationLayer.Controllers
             return new HttpNotFoundResult();
         }
 
+        public override ActionResult Edit(TViewModel entity)
+        {
+            if (ModelState.IsValid)
+            {
+
+                genericAppService.Edit(entity);
+                return RedirectToAction("Details",new { id=entity.UserID});
+            }
+            return View("Details", entity);
+        }
+
         public virtual ActionResult Export(Guid id)
         {
             TViewModel user = userAppService.Get(id);

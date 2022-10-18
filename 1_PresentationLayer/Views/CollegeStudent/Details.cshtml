@@ -25,16 +25,18 @@
                         @{
                             if (!Model.IsDisabled)
                             {
-                               <input class="btn btn-primary" type="submit" value="Submit">
-                                
-                            }
-                            }
-                                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "CollegeStudent",new { id = Model.UserID })'">Export</button>
+                                <input class="btn btn-primary" type="submit" value="Submit">
 
-                                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "CollegeStudent", new { id = Model.UserID })'">Edit</button>
+                            }
+                        }
+                        <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "CollegeStudent",new { id = Model.UserID })'">Export</button>
 
-                                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "CollegeStudent")'">Back to list</button>
-                            </div>
+                        <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "CollegeStudent", new { id = Model.UserID })'">Edit</button>
+                        @if (User.IsInRole("Professor"))
+                        {
+                            <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "CollegeStudent")'">Back to list</button>
+                        }
+                        </div>
                 </div>
                     
                 

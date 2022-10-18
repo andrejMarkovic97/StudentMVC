@@ -48,42 +48,46 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BirthDate)
+    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.SchoolName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentDate)
-            </td>
-            <td>
-                <div class="outer">
-                    <div class="inner">
-                        <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "HighSchoolStudent", new { id = item.UserID })'">Details</button>
-                    </div>
-                    <div class="inner">
-                        <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
-                            Delete
-                        </button>
-                    </div>
+    <td>
+        @Html.DisplayFor(modelItem => item.SchoolName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EnrollmentDate)
+    </td>
+    @if (User.IsInRole("Professor"))
+    {
+        <td>
+
+            <div class="outer">
+                <div class="inner">
+                    <button type="button" class="btn btn-primary p-2" onclick="location.href='@Url.Action("Details", "HighSchoolStudent", new { id = item.UserID })'">Details</button>
                 </div>
-                @using (Html.BeginForm("Delete", "HighSchoolStudent", new { id = item.UserID }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Partial("_ConfirmPopup")
-                }
+                <div class="inner">
+                    <button type="button" data-toggle="modal" data-target="#confirmModal" class="btn btn-primary p-2">
+                        Delete
+                    </button>
+                </div>
+            </div>
+            @using (Html.BeginForm("Delete", "HighSchoolStudent", new { id = item.UserID }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Partial("_ConfirmPopup")
+            }
 
-            </td>
-        </tr>
+        </td>
+    }
+    </tr>
     }
 
 </table>

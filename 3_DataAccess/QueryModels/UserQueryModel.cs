@@ -25,9 +25,6 @@ namespace _3_DataAccess.QueryModels
 
         public string LastName { get; set; }
 
-
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
 

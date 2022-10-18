@@ -28,8 +28,10 @@
                     }
                 }
                 <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "Professor", new { id = Model.UserID })'">Edit</button>
-
+                @if (User.IsInRole("Admin"))
+                {
                 <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "Professor")'">Back to list</button>
+                }
             </div>
         </div>
            

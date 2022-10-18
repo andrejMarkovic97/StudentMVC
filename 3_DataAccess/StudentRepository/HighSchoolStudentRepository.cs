@@ -7,7 +7,7 @@ using System.Web;
 
 namespace _3_DataAccess.Repository
 {
-    public class HighSchoolStudentRepository : GenericRepository<HighSchoolStudent>
+    public class HighSchoolStudentRepository :GenericRepository<HighSchoolStudent>
     {
   
 
@@ -52,8 +52,10 @@ namespace _3_DataAccess.Repository
 
         public override List<HighSchoolStudent> Search(string filter)
         {
-            return db.HighschoolStudents.ToList().FindAll(x => x.FirstName.ToLower() == filter || x.LastName.ToLower() == filter || x.BirthDate.ToString() == filter ||
-            x.Email.ToLower() == filter || x.PhoneNumber == filter || x.Adress.ToLower() == filter || x.SchoolName.ToLower() == filter || x.EnrollmentDate.ToString() == filter);
+            return db.HighschoolStudents.ToList().
+                FindAll(x => x.FirstName.ToLower().Contains(filter) || x.LastName.ToLower().Contains(filter)|| x.BirthDate.ToString().Contains(filter) ||
+                x.Email.ToLower().Contains(filter) || x.PhoneNumber.Contains(filter) || x.Adress.ToLower().Contains(filter) ||
+                x.SchoolName.ToLower().Contains(filter) || x.EnrollmentDate.ToString().Contains(filter));
         }
     }
 }

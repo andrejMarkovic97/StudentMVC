@@ -55,5 +55,11 @@ namespace _3_DataAccess.StudentRepository
             }
             return user;
         }
+
+        public override List<Professor> Search(string filter)
+        {
+            return db.Professors.ToList().FindAll(x => x.FirstName.ToLower().Contains(filter) || x.LastName.ToLower().Contains(filter) || x.BirthDate.ToString().Contains(filter) ||
+           x.Email.ToLower().Contains(filter) || x.PhoneNumber.Contains(filter) || x.Adress.ToLower().Contains(filter) || x.Subject.ToLower().Contains(filter) || x.Cabinet.ToString().Contains(filter));
+        }
     }
 }

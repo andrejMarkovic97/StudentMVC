@@ -22,15 +22,17 @@
                 @{
                     if (!Model.IsDisabled)
                     {
-                                <input class="btn btn-primary" type="submit" value="Submit">
+                        <input class="btn btn-primary" type="submit" value="Submit">
                     }
                 }
                 <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Export", "HighSchoolStudent",new { id = Model.UserID })'">Export</button>
 
                 <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Edit", "HighSchoolStudent", new { id = Model.UserID })'">Edit</button>
-
-                <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "HighSchoolStudent")'">Back to list</button>
-            </div>
+                @if (User.IsInRole("Professor"))
+                {
+                    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "HighSchoolStudent")'">Back to list</button>
+                }
+                </div>
         </div>
 
     </div>

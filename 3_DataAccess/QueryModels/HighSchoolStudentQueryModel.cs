@@ -15,8 +15,7 @@ namespace _3_DataAccess.QueryModels
         public string SchoolName { get; set; }
 
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+       
         public DateTime? EnrollmentDate { get; set; }
     }
 }
