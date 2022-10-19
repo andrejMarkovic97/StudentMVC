@@ -27,8 +27,7 @@ namespace _1_PresentationLayer.Controllers
         // GET: Generic/Details/5
         public virtual ActionResult Details(Guid id)
         {
-            //ViewBag.readOnly = true;
-            //ViewBag.disabled = "disabled";
+            
             TViewModel entity = genericAppService.Get(id);
             return View(entity);
         }

@@ -26,8 +26,8 @@ namespace _1_PresentationLayer.Controllers
 
         public HighSchoolStudentController
             (IUserAppService<HighSchoolStudentViewModel, HighSchoolStudent> studentService,
-            RoleService roleService,IGenericAppService<HighSchoolStudentQueryViewModel,HighSchoolStudentQueryModel> genericQMService)
-            :base(studentService)
+            RoleService roleService,IGenericAppService<HighSchoolStudentQueryViewModel,HighSchoolStudentQueryModel> genericQMService, 
+            IGenericService<ActionLogger> actionLoggerService, IUserAppService<UserViewModel, User> actionLoggerUserAppService) :base(studentService,actionLoggerService,actionLoggerUserAppService)
         {
             this.studentService = studentService;
             this.roleService = roleService;
@@ -38,8 +38,12 @@ namespace _1_PresentationLayer.Controllers
         [Authorize(Roles = "Professor")]
         public override ActionResult Create(HighSchoolStudentViewModel hs)
         {
-            
-                hs.UserID = Guid.NewGuid();
+            hs.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
+            hs.UserID = Guid.NewGuid();
+            if (studentService.Validate(hs))
+            {
+
+                
                 hs.UserRoles = new List<UserRole>();
                 UserRole roleUser = new UserRole
 
@@ -57,13 +61,14 @@ namespace _1_PresentationLayer.Controllers
                 hs.UserRoles.Add(roleUser);
                 hs.UserRoles.Add(roleHS);
 
-                hs.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
+               
                 studentService.Add(hs);
+                AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name,hs.UserID);
 
                 return RedirectToAction("Index");
-            
-            
-            
+            }
+
+            return RedirectToAction("Create");
         }
         [Authorize(Roles = "Professor,HighSchoolStudent")]
         public override ActionResult Details(Guid id)
@@ -105,5 +110,7 @@ namespace _1_PresentationLayer.Controllers
                 }
             }
         }
+      
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using _1_PresentationLayer.ApplicationService.UserAppService;
 using _1_PresentationLayer.ViewModels;
+using _2_BusinessLayer.GenericService;
 using _4_BusinessObjectModel.Models;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,15 @@ namespace _1_PresentationLayer.Controllers
                                                                                                  where TViewModel:UserViewModel,new()
     {
         protected readonly IUserAppService<TViewModel, TModel> userAppService;
+        protected readonly IGenericService<ActionLogger> actionLoggerService;
+        protected readonly IUserAppService<UserViewModel, User> actionLoggerUserAppService;
 
-        public UserAppController(IUserAppService<TViewModel, TModel> userAppService):base(userAppService)
+        public UserAppController(IUserAppService<TViewModel, TModel> userAppService , IGenericService<ActionLogger> actionLoggerService, 
+            IUserAppService<UserViewModel, User> actionLoggerUserAppService) :base(userAppService)
         {
             this.userAppService = userAppService;
+            this.actionLoggerService = actionLoggerService;
+            this.actionLoggerUserAppService = actionLoggerUserAppService;
         }
 
         public override ActionResult Create()
@@ -30,6 +36,30 @@ namespace _1_PresentationLayer.Controllers
                 
             };
             return View("Create",tvm);
+        }
+
+        public override ActionResult Create(TViewModel entity)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (userAppService.Validate(entity))
+                {
+                    genericAppService.Add(entity);
+                    AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name,entity.UserID);
+                  
+
+                    return RedirectToAction("Index");
+                }
+        }
+            return View();
+        }
+
+        public override ActionResult Delete(Guid id)
+        {
+            userAppService.Delete(id);
+            AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name,Guid.Empty);
+            return RedirectToAction("Index");
         }
 
         public override ActionResult Details(Guid id)
@@ -58,12 +88,15 @@ namespace _1_PresentationLayer.Controllers
 
         public override ActionResult Edit(TViewModel entity)
         {
-            if (ModelState.IsValid)
-            {
-
-                genericAppService.Edit(entity);
-                return RedirectToAction("Details",new { id=entity.UserID});
-            }
+            //if (ModelState.IsValid)
+            //{
+                if (userAppService.Validate(entity))
+                {
+                    genericAppService.Edit(entity);
+                    AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name,entity.UserID);
+                    return RedirectToAction("Details", new { id = entity.UserID });
+                }
+            //}
             return View("Details", entity);
         }
 
@@ -115,10 +148,20 @@ namespace _1_PresentationLayer.Controllers
             }
             return new HttpNotFoundResult();
             
-            
-            
         }
-
-       
+       protected void AddActionLog(string actionName,Guid alteredUserID)
+        {
+            var email = User.Identity.Name;
+            UserViewModel user = actionLoggerUserAppService.GetUserByEmail(email);
+            
+            ActionLogger al = new ActionLogger()
+            {
+                UserID = user.UserID,
+                Action = actionName,
+                TimeOfAction = System.DateTime.Now,
+                AlteredUserID = alteredUserID
+            };
+            actionLoggerService.Add(al);
+        }
     }
 }

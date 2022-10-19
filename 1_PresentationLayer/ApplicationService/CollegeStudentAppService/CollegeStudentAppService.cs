@@ -15,5 +15,17 @@ namespace _1_PresentationLayer.ApplicationService.CollegeStudentAppService
         public CollegeStudentAppService(IMapper mapper, IUserService<CollegeStudent> userService) : base(mapper, userService)
         {
         }
+
+        public override bool Validate(CollegeStudentViewModel userVM)
+        {
+            var baseValidate =  base.Validate(userVM);
+
+            if(baseValidate == false || userVM.InstitutionName.Length == 0 || userVM.InstitutionName.Any(c => char.IsDigit(c)) ||
+                userVM.Generation < 1950 || userVM.Generation > System.DateTime.Now.Year || !userVM.Generation.ToString().Any(c => char.IsDigit(c)))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

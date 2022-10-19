@@ -121,8 +121,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Discriminator.cs" />
+    <Compile Include="Models\ActionLogger.cs" />
     <Compile Include="Models\CollegeStudent.cs" />
     <Compile Include="Models\HighSchoolStudent.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Professor.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Role.cs" />

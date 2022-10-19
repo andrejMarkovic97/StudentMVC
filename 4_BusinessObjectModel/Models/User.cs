@@ -47,6 +47,9 @@ namespace _4_BusinessObjectModel.Models
 
        
         public List<UserRole> UserRoles { get; set; }
+
+        public Login Login { get; set; }
+        public ActionLogger actionLogger { get; set; }
         public override string ToString()
         {
             return $"First Name : {FirstName},\nLast name : {LastName},\nBirth date: {BirthDate.ToShortDateString()},\n" +

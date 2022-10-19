@@ -20,14 +20,25 @@ namespace _1_PresentationLayer.Controllers
         private readonly IUserAppService<ProfessorViewModel, Professor> professorAppService;
         private readonly RoleService roleService;
         private readonly IGenericAppService<ProfessorQueryViewModel, ProfessorQueryModel> genericQMService;
-
-        public ProfessorController(IUserAppService<ProfessorViewModel, Professor> professorAppService, RoleService roleService,
-            IGenericAppService<ProfessorQueryViewModel, ProfessorQueryModel> genericQMService) : base(professorAppService)
+        
+        //public ProfessorController(IUserAppService<ProfessorViewModel, Professor> professorAppService, RoleService roleService,
+        //    IGenericAppService<ProfessorQueryViewModel, ProfessorQueryModel> genericQMService) : base(professorAppService)
+        //{
+        //    this.professorAppService = professorAppService;
+        //    this.roleService = roleService;
+        //    this.genericQMService = genericQMService;
+        //}
+        public ProfessorController(IUserAppService<ProfessorViewModel, Professor> professorAppService,
+            IGenericService<ActionLogger> actionLoggerService,RoleService roleService, IGenericAppService<ProfessorQueryViewModel, ProfessorQueryModel> genericQMService, 
+            IUserAppService<UserViewModel, User> actionLoggerUserAppService) :
+            base(professorAppService, actionLoggerService,actionLoggerUserAppService)
         {
             this.professorAppService = professorAppService;
             this.roleService = roleService;
             this.genericQMService = genericQMService;
         }
+
+       
 
 
         [Authorize(Roles = "Admin")]
@@ -53,7 +64,7 @@ namespace _1_PresentationLayer.Controllers
 
             professor.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
             professorAppService.Add(professor);
-
+            AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name, professor.UserID);
             return RedirectToAction("Index");
 
         }

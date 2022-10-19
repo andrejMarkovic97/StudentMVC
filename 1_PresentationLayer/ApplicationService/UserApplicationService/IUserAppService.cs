@@ -19,5 +19,6 @@ namespace _1_PresentationLayer.ApplicationService.UserAppService
         TViewModel GetUserByCredentials(string email, string password);
 
         TViewModel GetUserByEmail(string email);
+        bool Validate(TViewModel userVM);
     }
 }

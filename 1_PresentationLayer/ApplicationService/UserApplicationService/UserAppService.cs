@@ -57,5 +57,21 @@ namespace _1_PresentationLayer.ApplicationService.UserAppService
             List<TViewModel> usersVM = mapper.Map<List<TViewModel>>(users);
             return usersVM;
         }
+
+        public virtual bool Validate(TViewModel userVM)
+        {
+            if (userVM == null ||
+                userVM.UserID == null ||
+                userVM.FirstName == null || userVM.FirstName.Length==0 || userVM.FirstName.Any(c=>char.IsDigit(c)) ||
+                userVM.LastName == null || userVM.LastName.Length == 0 || userVM.LastName.Any(c => char.IsDigit(c)) ||
+                userVM.Password==null || userVM.Password.Length==0||
+                userVM.BirthDate.Year<1900 || userVM.BirthDate.Year>System.DateTime.Now.Year ||
+                userVM.Email==null|| userVM.Email.Length==0 || !userVM.Email.Contains("@") ||
+                userVM.Password==null || userVM.Password.Length==0 ||
+                 userVM.PhoneNumber.Any(c => char.IsLetter(c))){
+                return false;
+            }
+            return true;
+        }
     }
 }

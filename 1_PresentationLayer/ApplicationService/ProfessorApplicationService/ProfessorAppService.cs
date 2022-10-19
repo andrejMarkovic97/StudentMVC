@@ -15,5 +15,16 @@ namespace _1_PresentationLayer.ApplicationService.ProfessorApplicationService
         public ProfessorAppService(IMapper mapper, IUserService<Professor> userService) : base(mapper, userService)
         {
         }
+
+        public override bool Validate(ProfessorViewModel userVM)
+        {
+            var baseValidate = base.Validate(userVM);
+            if (baseValidate == false ||
+                (userVM.Subject!=null && userVM.Subject.Any(char.IsDigit) && userVM.Subject.Any(char.IsLetter)))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

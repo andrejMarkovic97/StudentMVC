@@ -43,6 +43,7 @@ namespace _3_DataAccess.GenericRepository
             dbSet.Attach(entity);
             db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
+            
         }
 
         public virtual T Get(Guid id)

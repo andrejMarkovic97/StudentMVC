@@ -10,6 +10,8 @@ using _2_BusinessLayer.GenericService;
 
 using _2_BusinessLayer.RoleServices;
 using _2_BusinessLayer.StudentServices;
+using _3_DataAccess.GenericRepository;
+using _3_DataAccess.LoginRepository;
 using _3_DataAccess.QueryModelRepository;
 using _3_DataAccess.QueryModels;
 using _3_DataAccess.Repository;
@@ -52,6 +54,8 @@ namespace _1_PresentationLayer.App_Start
 			container.RegisterType<IGenericRepository<CollegeStudentQueryModel>, CollegeStudentQueryModelRepository>();
 			container.RegisterType<IGenericRepository<ProfessorQueryModel>, ProfessorQueryModelRepository>();
 
+			container.RegisterType<IGenericRepository<Login>, LoginRepository>();
+			container.RegisterType<IGenericRepository<ActionLogger>, GenericRepository<ActionLogger>>();
 			//SERVICE REGISTRATION
 			//container.RegisterType<IGenericService<User>, StudentService<User>>();
 
@@ -67,6 +71,9 @@ namespace _1_PresentationLayer.App_Start
 			container.RegisterType<IGenericService<HighSchoolStudentQueryModel>, GenericService<HighSchoolStudentQueryModel>>();
 			container.RegisterType<IGenericService<CollegeStudentQueryModel>, GenericService<CollegeStudentQueryModel>>();
 			container.RegisterType<IGenericService<ProfessorQueryModel>, GenericService<ProfessorQueryModel>>();
+
+			container.RegisterType<IGenericService<Login>, GenericService<Login>>();
+			container.RegisterType<IGenericService<ActionLogger>, GenericService<ActionLogger>>();
 
 			//APPLICATION SERVICE REGISTRATION 
 			container.RegisterType<IGenericAppService<RoleViewModel,Role>, RoleAppService>();

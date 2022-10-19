@@ -42,7 +42,14 @@ namespace _3_DataAccess.UserRepository
             return user;
         }
 
-        
+        public override User GetUserByEmail(string email)
+        {
+            if(email!=null && email.Length > 0)
+            {
+                return db.Users.ToList().FirstOrDefault(u => u.Email == email);
+            }
+            return null;
+        }
     }
         
 }

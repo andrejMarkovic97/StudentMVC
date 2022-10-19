@@ -16,14 +16,19 @@ namespace _1_PresentationLayer.Controllers
     public class LoginController : Controller
     {
         private readonly IUserAppService<UserViewModel, User> userAppService;
+        private readonly IGenericService<Login> loginLoggerService;
 
-        public LoginController(IUserAppService<UserViewModel,User> userAppService)
+        public LoginController(IUserAppService<UserViewModel,User> userAppService, IGenericService<Login> loginLoggerService)
         {
             this.userAppService = userAppService;
+            this.loginLoggerService = loginLoggerService;
         }
         public ActionResult Login()
         {
-
+            if (User.Identity != null)
+            {
+                FormsAuthentication.SignOut();
+            }
             return View();
         }
 
@@ -38,30 +43,32 @@ namespace _1_PresentationLayer.Controllers
                 {
                     AddLoginCookie(user.Email);
 
-                    if(User.IsInRole("Admin"))
-                    
+                    AddLogin(existingUser.UserID, existingUser.Email, existingUser.Password);
+                  
+                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
                     {
 
                         return RedirectToAction("AdminArea", "Home");
                     }
-                   
-                    if (User.IsInRole("CollegeStudent"))
+
+                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "CollegeStudent") != null)
                     {
                         return RedirectToAction("UserProfile", "CollegeStudent");
                     }
-                   
-                    if (User.IsInRole("HighSchoolStudent"))
+
+                    if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "HighSchoolStudent") != null)
                     {
                         return RedirectToAction("UserProfile", "HighSchoolStudent");
                     }
                    
-                    if (User.IsInRole("Professor"))
+                    if (existingUser.UserRoles.FirstOrDefault(ur=>ur.Role.RoleName=="Professor")!=null)
                     {
                         return RedirectToAction("UserProfile", "Professor");
                     }
                 }
+
                 TempData["LoginMessage"] = "Invalid credentials";
-                return View("Login");
+                
             }
             return View("Login");
         }
@@ -83,6 +90,23 @@ namespace _1_PresentationLayer.Controllers
                 HttpOnly = true
             };
             Response.Cookies.Add(cookie);
+        }
+
+        private void AddLogin(Guid id , string email , string password)
+        {
+            Login login = new Login()
+            {
+                UserID = id,
+                Email = email,
+
+                LoginDate = System.DateTime.Now
+            };
+            if (loginLoggerService.Get(id) == null)
+            {
+                loginLoggerService.Add(login);
+                return;
+            }
+            loginLoggerService.Edit(login);
         }
     }
 }

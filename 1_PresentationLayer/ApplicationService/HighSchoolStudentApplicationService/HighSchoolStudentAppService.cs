@@ -19,5 +19,15 @@ namespace _1_PresentationLayer.ApplicationService.HighSchoolStudentAppService
 
         }
 
+        public override bool Validate(HighSchoolStudentViewModel userVM)
+        {
+            var baseValidate = base.Validate(userVM);
+            if(baseValidate == false || userVM.SchoolName.Length==0 || userVM.SchoolName.Any(c => char.IsDigit(c)) ||
+                userVM.EnrollmentDate.Value.Year<1940 || userVM.EnrollmentDate.Value.Year> System.DateTime.Now.Year)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

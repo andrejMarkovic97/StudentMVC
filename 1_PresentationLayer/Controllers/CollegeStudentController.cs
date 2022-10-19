@@ -24,8 +24,9 @@ namespace _1_PresentationLayer.Controllers
         private readonly IGenericAppService<CollegeStudentQueryViewModel, CollegeStudentQueryModel> genericQMService;
 
         public CollegeStudentController(IUserAppService<CollegeStudentViewModel, CollegeStudent> studentAppService, 
-            RoleService roleService, IGenericAppService<CollegeStudentQueryViewModel, CollegeStudentQueryModel> genericQMService) :
-            base(studentAppService)
+            RoleService roleService, IGenericAppService<CollegeStudentQueryViewModel, CollegeStudentQueryModel> genericQMService,
+            IGenericService<ActionLogger> actionLoggerService, IUserAppService<UserViewModel, User> actionLoggerUserAppService) :
+            base(studentAppService,actionLoggerService,actionLoggerUserAppService)
         {
             this.studentAppService = studentAppService;
             this.roleService = roleService;
@@ -37,7 +38,7 @@ namespace _1_PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-
+               
             
             cs.Title = "Create";
             cs.UserID = Guid.NewGuid();
@@ -59,6 +60,7 @@ namespace _1_PresentationLayer.Controllers
 
             cs.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
             studentAppService.Add(cs);
+            AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name, cs.UserID);
 
             return RedirectToAction("Index");
             }

@@ -18,10 +18,12 @@ namespace _3_DataAccess
         public DbSet<User> Users {get; set;}
         public DbSet<HighSchoolStudent> HighschoolStudents { get; set; }
         public DbSet<CollegeStudent> CollegeStudents { get; set; }
-        public virtual DbSet<Professor> Professors { get; set; }
+        public  DbSet<Professor> Professors { get; set; }
 
         public DbSet<Role> Roles{ get; set; }
-        public virtual DbSet<UserRole> UserRoles{ get; set; }
+        public  DbSet<UserRole> UserRoles{ get; set; }
+
+        public DbSet<Login> Logins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -59,21 +61,38 @@ namespace _3_DataAccess
 
             //MAPPING ROLE
             var role = modelBuilder.Entity<Role>();
+            
             role.ToTable("t_roles");
             role.HasKey(r => r.RoleID);
-            role.Property(r => r.RoleID).HasColumnName("role_id");
-            role.Property(r => r.RoleName).HasColumnName("role_name");
+            role.Property(r => r.RoleID).HasColumnName("role_id").IsRequired();
+            role.Property(r => r.RoleName).HasColumnName("role_name").IsRequired();
 
             //MAPPING USERROLES
             var userRole = modelBuilder.Entity<UserRole>();
             userRole.ToTable("t_user_roles");
-            userRole.Property(ur => ur.UserID).HasColumnName("user_id");
-            userRole.Property(ur => ur.RoleID).HasColumnName("role_id");
-            
+            userRole.Property(ur => ur.UserID).HasColumnName("user_id").IsRequired();
+            userRole.Property(ur => ur.RoleID).HasColumnName("role_id").IsRequired();
+
+            //MAPPING LOGIN
+            var login = modelBuilder.Entity<Login>();
+            login.ToTable("t_login");
+            login.HasKey(l => l.UserID);
+            login.Property(l => l.UserID).HasColumnName("user_id").IsRequired(); ;
+            login.Property(l => l.Email).HasColumnName("email").IsRequired();
+           
+            login.Property(l => l.LoginDate).HasColumnName("last_login_date").IsRequired();
+
+            //MAPPING ACTION_LOGGER
+            var actionLogger = modelBuilder.Entity<ActionLogger>();
+            actionLogger.ToTable("t_action_log");
+            actionLogger.HasKey(a => a.UserID);
+            actionLogger.Property(a => a.UserID).HasColumnName("user_id").IsRequired();
+            actionLogger.Property(a => a.Action).HasColumnName("action").IsRequired();
+            actionLogger.Property(a => a.TimeOfAction).HasColumnName("time_of_action").IsRequired();
+            actionLogger.Property(a => a.AlteredUserID).HasColumnName("altered_user_id");
 
 
-
-            modelBuilder.Entity<HighSchoolStudent>()
+             modelBuilder.Entity<HighSchoolStudent>()
 
                .Map<HighSchoolStudent>(m => m.Requires("Discriminator").HasValue(1));
 
@@ -107,6 +126,11 @@ namespace _3_DataAccess
                 .WithRequired()
                 .HasForeignKey(c => c.RoleID);
 
+            ////MAPPING USER-LOGIN
+            modelBuilder.Entity<User>().HasOptional(s => s.Login).WithRequired(l => l.User).WillCascadeOnDelete();
+
+            //MAPPING USER-ACTION_LOGGER
+            modelBuilder.Entity<User>().HasOptional(s => s.actionLogger).WithRequired(a=>a.User).WillCascadeOnDelete();
         }
 
     }
