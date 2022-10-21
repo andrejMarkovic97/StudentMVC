@@ -43,7 +43,7 @@ namespace _1_PresentationLayer.Controllers
                 {
                     AddLoginCookie(user.Email);
 
-                    AddLogin(existingUser.UserID, existingUser.Email, existingUser.Password);
+                    AddLogin(existingUser.UserID);
                   
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
                     {
@@ -92,7 +92,7 @@ namespace _1_PresentationLayer.Controllers
             Response.Cookies.Add(cookie);
         }
 
-        private void AddLogin(Guid id , string password)
+        private void AddLogin(Guid id)
         {
             Login login = new Login()
             {
