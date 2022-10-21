@@ -44,6 +44,8 @@ namespace _1_PresentationLayer.Controllers
                     AddLoginCookie(user.Email);
 
                     AddLogin(existingUser.UserID);
+
+                    
                   
                     if (existingUser.UserRoles.FirstOrDefault(ur => ur.Role.RoleName == "Admin") != null)
                     {

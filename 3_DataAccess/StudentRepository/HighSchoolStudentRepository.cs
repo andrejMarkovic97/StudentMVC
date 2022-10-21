@@ -27,7 +27,7 @@ namespace _3_DataAccess.Repository
         {
             var userRoles = db.UserRoles.ToList().Where(ur => ur.UserID == id);
             db.UserRoles.RemoveRange(userRoles);
-            db.Users.Remove(Get(id));
+            db.Users.Remove(db.Users.Find(id));
             db.SaveChanges();
         }
 

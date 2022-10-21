@@ -37,7 +37,8 @@ namespace _3_DataAccess.StudentRepository
             {
                 db.UserRoles.RemoveRange(userRoles);
             }
-            db.Users.Remove(Get(id));
+            var professor = db.Professors.Find(id);
+            db.Users.Remove(professor);
             db.SaveChanges();
         }
 
