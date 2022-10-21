@@ -36,8 +36,7 @@ namespace _1_PresentationLayer.Controllers
         [Authorize(Roles = "Professor")]
         public override ActionResult Create(CollegeStudentViewModel cs)
         {
-            if (ModelState.IsValid)
-            {
+           
                
             
             cs.Title = "Create";
@@ -59,11 +58,14 @@ namespace _1_PresentationLayer.Controllers
             cs.UserRoles.Add(roleCS);
 
             cs.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
-            studentAppService.Add(cs);
-            AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name, cs.UserID);
+            if (studentAppService.Validate(cs))
+            {
+                studentAppService.Add(cs);
+                AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name, cs.UserID);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
+            TempData["ErrorValidate"] = "Invalid information";
             return RedirectToAction("Create");
 
         }

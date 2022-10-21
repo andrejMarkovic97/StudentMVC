@@ -40,8 +40,7 @@ namespace _1_PresentationLayer.Controllers
         {
             hs.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
             hs.UserID = Guid.NewGuid();
-            if (studentService.Validate(hs))
-            {
+          
 
                 
                 hs.UserRoles = new List<UserRole>();
@@ -60,14 +59,15 @@ namespace _1_PresentationLayer.Controllers
                 };
                 hs.UserRoles.Add(roleUser);
                 hs.UserRoles.Add(roleHS);
+            if (studentService.Validate(hs))
+            {
 
-               
                 studentService.Add(hs);
                 AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name,hs.UserID);
 
                 return RedirectToAction("Index");
             }
-
+            TempData["ErrorValidate"] = "Invalid information";
             return RedirectToAction("Create");
         }
         [Authorize(Roles = "Professor,HighSchoolStudent")]

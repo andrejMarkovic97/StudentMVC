@@ -90,12 +90,14 @@ namespace _1_PresentationLayer.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                if (userAppService.Validate(entity))
+            entity.UserRoles = userAppService.Get(entity.UserID).UserRoles;
+            if (userAppService.Validate(entity))
                 {
-                    genericAppService.Edit(entity);
+                    userAppService.Edit(entity);
                     AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name,entity.UserID);
                     return RedirectToAction("Details", new { id = entity.UserID });
                 }
+                TempData["ErrorValidate"] = "Invalid information";
             //}
             return View("Details", entity);
         }
@@ -158,7 +160,7 @@ namespace _1_PresentationLayer.Controllers
             {
                 UserID = user.UserID,
                 Action = actionName,
-                TimeOfAction = System.DateTime.Now,
+                TimeOfAction = DateTime.Now,
                 AlteredUserID = alteredUserID
             };
             actionLoggerService.Add(al);

@@ -63,9 +63,13 @@ namespace _1_PresentationLayer.Controllers
             professor.UserRoles.Add(roleProfessor);
 
             professor.Password = System.Web.Security.Membership.GeneratePassword(8, 1);
+            if(userAppService.Validate(professor)){ 
             professorAppService.Add(professor);
             AddActionLog(System.Reflection.MethodBase.GetCurrentMethod().Name, professor.UserID);
             return RedirectToAction("Index");
+            }
+            TempData["ErrorValidate"] = "Invalid information";
+            return RedirectToAction("Create");
 
         }
         [Authorize(Roles = "Admin")]

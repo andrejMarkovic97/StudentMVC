@@ -41,6 +41,16 @@ namespace _3_DataAccess.StudentRepository
             db.SaveChanges();
         }
 
+        public override Professor Get(Guid id)
+        {
+            var user = db.Professors.AsNoTracking().FirstOrDefault(s => s.UserID == id);
+            if (user != null)
+            {
+                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == id).ToList();
+            }
+            return user;
+        }
+
         public override List<Professor> GetAll()
         {
             return db.Professors.Include("UserRoles").ToList();

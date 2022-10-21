@@ -14,7 +14,7 @@ namespace _1_PresentationLayer.ViewModels
 
         }
         [Required]
-        
+
         public Guid UserID { get; set; }
 
 

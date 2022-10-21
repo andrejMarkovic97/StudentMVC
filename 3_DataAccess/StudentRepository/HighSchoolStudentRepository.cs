@@ -31,6 +31,16 @@ namespace _3_DataAccess.Repository
             db.SaveChanges();
         }
 
+        public override HighSchoolStudent Get(Guid id)
+        {
+            var user = db.HighschoolStudents.AsNoTracking().FirstOrDefault(s => s.UserID == id);
+            if (user != null)
+            {
+                user.UserRoles = db.UserRoles.Include("Role").Where(ur => ur.UserID == id).ToList();
+            }
+            return user;
+        }
+
         public override List<HighSchoolStudent> GetAll()
         {
             return db.HighschoolStudents.Include("UserRoles").ToList();
