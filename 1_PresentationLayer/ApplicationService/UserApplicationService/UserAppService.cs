@@ -60,22 +60,36 @@ namespace _1_PresentationLayer.ApplicationService.UserAppService
 
         public virtual bool Validate(TViewModel userVM)
         {
-            if (userVM == null ||
-                userVM.UserID == null ||
+            if (userVM == null ||userVM.UserID == null ||
+
                 userVM.FirstName == null || userVM.FirstName.Length==0 ||
+
                 userVM.FirstName.Length>50 || !userVM.FirstName.All(c=>char.IsLetter(c)) ||
+
                 userVM.LastName == null || userVM.LastName.Length == 0 ||
+
                 userVM.LastName.Length>50||!userVM.LastName.All(c => char.IsLetter(c)) ||
+
                 userVM.Password==null || userVM.Password.Length==0|| userVM.Password.Length>50 ||
-                userVM.BirthDate==null|| userVM.BirthDate.Year<1900 || userVM.BirthDate.Year>System.DateTime.Now.Year || 
+
+                userVM.BirthDate==null|| userVM.BirthDate.Year<1900 || userVM.BirthDate.Year> DateTime.Now.Year || 
+
                 userVM.BirthDate.Month>12 ||userVM.BirthDate.Month<1 ||
+
                 userVM.BirthDate.Day<1 || userVM.BirthDate.Day>31 ||
+
                 userVM.Email==null|| userVM.Email.Length<7 || !userVM.Email.EndsWith(".com") ||
+
                 userVM.Email.Length>255||!userVM.Email.Contains("@") ||
+
                 userVM.Email.StartsWith("@") || userVM.Email.Contains("@.com") ||
+
                 userVM.Password==null || userVM.Password.Length==0 ||
+
                 userVM.Password.Length>50 ||userVM.PhoneNumber.Any(c => char.IsLetter(c)) ||
-                userVM.UserRoles==null && userVM.UserRoles.Count()==0){
+
+                userVM.UserRoles==null && userVM.UserRoles.Count()==0)
+            {
                 return false;
             }
             return true;

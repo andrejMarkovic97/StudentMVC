@@ -92,13 +92,12 @@ namespace _1_PresentationLayer.Controllers
             Response.Cookies.Add(cookie);
         }
 
-        private void AddLogin(Guid id , string email , string password)
+        private void AddLogin(Guid id , string password)
         {
             Login login = new Login()
             {
                 UserID = id,
-                Email = email,
-
+                
                 LoginDate = System.DateTime.Now
             };
             if (loginLoggerService.Get(id) == null)

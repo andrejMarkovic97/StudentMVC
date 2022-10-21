@@ -14,7 +14,6 @@ namespace _4_BusinessObjectModel.Models
         }
         public User User { get; set; }
         public Guid UserID { get; set; }
-        public string Email { get; set; }
         
 
        

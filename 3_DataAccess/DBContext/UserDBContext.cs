@@ -78,7 +78,7 @@ namespace _3_DataAccess
             login.ToTable("t_login");
             login.HasKey(l => l.UserID);
             login.Property(l => l.UserID).HasColumnName("user_id").IsRequired(); ;
-            login.Property(l => l.Email).HasColumnName("email").IsRequired();
+            
            
             login.Property(l => l.LoginDate).HasColumnName("last_login_date").IsRequired();
 

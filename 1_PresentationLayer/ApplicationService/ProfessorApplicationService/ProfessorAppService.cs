@@ -20,7 +20,7 @@ namespace _1_PresentationLayer.ApplicationService.ProfessorApplicationService
         {
             var baseValidate = base.Validate(userVM);
             if (baseValidate == false ||
-                (userVM.Subject!=null && (userVM.Subject.Any(char.IsDigit) || userVM.Subject.Length==0 || userVM.Subject.Length>50)) ||
+                (userVM.Subject!=null && (!userVM.Subject.Any(c=>char.IsLetter(c)) || userVM.Subject.Length==0 || userVM.Subject.Length>50)) ||
                 (userVM.Cabinet!=null && (userVM.Cabinet.Length==0 || userVM.Cabinet.Length>50)))
             {
                 return false;
