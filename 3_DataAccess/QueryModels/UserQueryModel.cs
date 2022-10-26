@@ -30,6 +30,6 @@ namespace _3_DataAccess.QueryModels
 
 
 
-        public List<UserRole> UserRoles { get; set; }
+        
     }
 }

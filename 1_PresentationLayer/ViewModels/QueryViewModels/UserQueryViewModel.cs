@@ -28,6 +28,6 @@ namespace _1_PresentationLayer.ViewModels.QueryViewModels
 
 
 
-        public List<UserRole> UserRoles { get; set; }
+        
     }
 }
